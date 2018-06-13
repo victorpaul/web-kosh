@@ -1,3 +1,5 @@
-node_modules
 /.idea
+/functions/node_modules
+/functions/package-lock.json
+/functions/firebase-debug.log
 *.iml
