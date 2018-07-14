@@ -16,6 +16,9 @@ var db = admin.firestore();
 // }
 // request.post(options);
 
+app.get('/png',(req,res) =>{
+   res.status(200,'pong')
+});
 
 app.post('/webhook', (req, res) => {
 
