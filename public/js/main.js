@@ -31,13 +31,23 @@ $(window).on('load', function() {
 	});
 
 
-	$('.review-slider').owlCarousel({
+	$('.rs1').owlCarousel({
 		loop: true,
 		nav: false,
 		dots: true,
 		items: 1,
+        autoplayTimeout: 10000,
 		autoplay: true
 	});
+
+    $('.rs2').owlCarousel({
+        loop: true,
+        nav: false,
+        dots: true,
+        items: 1,
+        autoplayTimeout: 7000,
+        autoplay: true
+    });
 
 
 
