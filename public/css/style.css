@@ -1200,6 +1200,20 @@ ol {
 	color: #fff;
 }
 
+.skills{
+	margin-bottom: 20px;
+}
+
+.skills img {
+	width: 40px;
+	margin-right: 10px;
+}
+
+.skills img.bg {
+	background-color: #002069;
+	padding: 4px;
+	border-radius: 2px;
+}
 
 /* ===========================
   Responsive
