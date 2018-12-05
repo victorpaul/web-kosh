@@ -81,7 +81,7 @@
                     </div>
                     <div class="col-lg-6">
                         <figure class="hero-image">
-                            <img src="img/kosh.jpg" alt="5">
+                            <img src="img/kosh.jpg" alt="5" style="width: 470px;">
                         </figure>
                     </div>
                 </div>
@@ -281,7 +281,7 @@
                         <div class="qut">“</div>
                         <p>
                             <code>
-                                val hash = generatePasswordHash(generateSalt(), "qwerty")
+                                val hash = generatePasswordHash(salt, "qwerty")
                                 <br/>
                                 user.setNewPassword(salt,hash)
                             </code>
