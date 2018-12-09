@@ -1,0 +1,12 @@
+{
+  "name": "web-kosh",
+  "version": "0.0.1",
+  "description": "",
+  "author": "kosh",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.7.0",
+    "gulp-rename": "^1.4.0"
+  },
+  "devDependencies": {}
+}

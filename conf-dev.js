@@ -1,0 +1,1 @@
+var kosh = "kosh dev";
