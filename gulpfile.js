@@ -19,6 +19,7 @@ gulp.task('copy-all', function () {
 gulp.task('run-server-www', function () {
     connect.server({
         root: 'dist',
+        port:3030,
         livereload: true
     })
 });
@@ -36,4 +37,5 @@ gulp.task('local-conf', () => {
         .pipe(gulp.dest('dist/js'))
 });
 
-gulp.task('run-loc', ['local-conf', 'copy-all', 'run-server-www', 'watch']);
+gulp.task('build-loc', ['local-conf', 'copy-all']);
+gulp.task('run-loc', ['build-loc', 'run-server-www', 'watch']);
