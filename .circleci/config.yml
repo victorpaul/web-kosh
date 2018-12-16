@@ -9,7 +9,7 @@ jobs:
     - attach_workspace:
         at: ~/web-kosh-app
     - run: npm install
-    - run: ls dist
+    - run: ls ~/web-kosh-app/dist
     - run: gulp build-loc
     - persist_to_workspace:
         root: .
