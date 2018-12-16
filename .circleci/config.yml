@@ -8,16 +8,16 @@ jobs:
     - run: npm install
     - run: gulp build-loc
     - persist_to_workspace:
-        root: workspace
+        root: /workspace
         paths:
         - dist
   deploy:
     docker:
     - image: circleci/python:2.7-jessie
-    working_directory: ~/project
+
     steps:
     - attach_workspace:
-        at: workspace
+        at: /workspace
     - run:
         name: Check directory
         command: ls
