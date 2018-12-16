@@ -4,25 +4,18 @@ jobs:
     docker:
     - image: ciandt/gulp
     working_directory: ~/project
-    #    branches:
-    #      only: master
     steps:
     - checkout
     - run: npm install
     - run: gulp build-loc
-    - run: ls
-    - run: ls dist
-    - store_artifacts:
-        path: dist
-        destination: www
   deploy:
     docker:
     - image: circleci/python:2.7-jessie
     working_directory: ~/project
-    #    branches:
-    #      only: master
     steps:
-    - run: ls
+    - run:
+        name: Check directory
+        command: ls
     - run:
         name: Install AWS
         command: sudo pip install awscli
