@@ -7,8 +7,9 @@ jobs:
       - checkout
       - run: npm install
       - run: gulp build-loc
+      - run: ls
       - store_artifacts:
-          path: /dist
+          path: /dist/*.*
           destination: www
 
     only:
