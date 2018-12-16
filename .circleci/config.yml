@@ -6,17 +6,20 @@ jobs:
     working_directory: ~/web-kosh-app
     steps:
     - checkout
+    - attach_workspace:
+        at: ~/web-kosh-app
     - run: npm install
     - run: gulp build-loc
     - persist_to_workspace:
-        root: /tmp/workspace
+        root: .
+        paths: dist
   deploy:
     docker:
     - image: circleci/python:2.7-jessie
     working_directory: ~/web-kosh-app
     steps:
     - attach_workspace:
-        at: /tmp/workspace
+        at: ~/web-kosh-app
     - run:
         name: Check directory 1
         command: ls /tmp/workspace
