@@ -4,8 +4,8 @@ jobs:
     docker:
     - image: ciandt/gulp
     working_directory: ~/project
-    branches:
-      only: master
+#    branches:
+#      only: master
     steps:
     - checkout
     - run: npm install
@@ -19,8 +19,8 @@ jobs:
     docker:
     - image: circleci/python:2.7-jessie
     working_directory: ~/project
-    branches:
-      only: master
+#    branches:
+#      only: master
     steps:
     - run:
         name: Install AWS
