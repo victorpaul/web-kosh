@@ -10,8 +10,6 @@ jobs:
     - run: gulp build-loc
     - persist_to_workspace:
         root: /tmp/workspace
-        paths:
-        - ~/web-kosh-app/dist
   deploy:
     docker:
     - image: circleci/python:2.7-jessie
@@ -20,8 +18,11 @@ jobs:
     - attach_workspace:
         at: /tmp/workspace
     - run:
-        name: Check directory
-        command: ls
+        name: Check directory 1
+        command: ls /tmp/workspace
+    - run:
+        name: Check directory 2
+        command: ls ~/web-kosh-app
     - run:
         name: Install AWS
         command: sudo pip install awscli
