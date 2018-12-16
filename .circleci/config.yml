@@ -22,12 +22,13 @@ jobs:
     #    branches:
     #      only: master
     steps:
+    - run: ls
     - run:
         name: Install AWS
         command: sudo pip install awscli
     - run:
         name: Deploy to s3
-        command: aws s3 sync ~/project/dist s3://${S3_BUCKET} --delete
+        command: aws s3 sync dist s3://${S3_BUCKET} --delete
 
 workflows:
   version: 2
