@@ -7,9 +7,9 @@ jobs:
       - checkout
       - run: npm install
       - run: gulp build-loc
-    artifacts:
-      paths:
-        - dist/
-      expire_in: 1 hour
+      - store_artifacts:
+        path: /dist
+        destination: www
+
     only:
       - master
