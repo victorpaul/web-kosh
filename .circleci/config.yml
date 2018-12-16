@@ -4,6 +4,7 @@ jobs:
     docker:
       - image: ciandt/gulp
     steps:
+      - checkout
       - run: npm install
       - run: npm install gulp
       - run: gulp build-loc
