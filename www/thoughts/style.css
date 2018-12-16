@@ -1631,7 +1631,7 @@ input:focus {
   .single-youtube-channel .youtube-channel-content {
     padding-left: 20px; }
     .single-youtube-channel .youtube-channel-content .channel-title {
-      text-transform: uppercase;
+      /*text-transform: uppercase;*/
       font-size: 14px;
       color: #ffffff;
       margin-bottom: 8px;
