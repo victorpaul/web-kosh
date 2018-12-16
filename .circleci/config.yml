@@ -3,21 +3,22 @@ jobs:
   build:
     docker:
     - image: ciandt/gulp
+    working_directory: ~/web-kosh-app
     steps:
     - checkout
     - run: npm install
     - run: gulp build-loc
     - persist_to_workspace:
-        root: /workspace
+        root: /tmp/workspace
         paths:
-        - dist
+        - ~/web-kosh-app/dist
   deploy:
     docker:
     - image: circleci/python:2.7-jessie
-
+    working_directory: ~/web-kosh-app
     steps:
     - attach_workspace:
-        at: /workspace
+        at: /tmp/workspace
     - run:
         name: Check directory
         command: ls
@@ -26,7 +27,7 @@ jobs:
         command: sudo pip install awscli
     - run:
         name: Deploy to s3
-        command: aws s3 sync workspace/dist s3://${S3_BUCKET} --delete
+        command: aws s3 sync ~/web-kosh-app/dist s3://${S3_BUCKET} --delete
 
 workflows:
   version: 2
