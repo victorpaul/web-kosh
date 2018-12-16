@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: ciandt/gulp
+    working_directory: ~/project
     steps:
       - checkout
       - run: npm install
@@ -12,6 +13,26 @@ jobs:
       - store_artifacts:
           path: dist
           destination: www
+  deploy:
+    docker:
+      - image: circleci/python:2.7-jessie
+    working_directory: ~/project
+    steps:
+      - run:
+          name: Install AWS
+          command: sudo pip install awscli
+      -run
+        name: Deploy to s3
+        command: aws s3 sync dist s3://${S3_BUCKET} --delete
 
-    only:
-      - master
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+    - build
+    - deploy:
+        requires:
+        - build
+        filters:
+          branches:
+            only: master
