@@ -2,32 +2,28 @@ const gulp = require('gulp');
 const rename = require('gulp-rename');
 const connect = require('gulp-connect');
 
-const folders = ['css', 'icon-fonts', 'img', 'img/icon', 'js', 'skills'];
+const folders = [
+    'css', 'icon-fonts', 'img', 'img/icon', 'js', 'skills',
+    'thoughts', 'thoughts/css', 'thoughts/js', 'thoughts/js/bootstrap', 'thoughts/js/jquery', 'thoughts/js/plugins', 'thoughts/fonts', 'thoughts/img/bg-img', 'thoughts/img/core-img'
+];
+
 
 gulp.task('copy-all', function () {
-    for (var key in folders) {
-        gulp.src('www/' + folders[key] + '/*.*')
-            .pipe(gulp.dest('dist/' + folders[key]))
-            .pipe(connect.reload());
-    }
-    gulp.src('www/*.*')
-        .pipe(gulp.dest('dist/'))
-        .pipe(connect.reload());
-
+    for (var key in folders)
+        gulp.src('www/' + folders[key] + '/*.*').pipe(gulp.dest('dist/' + folders[key])).pipe(connect.reload());
+    gulp.src('www/*.*').pipe(gulp.dest('dist/')).pipe(connect.reload());
 });
 
 gulp.task('run-server-www', function () {
     connect.server({
         root: 'dist',
-        port:3030,
+        port: 3030,
         livereload: true
     })
 });
 
 gulp.task('watch', function () {
-    for (var key in folders) {
-        gulp.watch(['www/' + folders[key] + '/*.*'], ['copy-all']);
-    }
+    for (var key in folders) gulp.watch(['www/' + folders[key] + '/*.*'], ['copy-all']);
     gulp.watch(['www/*.*'], ['copy-all']);
 });
 
