@@ -12,9 +12,9 @@ jobs:
     - run: gulp build-loc
     - run: ls
     - run: ls dist
-#    - store_artifacts:
-  #        path: dist
-  #        destination: www
+    - store_artifacts:
+        path: dist
+        destination: www
   deploy:
     docker:
     - image: circleci/python:2.7-jessie
@@ -28,7 +28,7 @@ jobs:
         command: sudo pip install awscli
     - run:
         name: Deploy to s3
-        command: aws s3 sync dist s3://${S3_BUCKET} --delete
+        command: aws s3 sync www s3://${S3_BUCKET} --delete
 
 workflows:
   version: 2
