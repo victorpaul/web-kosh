@@ -5,7 +5,7 @@ jobs:
       - image: ciandt/gulp
     steps:
       - run: npm install
-      - run: npm gulp install
+      - run: npm install gulp
       - run: gulp build-loc
     artifacts:
       paths:
