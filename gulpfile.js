@@ -4,7 +4,7 @@ const connect = require('gulp-connect');
 
 const folders = [
     'css', 'icon-fonts', 'img', 'img/icon', 'js', 'skills',
-    'thoughts', 'thoughts/css', 'thoughts/js', 'thoughts/js/bootstrap', 'thoughts/js/jquery', 'thoughts/js/plugins', 'thoughts/fonts', 'thoughts/img/bg-img', 'thoughts/img/core-img'
+    'beerme','thoughts', 'thoughts/css', 'thoughts/js', 'thoughts/js/bootstrap', 'thoughts/js/jquery', 'thoughts/js/plugins', 'thoughts/fonts', 'thoughts/img/bg-img', 'thoughts/img/core-img'
 ];
 
 
