@@ -1449,3 +1449,7 @@ ol {
 		padding-top: 250px;
 	}
 }
+
+#commit{
+	text-align: right;
+}

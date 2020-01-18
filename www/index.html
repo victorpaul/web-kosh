@@ -235,7 +235,7 @@
                             <code>
                                 val r = 2 + 2
                                 <br/>
-                                r
+                                assertEquals(4,r);
                             </code>
                         </p>
                         <h3>Amazing calculation</h3>
@@ -245,6 +245,7 @@
                         <p>
                             <code>
                                 val users = sql("SELECT name FROM user");
+                                assertEquals(["Victor","Nata"],users);
                             </code>
                         </p>
                         <h3>Complex sql queries</h3>
@@ -256,6 +257,12 @@
                                 val hash = generatePasswordHash(salt, "qwerty")
                                 <br/>
                                 user.setNewPassword(salt,hash)
+                                <br/>
+                                assertNotEmpty(user.salt)
+                                <br/>
+                                assertNotEmpty(user.password)
+                                <br/>
+                                assertEquals(generatePasswordHash(user.salt, "qwerty"),user.password)
                             </code>
                         </p>
                         <h3>Bulletproof security</h3>
@@ -306,7 +313,7 @@
 
                         </p>
                         <h3>Everything is possible</h3>
-                        <h4 title="harik">my Syster's ex boyfriend</h4>
+                        <h4 title="harik">The guy who infected me with tech</h4>
                     </div>
                 </div>
             </div>
@@ -314,7 +321,7 @@
     </div>
 </section>
 <br/>
-
+<div id="commit"></div>
 <!-- Review section end -->
 
 <!-- Portfolio section start -->
