@@ -144,6 +144,12 @@ $(window).on('load', function () {
             var commit = data[0];
             $("#commit").html("Last commit " + commit.sha + " " + commit.commit.author.date);
         });
+		// $.get('https://apps.garmin.com/en-US/apps/1b2d5771-651f-4c10-8b1b-600d2fa07c18', (data) => {
+		// 	var htmlPage = data;
+		// 	console.log(data);
+		// 	//$("#chalkdownloads").html("Last commit " + commit.sha + " " + commit.commit.author.date);
+		// });
+
     }
 
 })(jQuery);
