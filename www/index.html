@@ -73,8 +73,8 @@
                             <ul>
                                 <li><span>Date of Birth</span>Fall 1987</li>
                                 <li><span>Address</span>Ukraine</li>
-                                <li><span>E-mail</span>gmail</li> <!--ok, here is my email vpaul.play@gmail.com-->
-                                <li><span>Phone </span>really blue</li>
+                                <li><span>E-mail</span>gmail</li> <!--ok, here is one of my emails, vpaul.play@gmail.com-->
+                                <li><span>Phone </span>Clearly White</li>
                             </ul>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
             <div class="col-xl-7 offset-xl-2">
                 <h2>Experience so far</h2>
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;First of all I'm java/scala backend guy. But I'm good in many other things, when I need them. In free time, I relax with kotlin, monkeyc, UE4(blueprints,c++).</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;Btw, this is my current home project <a href="https://apps.garmin.com/en-US/apps/1b2d5771-651f-4c10-8b1b-600d2fa07c18" target="_blank">Chalk Watches (<span id="chalkdownloads">100k+</span> downloads).</a></p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Btw, this is one of my home projects <a href="https://apps.garmin.com/en-US/apps/1b2d5771-651f-4c10-8b1b-600d2fa07c18" target="_blank">Chalk Watches (<span id="chalkdownloads">200k+</span> downloads).</a></p>
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;I'm kinda "hacker", I use wide range of technologies to solve very different tasks (js,android,scala,bash,devops).</p>
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;And I love TDD, it helps me to make stable, scalable and bulletproof code. Especially, its important when I need to do something with technology I'm not experienced enough.</p>
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;It just happens that different tasks requires different approaches, technologies. I'm <u>NOT</u> the one who is going to solve every problem with "best tool". I care about future, maintaining and scaling of the product. That means, I'll better spend some time to pick up right tool.</p>
@@ -127,17 +127,19 @@
                 <div class="section-title">
                     <div class="skills">
                         <img src="skills/terminal.png" title="My good fellow"/>
-                        <img src="skills/android.svg" title="Where I relax"/>
+                        <img src="skills/android.svg" title="In case of emergency, I'm native android dev"/>
                         <img src="skills/firebase.svg" title="When I feel like a hipsters"/>
                         <img class="bg" src="skills/docker.svg" title="Is Amazing"/>
-                        <img src="skills/git.svg" title="I use github and gitlab"/>
+                        <img src="skills/git.svg" title="I prefer gitlab, and I like their CI"/>
                         <img src="skills/idea.svg" title="My hammer"/>
                         <img src="skills/java.svg" title="Love it"/>
-                        <img src="skills/spring.svg" title="When you need some APIs"/>
-                        <img src="skills/kubernetes.svg" title="In case of pressure"/>
+                        <img src="skills/scala.svg" title="Love it too"/>
+                        <img src="skills/spring.svg" title="When you need some reliable server"/>
                         <img src="skills/aws.svg" title="Little proud cloud does too much to describe it"/>
+                        <img src="skills/gcp.svg" title="Good cloud"/>
                         <img src="skills/tdd.svg" title="TDD is how to write code right!"/>
                         <img src="skills/ue4.svg" title="I love games, when I have free time I learn ue4"/>
+                        <img src="skills/js.svg" title="...Uff.. erm.. Im not really proud of it, but, sometimes I just have to do something using this. And, well, literally, anything can be done with this. At least it has great community, and it's super flexible in writing tests"/>
                     </div>
                 </div>
                 <br/>
@@ -241,7 +243,7 @@
                             <code>
                                 val r = 2 + 2
                                 <br/>
-                                assertEquals(4,r);
+                                r shouldBe 4;
                             </code>
                         </p>
                         <h3>Amazing calculation</h3>
@@ -250,8 +252,8 @@
                         <div class="qut">“</div>
                         <p>
                             <code>
-                                val users = sql("SELECT name FROM user");
-                                assertEquals(["Victor","Nata"],users);
+                                val happyFamily = sql("SELECT name FROM user");
+                                happyFamily shouldBe ["Victor","Nata","Mark","Sophy"]
                             </code>
                         </p>
                         <h3>Complex sql queries</h3>
@@ -260,15 +262,11 @@
                         <div class="qut">“</div>
                         <p>
                             <code>
-                                val hash = generatePasswordHash(salt, "qwerty")
+                                val hash = generatePasswordHash("salt", "qwerty")
                                 <br/>
-                                user.setNewPassword(salt,hash)
+                                user.setNewPassword("salt",hash)
                                 <br/>
-                                assertNotEmpty(user.salt)
-                                <br/>
-                                assertNotEmpty(user.password)
-                                <br/>
-                                assertEquals(generatePasswordHash(user.salt, "qwerty"),user.password)
+                                user.password should not be "qwerty"
                             </code>
                         </p>
                         <h3>Bulletproof security</h3>
