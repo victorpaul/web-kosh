@@ -79,14 +79,19 @@
                             <!--<p>I’m developer</p>-->
                         </div>
                         <div class="hero-info">
-                            <h2>General Info</h2>
                             <ul>
+                                <li>Senor software developer</li>
                                 <li><span>Experience</span><span id="experience">XX+</span></li>
                                 <li><span>Date of Birth</span>Fall 1987</li>
                                 <li><span>Address</span>Ukraine</li>
                                 <li><span>E-mail</span>gmail</li> <!--ok, here is one of my emails, vpaul.play@gmail.com-->
-                                <li><span>Phone</span>Clearly White</li>
-                                <li><a target="_blank" href="https://www.linkedin.com/in/victorpaull/">LinkedIn</a></li>
+                                <li><span>Phone</span>Clearly White</li> <!--it's not white anymore, now it's more like a grey one, but it is still a google pixel phone-->
+                                <li>
+                                    <a target="_blank" href="https://www.linkedin.com/in/victorpaull/">LinkedIn</a>,
+                                    <a target="_blank" href="https://gitlab.com/victorpaul">gitLab</a>,
+                                    <a target="_blank" href="https://github.com/victorpaul">gitHub</a>
+                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -130,12 +135,12 @@
         <div class="row">
             <div class="col-xl-7 offset-xl-2">
                 <h2>Experience so far</h2>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;First of all I'm java/scala backend guy. But I'm good in many other things, when I need them. In free time, I have some fun with UE4(blueprints,c++).</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;This is one of my home projects <a href="https://apps.garmin.com/en-US/apps/1b2d5771-651f-4c10-8b1b-600d2fa07c18" target="_blank">Chalk Watches (<span id="chalkdownloads">200k+</span> downloads).</a></p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;I'm kinda "hacker/geek", I use wide range of technologies to solve very different tasks (js,android,scala,bash,devops).</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;And I love TDD, it helps me to make my code stable, scalable and bulletproof. When I need to do something with technology I'm not experienced enough, tdd is super helpful</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;It just happens that different tasks requires different approaches, technologies. I'm <u>NOT</u> the one who is going to solve every problem with "best tool". I care about future, maintaining and scaling of the product. That means, I'll better spend some time to pick up right tool.</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;Nothing and no one is perfect, but we always have to keep trying, to become better.</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;First of all I'm java/scala backend guy. However I'm good in many other things, especially when I need them. In my spare time I enjoy learn new technologies and experiment with pet projects and gamedev.</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;This is one of my home projects <a href="https://apps.garmin.com/en-US/apps/1b2d5771-651f-4c10-8b1b-600d2fa07c18" target="_blank">Chalk Watches (<span id="chalkdownloads">300k+</span> downloads).</a></p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;I'm kinda "hacker/geek", it happens that I use wide range of technologies to solve different tasks (js,android,scala,bash,devops,flutter etc).</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;I love TDD, it helps me to make my code stable, scalable and bulletproof. Especially it helps with technologies where you are not experienced enough, writing testable code, forces you to follow good practices in frameworks.</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;To make things right, you have to use different approaches for solving different tasks. I'm <b>NOT</b>> the one who is going to solve every problem with <b>"</b>the best tool<b>"</b>. I care about future, maintaining and scaling of the product. That means, I'll better spend some time to pick up right tool then reinvent the bicycle.</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Nothing and noone is perfect, but we have to strive to get better</p>
                 <div class="section-title">
                     <div class="skills">
                         <img src="skills/terminal.png" title="My good fellow"/>
@@ -208,7 +213,7 @@
                         <h2>1999-2002</h2>
                         <h3>Home</h3>
                         <h4>Teenager, also advanced PC user</h4>
-                        <p>I had old PC, 40mhz CPU, 4mb of ram, so I learn DOS and batch scripts to be able to run some games and support system</p>
+                        <p>I had old PC, 40mhz CPU, 4mb of ram, so I learn DOS and batch scripts just to be able to run some games and support the system</p>
                     </li>
                     <li>
                         <h2>1996-1999</h2>
@@ -220,12 +225,11 @@
                         <h2>1996</h2>
                         <h3>Home</h3>
                         <h4>Kid</h4>
-                        <p>That wanted to create video games</p>
+                        <p>That wanted to create a video games</p>
                     </li>
                     <li>
                         <h2>1987</h2>
-                        <h3>Far far away from home among bears in Moscow</h3>
-                        <h4>new Person()</h4>
+                        <p>Far far away from home among bears in Moscow</p>
                         <p>It's friday, it's fall, it's cold, early in the morning. Little kosh was born.</p>
                     </li>
                 </ul>
@@ -285,7 +289,8 @@
                         <p>
                             <code>
                                 val happyFamily = sql("SELECT name FROM user");
-                                happyFamily shouldBe ["Victor","Nata","Mark","Sophy"]
+                                </br>
+                                happyFamily shouldBe Some(["Victor","Nata","Mark","Sophy"])
                             </code>
                         </p>
                         <h3>Complex sql queries</h3>
@@ -294,11 +299,9 @@
                         <div class="qut">“</div>
                         <p>
                             <code>
-                                val hash = generatePasswordHash("salt", "qwerty")
+                                val hash = hashPasswor("salt", "qwerty")
                                 <br/>
-                                user.setNewPassword("salt",hash)
-                                <br/>
-                                user.password should not be "qwerty"
+                                hash should not be "qwerty"
                             </code>
                         </p>
                         <h3>Bulletproof security</h3>
@@ -342,15 +345,15 @@
                         <h3>Dean McCoppin</h3>
                         <h4>Dude from cartoon Iron Giant</h4>
                     </div>
-                    <div class="single-review">
-                        <div class="qut">“</div>
-                        <p>
-                            All of old. Nothing else ever. Ever tried. Ever failed. No matter. Try again. Fail again.
-                            Fail better
-                        </p>
-                        <h3>Samuel Beckett</h3>
-                        <h4>Irish playwright, novelist, poet and winner of the 1969 Nobel Prize in Literature</h4>
-                    </div>
+<!--                    <div class="single-review">-->
+<!--                        <div class="qut">“</div>-->
+<!--                        <p>-->
+<!--                            All of old. Nothing else ever. Ever tried. Ever failed. No matter. Try again. Fail again.-->
+<!--                            Fail better-->
+<!--                        </p>-->
+<!--                        <h3>Samuel Beckett</h3>-->
+<!--                        <h4>Irish playwright, novelist, poet and winner of the 1969 Nobel Prize in Literature</h4>-->
+<!--                    </div>-->
                     <div class="single-review">
                         <div class="qut">“</div>
                         <p>

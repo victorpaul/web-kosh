@@ -22,7 +22,7 @@ $(window).on('load', function () {
 (function ($) {
 
     var experienceYears = new Date(new Date().getTime() - new Date(Date.parse("01/9/2009")).getTime()).getFullYear() - 1970;
-    $("#experience").html(experienceYears + "+ years");
+    $("#experience").html(experienceYears + "+ years of experience");
     /*------------------
         Background set
     --------------------*/
