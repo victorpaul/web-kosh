@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Additional Game Videos - My Sandbox</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="back-button">Back</a>
+        <h1>My Sandbox - Additional Videos</h1>
+    </header>
+    <div class="container">
+        <div class="video-item">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/i--nSPE23VY" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="description">
+                Just for fun, I used AI to create a simple cover-based shooter.
+                Here's what we got:
+                <ul>
+                    <li>A very basic cover generator system that spawns covers and calculates possible cover points</li>
+                    <li>Combat decision logic that helps pawns find the best cover based on the current state of the battlefield</li>
+                    <li>A simple weapon system that fires projectiles with spread</li>
+                    <li>A custom sight system for pawns. I was truly shocked that such an essential feature as sensing enemies is so poorly implemented in Unreal Engine. It deserves a separate post. 😄</li>
+                    <li>A basic pawn that is capable of holding a weapon and using all the systems above to defeat its enemy</li>
+                </ul>
+                Things to improve:
+                <ul>
+                    <li>Multiple pawns try to take the same cover, so they become easy targets</li>
+                    <li>Friendly fire; nobody cares about killing an ally</li>
+                    <li>Pawns always try to get new cover instead of holding a good position</li>
+                    <li>Weapon reloading would add some tactical moments</li>
+                    <li>More weapons and shields would also add more tactical options</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
