@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <script src="timeline.js"></script>
     <script src="modal.js"></script>
+    <script src="theme.js"></script>
 </head>
 <body>
     <header class="main-header">
@@ -16,6 +17,9 @@
                 <li><a href="/pages/games">My Sandbox</a></li>
             </ul>
         </nav>
+        <button id="theme-toggle" class="theme-toggle" title="Switch to Dark Mode">
+            <span id="theme-icon">🌙</span>
+        </button>
     </header>
     
     <div class="container">
@@ -28,7 +32,6 @@
                 </div>
                 
                 <div class="social-links">
-                    <h2>Connect With Me</h2>
                     <ul>
                         <li><a target="_blank" href="https://www.linkedin.com/in/victorkosh/">LinkedIn</a></li>
                         <li><a target="_blank" href="https://gitlab.com/victorpaul">gitLab</a></li>
@@ -40,8 +43,6 @@
             <!-- Column 2: Timeline -->
             <div class="column right-column">
                 <div class="timeline-container">
-                    <h2>My Timeline</h2>
-                    
                     <div class="timeline-filters">
                         <label class="filter-option work">
                             <input type="checkbox" name="filter-work" checked>

@@ -1,3 +1,46 @@
+/* Theme variables */
+:root {
+    /* Light theme (default) */
+    --bg-color: white;
+    --text-color: #333;
+    --header-bg: #fff;
+    --header-border: #eee;
+    --link-color: #0077cc;
+    --link-hover: #005fa3;
+    --left-column-bg: #f9f9f9;
+    --left-column-border: #eee;
+    --timeline-border: #0077cc;
+    --timeline-personal-color: #28a745;
+    --timeline-content-bg: #f9f9f9;
+    --timeline-content-shadow: rgba(0, 0, 0, 0.1);
+    --work-filter-bg: rgba(0, 119, 204, 0.1);
+    --personal-filter-bg: rgba(40, 167, 69, 0.1);
+    --modal-overlay: rgba(0, 0, 0, 0.8);
+    --modal-bg: #fefefe;
+    --modal-shadow: rgba(0, 0, 0, 0.2);
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --header-bg: #1e1e1e;
+    --header-border: #333;
+    --link-color: #64b5f6;
+    --link-hover: #90caf9;
+    --left-column-bg: #1e1e1e;
+    --left-column-border: #333;
+    --timeline-border: #64b5f6;
+    --timeline-personal-color: #4caf50;
+    --timeline-content-bg: #262626;
+    --timeline-content-shadow: rgba(0, 0, 0, 0.3);
+    --work-filter-bg: rgba(100, 181, 246, 0.2);
+    --personal-filter-bg: rgba(76, 175, 80, 0.2);
+    --modal-overlay: rgba(0, 0, 0, 0.9);
+    --modal-bg: #262626;
+    --modal-shadow: rgba(0, 0, 0, 0.4);
+}
+
 /* Clean, paper-like design with two-column layout */
 * {
     margin: 0;
@@ -14,9 +57,10 @@ html, body {
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: white;
-    color: #333;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
@@ -29,14 +73,18 @@ body {
 
 /* Header styles */
 .main-header {
-    background-color: #fff;
-    border-bottom: 1px solid #eee;
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--header-border);
     position: fixed;
     width: 100%;
     top: 0;
     left: 0;
     z-index: 100;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
 .main-header nav ul {
@@ -54,19 +102,45 @@ body {
     display: block;
     padding: 1rem 2rem;
     text-decoration: none;
-    color: #555;
+    color: var(--text-color);
     font-weight: 500;
     transition: all 0.2s ease;
 }
 
 .main-header nav a:hover {
-    background-color: #f5f5f5;
-    color: #000;
+    background-color: rgba(128, 128, 128, 0.1);
+    color: var(--link-hover);
 }
 
 .main-header nav li.active a {
-    color: #0077cc;
-    border-bottom: 3px solid #0077cc;
+    color: var(--link-color);
+    border-bottom: 3px solid var(--link-color);
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin-right: 1.5rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    transition: background-color 0.3s;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(128, 128, 128, 0.1);
+}
+
+.theme-toggle:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--link-color);
 }
 
 /* Two-column layout */
@@ -84,8 +158,8 @@ body {
 /* Left column: Profile and contacts */
 .left-column {
     flex: 0 0 400px;
-    background-color: #f9f9f9;
-    border-right: 1px solid #eee;
+    background-color: var(--left-column-bg);
+    border-right: 1px solid var(--left-column-border);
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -93,6 +167,7 @@ body {
     top: 50px; /* Same as header height */
     height: calc(100vh - 50px); /* Viewport height minus header */
     overflow-y: auto;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
 .left-column h1 {
@@ -135,14 +210,14 @@ body {
 
 .social-links a {
     text-decoration: none;
-    color: #0077cc;
+    color: var(--link-color);
     font-weight: bold;
     transition: color 0.2s;
     font-size: 1.1rem;
 }
 
 .social-links a:hover {
-    color: #005fa3;
+    color: var(--link-hover);
     text-decoration: underline;
 }
 
@@ -191,19 +266,23 @@ body {
 }
 
 .filter-option.work {
-    background-color: rgba(0, 119, 204, 0.1);
+    background-color: var(--work-filter-bg);
+    transition: background-color 0.3s;
 }
 
 .filter-option.work span {
-    color: #0077cc;
+    color: var(--link-color);
+    transition: color 0.3s;
 }
 
 .filter-option.personal {
-    background-color: rgba(40, 167, 69, 0.1);
+    background-color: var(--personal-filter-bg);
+    transition: background-color 0.3s;
 }
 
 .filter-option.personal span {
-    color: #28a745;
+    color: var(--timeline-personal-color);
+    transition: color 0.3s;
 }
 
 .timeline {
@@ -218,7 +297,8 @@ body {
     left: 8px;
     height: 100%;
     width: 2px;
-    background-color: #0077cc;
+    background-color: var(--timeline-border);
+    transition: background-color 0.3s;
 }
 
 .timeline-item {
@@ -238,37 +318,50 @@ body {
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    background-color: #fff;
-    border: 2px solid #0077cc;
+    background-color: var(--bg-color);
+    border: 2px solid var(--timeline-border);
     z-index: 1;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
 /* Personal timeline items */
 .timeline-item.personal::before {
-    border-color: #28a745;
+    border-color: var(--timeline-personal-color);
 }
 
 .timeline-item.personal .timeline-date {
-    color: #28a745;
+    color: var(--timeline-personal-color);
 }
 
 .timeline-item.personal .timeline-content {
-    border-left: 3px solid #28a745;
+    border-left: 3px solid var(--timeline-personal-color);
 }
 
 .timeline-date {
     font-weight: bold;
-    color: #0077cc;
+    color: var(--link-color);
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+h1, h2, h3 {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+}
+
+/* Make timeline h3 elements brighter in dark mode */
+[data-theme="dark"] .timeline-item h3 {
+    color: #ffffff;
 }
 
 .timeline-content {
-    background-color: #f9f9f9;
+    background-color: var(--timeline-content-bg);
     padding: 1.5rem;
     border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    border-left: 3px solid #0077cc;
+    box-shadow: 0 1px 3px var(--timeline-content-shadow);
+    border-left: 3px solid var(--timeline-border);
+    transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 
 .timeline-content h3 {
@@ -297,14 +390,15 @@ body {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: var(--modal-overlay);
     align-items: center;
     justify-content: center;
+    transition: background-color 0.3s;
 }
 
 .modal-content {
     position: relative;
-    background-color: #fefefe;
+    background-color: var(--modal-bg);
     margin: 0;
     padding: 0;
     width: 80%;
@@ -312,10 +406,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 var(--modal-shadow), 0 6px 20px 0 var(--modal-shadow);
     animation: modalopen 0.3s;
     border-radius: 4px;
     overflow: hidden;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .modal-close {
