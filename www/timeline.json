@@ -1,0 +1,97 @@
+{
+  "timelineItems": [
+    {
+      "date": "2024 - Present",
+      "title": "Senior Software Engineer",
+      "description": ["Working at <a href=\"https://www.eskimi.com/\" target=\"_blank\">Eskimi</a>"],
+      "type": "work"
+    },
+    {
+      "date": "2021 - 2024",
+      "title": "Senior Software Engineer",
+      "description": ["Worked at a Startup (NDA)"],
+      "type": "work"
+    },
+    {
+      "date": "2021",
+      "title": "Senior Software Engineer",
+      "description": ["Worked at <a href=\"https://www.epam.com/\" target=\"_blank\">Epam</a>"],
+      "type": "work"
+    },
+    {
+      "date": "2018 - Present",
+      "title": "Father",
+      "description": ["Mark and Sophy were <a href=\"/img/kid2.jpg\" class=\"modal\">born</a>"],
+      "type": "personal"
+    },
+    {
+      "date": "2013 - 2020",
+      "title": "Java/Scala Developer",
+      "description": ["Worked at <a href=\"https://www.ekreative.com\" target=\"_blank\">eKreative</a>"],
+      "type": "work"
+    },
+    {
+      "date": "2012 - 2013",
+      "title": "Java Developer",
+      "description": ["Worked at <a href=\"https://www.facebook.com/Friend2Friend\" target=\"_blank\">friend2friend</a> (Spain)"],
+      "type": "work"
+    },
+    {
+      "date": "2009 - 2012",
+      "title": "PHP Developer",
+      "description": [
+        "Worked at <a href=\"https://www.visual-craft.com/\" target=\"_blank\">visual-craft</a>",
+        "First experience with PHP, HTML, CSS, MySQL, JavaScript, APIs, payment systems"
+      ],
+      "type": "work"
+    },
+    {
+      "date": "2006 - 2009",
+      "title": "Student",
+      "description": [
+        "Studied at <a href=\"http://www.cdu.edu.ua\" target=\"_blank\">National University</a>",
+        "Got another diploma. Played Diablo2 and StarCraft a lot, got beard"
+      ],
+      "type": "personal"
+    },
+    {
+      "date": "2002 - 2006",
+      "title": "Student",
+      "description": [
+        "Studied at <a href=\"http://polytechnic.ck.ua\" target=\"_blank\">College</a>",
+        "Got first diploma"
+      ],
+      "type": "personal"
+    },
+    {
+      "date": "1999 - 2002",
+      "title": "Teenager, Advanced PC User",
+      "description": [
+        "Had an old PC with 40MHz CPU, 4MB of RAM",
+        "Learned DOS and batch scripts to run games and support the system"
+      ],
+      "type": "personal"
+    },
+    {
+      "date": "1996 - 1999",
+      "title": "Lego Developer",
+      "description": ["\"Even now I love to play with all kind of constructors\""],
+      "type": "personal"
+    },
+    {
+      "date": "1996",
+      "title": "Kid",
+      "description": ["That wanted to create video games"],
+      "type": "personal"
+    },
+    {
+      "date": "1987",
+      "title": "Born",
+      "description": [
+        "Far far away from home among bears in Moscow",
+        "Friday, fall, cold, early in the morning. Little kosh was born."
+      ],
+      "type": "personal"
+    }
+  ]
+}

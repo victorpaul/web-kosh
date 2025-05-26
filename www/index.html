@@ -1,562 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-28082070-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-        var options = {
-            'linker': {'domains': ['sukinsan.com', 'kosh.top']},
-            'accept_incoming': true
-        };
-
-        gtag('config', 'UA-28082070-1', options);
-        gtag('config', 'UA-28082070-3', options);
-
-    </script>
-
-    <title>Kosh Viktor Paul</title>
     <meta charset="UTF-8">
-    <meta name="description" content="Senior Java/Scala backend developer with expertise in multiple technologies. Known as Kosh or Victor Paul.">
-    <meta name="keywords" content="kosh, victorpaul, sukinsan, kosh was here, java, android, developing, ukraine, cherkasy, git, cv, linkedin, github, experience, ekreative, frien2friend, visual-craft, lego, contact">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="shortcut icon"/>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700" rel="stylesheet">
-
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="css/flaticon.css"/>
-    <link rel="stylesheet" href="css/owl.carousel.css"/>
-    <link rel="stylesheet" href="css/magnific-popup.css"/>
-    <link rel="stylesheet" href="css/style.css"/>
-
-
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <script src="/js/config.js"></script>
-
-    <style>
-        #static_top_left{
-            position: fixed;
-            top: 31px;
-            left: 60px;
-        }
-        #static_top_right{
-            position: fixed;
-            top: 31px;
-            right: 60px;
-        }
-    </style>
-
-
+    <title>About Me</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="timeline.js"></script>
+    <script src="modal.js"></script>
 </head>
-
 <body>
-
-<!-- Page Preloder -->
-<div id="preloder">
-    <div class="loader"></div>
-</div>
-
-
-<!-- Hero section start -->
-<section class="hero-section spad">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xl-10 offset-xl-1">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="hero-text">
-                            <br/>
-                            <br/>
-                            <h2>kosh viktor paul</h2>
-                            <!--<p>I’m developer</p>-->
-                        </div>
-                        <div class="hero-info">
-                            <ul>
-                                <li>Senior software engineer (backend java/scala)</li>
-                                <li><span>Experience</span><span id="experience">XX+</span></li>
-                                <li><span>Date of Birth</span>Fall 1987</li>
-                                <li><span>Address</span>Ukraine</li>
-                                <li><span>E-mail</span>gmail</li> <!--ok, here is one of my emails, vpaul.play@gmail.com-->
-                                <li><span>Phone</span>Clearly White</li> <!--it's not white anymore, now it's more like a grey one, but it is still a google pixel phone-->
-                                <li>
-                                    <a target="_blank" href="https://www.linkedin.com/in/victorpaull/">LinkedIn</a>,
-                                    <a target="_blank" href="https://gitlab.com/victorpaul">gitLab</a>,
-                                    <a target="_blank" href="https://github.com/victorpaul">gitHub</a>
-                                </li>
-
-                            </ul>
-                        </div>
+    <header class="main-header">
+        <nav>
+            <ul>
+                <li class="active"><a href="/">Me</a></li>
+                <li><a href="/pages/games">My Sandbox</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <div class="two-column-layout">
+            <!-- Column 1: Personal info and contacts -->
+            <div class="column left-column">
+                <h1>Kosh Victor Paul</h1>
+                <div class="profile-image">
+                    <img src="/img/kosh.jpg" alt="Victor Paul">
+                </div>
+                
+                <div class="social-links">
+                    <h2>Connect With Me</h2>
+                    <ul>
+                        <li><a target="_blank" href="https://www.linkedin.com/in/victorkosh/">LinkedIn</a></li>
+                        <li><a target="_blank" href="https://gitlab.com/victorpaul">gitLab</a></li>
+                        <li><a target="_blank" href="https://github.com/victorpaul">gitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Column 2: Timeline -->
+            <div class="column right-column">
+                <div class="timeline-container">
+                    <h2>My Timeline</h2>
+                    
+                    <div class="timeline-filters">
+                        <label class="filter-option work">
+                            <input type="checkbox" name="filter-work" checked>
+                            <span>Work</span>
+                        </label>
+                        <label class="filter-option personal">
+                            <input type="checkbox" name="filter-personal" checked>
+                            <span>Personal</span>
+                        </label>
                     </div>
-                    <div class="col-lg-6">
-                        <figure class="hero-image">
-                            <img src="img/kosh.jpg" alt="Victor Paul profile photo" style="width: 470px;">
-                        </figure>
+                    
+                    <div class="timeline">
+                        <!-- Timeline items will be loaded dynamically from timeline.json -->
+                        <div class="timeline-loading">Loading timeline...</div>
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
-<!-- Hero section end -->
-
-<!-- Social links section start -->
-<!--<div class="social-section">-->
-    <!--<div class="container-fluid">-->
-        <!--<div class="row">-->
-            <!--<div class="col-xl-10 offset-xl-1">-->
-                <!--<div class="social-link-warp">-->
-                    <!--<div class="social-links">-->
-                        <!--<a href="https://github.com/victorpaul" target="_blank" title="github">-->
-                            <!--<i class="fa fa-github"></i>-->
-                        <!--</a>-->
-                        <!--<a href="https://www.linkedin.com/in/victorpaull/" target="_blank" title="linkedIn">-->
-                            <!--<i class="fa fa-linkedin"></i>-->
-                        <!--</a>-->
-                    <!--</div>-->
-                    <!--<h2 class="hidden-md hidden-sm">My Social Profiles</h2>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
-<!-- Social links section end -->
-
-<!-- Resume section start -->
-<section class="resume-section spad">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xl-7 offset-xl-2">
-                <h2>Experience so far</h2>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;First of all, I'm a java/scala backend guy. However, I'm good at many other things, especially when I need them. In my spare time, I enjoy learning new technologies and experimenting with pet projects and gamedev.</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;This is one of my home projects <a href="https://apps.garmin.com/en-US/apps/1b2d5771-651f-4c10-8b1b-600d2fa07c18" target="_blank">Chalk Watches (<span id="chalkdownloads">300k+</span> downloads).</a></p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;And here are some <a href="games.html" target="_blank">examples</a> of game logic I implemented.</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;I'm kinda "hacker/geek", it happens that I use a wide range of technologies to solve different tasks (js, android, scala, bash, devops, flutter etc).</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;I love TDD, it helps me to make my code stable, scalable and bulletproof. Especially it helps with technologies where you are not experienced enough, writing testable code forces you to follow good practices in frameworks.</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;To make things right, you have to use different approaches for solving different tasks. I'm <b>NOT</b> the one who is going to solve every problem with <b>&quot;</b>the best tool<b>&quot;</b>. I care about the future, maintaining and scaling of the product. That means, I'll better spend some time to pick up the right tool than reinvent the bicycle.</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;Nothing and no one is perfect, but we have to strive to get better.</p>
-                <div class="section-title">
-                    <div class="skills">
-                        <img src="skills/terminal.png" title="My good fellow"/>
-                        <img src="skills/android.svg" title="In case of emergency, I'm native android dev"/>
-                        <img src="skills/firebase.svg" title="When I feel like a hipster"/>
-                        <img class="bg" src="skills/docker.svg" title="Is Amazing"/>
-                        <img src="skills/idea.svg" title="My hammer"/>
-                        <img src="skills/java.svg" title="Love it"/>
-                        <img src="skills/scala.svg" title="Love it too"/>
-                        <img src="skills/spring.svg" title="When you need some reliable server"/>
-                        <img src="skills/aws.svg" title="Little proud cloud does too much to describe it"/>
-                        <img src="skills/gcp.svg" title="Good cloud"/>
-                        <img src="skills/tdd.svg" title="TDD is how to write code right!"/>
-                        <img src="skills/ue4.svg" title="I love games, when I have free time I practice with ue4/5 using c++ and blueprints"/>
-                        <img src="skills/js.svg" title="...Uff.. erm.. I'm not really proud of this skill, but, sometimes I just have to do something using this. And, well, literally, anything can be done with this. At least it has great community, and apparently, writing tests with typescript is great experience, without jokes"/>
-
-                        <a target="_blank" href="https://github.com/victorpaul"><img src="skills/github.svg" title="My github"/></a>
-                        <a target="_blank" href="https://gitlab.com/victorpaul"><img src="skills/gitlab.svg" title="My gitlab"/></a>
-
-                    </div>
-                </div>
-                <br/>
-                <br/>
-                <ul class="resume-list">
-                    <li>
-                        <h2>2024-now</h2>
-                        <h3><a href="https://www.eskimi.com/" target="_blank">Eskimi</a></h3>
-                        <h4>Senior Software Engineer</h4>
-                    </li>
-                    <li>
-                        <h2>2021-2024</h2>
-                        <h3>Startup (NDA)</h3>
-                        <h4>Senior Software Engineer</h4>
-                    </li>
-                    <li>
-                        <h2>2021-2021</h2>
-                        <h3><a href="https://www.epam.com/" target="_blank">Epam</a></h3>
-                        <h4>Senior Software Engineer</h4>
-                    </li>
-                    <li>
-                        <h2>2018-now</h2>
-                        <h3>Mark and Sophy were <a href="img/kid2.jpg" target="_blank">born</a></h3>
-                        <h4>father</h4>
-                    </li>
-                    <li>
-                        <h2>2013-2020</h2>
-                        <h3><a href="https://www.ekreative.com" target="_blank">eKreative</a></h3>
-                        <h4>java/scala developer</h4>
-                    </li>
-                    <li>
-                        <h2>2012-2013</h2>
-                        <h3><a href="https://www.facebook.com/Friend2Friend" target="_blank">friend2friend</a> (Spain)</h3>
-                        <h4>java developer</h4>
-                    </li>
-                    <li>
-                        <h2>2009-2012</h2>
-                        <h3><a href="https://www.visual-craft.com/" target="_blank">visual-craft</a></h3>
-                        <h4>php developer</h4>
-                        <p>My very first experience with PHP, html, css, mySql, javascript, APIs, payment
-                            systems, etc</p>
-                    </li>
-                    <li>
-                        <h2>2006-2009</h2>
-                        <h3><a href="http://www.cdu.edu.ua" target="_blank">National University</a></h3>
-                        <h4>Student</h4>
-                        <p>Got another diploma. Have been playing Diablo2 and StarCraft a lot, got beard</p>
-                    </li>
-                    <li>
-                        <h2>2002-2006</h2>
-                        <h3><a href="http://polytechnic.ck.ua" target="_blank">Collage</a></h3>
-                        <h4>Student</h4>
-                        <p>Got first diploma</p>
-                    </li>
-                    <li>
-                        <h2>1999-2002</h2>
-                        <h3>Home</h3>
-                        <h4>Teenager, also advanced PC user</h4>
-                        <p>I had old PC, 40mhz CPU, 4mb of ram, so I learn DOS and batch scripts just to be able to run some games and support the system</p>
-                    </li>
-                    <li>
-                        <h2>1996-1999</h2>
-                        <h3>Home</h3>
-                        <h4>Lego developer</h4>
-                        <p>Btw, even now I love to play with all kind of constructors.</p>
-                    </li>
-                    <li>
-                        <h2>1996</h2>
-                        <h3>Home</h3>
-                        <h4>Kid</h4>
-                        <p>That wanted to create a video games</p>
-                    </li>
-                    <li>
-                        <h2>1987</h2>
-                        <p>Far far away from home among bears in Moscow</p>
-                        <p>It's friday, it's fall, it's cold, early in the morning. Little kosh was born.</p>
-                    </li>
-                </ul>
-            </div>
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <img id="modalImage" src="">
         </div>
     </div>
-</section>
-<!-- Resume section end -->
-
-<!-- Resume section start -->
-<!--<section class="resume-section with-bg spad">-->
-    <!--<div class="container-fluid">-->
-        <!--<div class="row">-->
-            <!--<div class="col-xl-7 offset-xl-2">-->
-                <!--<div class="section-title">-->
-                    <!--<h2>Education</h2>-->
-                <!--</div>-->
-                <!--<ul class="resume-list">-->
-                    <!--<li>-->
-                        <!--<h2>2002-2006</h2>-->
-                        <!--<h3><a href="http://polytechnic.ck.ua" target="_blank">Collage</a></h3>-->
-                        <!--<p>Got first diploma</p>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<h2>2006-2009</h2>-->
-                        <!--<h3><a href="http://www.cdu.edu.ua" target="_blank">National University</a></h3>-->
-                        <!--<p>Got another diploma</p>-->
-                    <!--</li>-->
-                <!--</ul>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</section>-->
-<!-- Resume section end -->
-
-<section class="review-section spad pb-0">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xl-7 offset-xl-2">
-                <div class="section-title">
-                    <h2>Portfolio</h2>
-                </div>
-                <div class="review-slider rs2 owl-carousel">
-                    <div class="single-review">
-                        <div class="qut">“</div>
-                        <p>
-                            <code>
-                                val r = 2 + 2
-                                <br/>
-                                r shouldBe 4;
-                            </code>
-                        </p>
-                        <h3>Amazing calculation</h3>
-                    </div>
-                    <div class="single-review">
-                        <div class="qut">“</div>
-                        <p>
-                            <code>
-                                val happyFamily = sql("SELECT name FROM user");
-                                </br>
-                                happyFamily shouldBe Some(["Victor","Nata","Mark","Sophy"])
-                            </code>
-                        </p>
-                        <h3>Complex sql queries</h3>
-                    </div>
-                    <div class="single-review">
-                        <div class="qut">“</div>
-                        <p>
-                            <code>
-                                val hash = hashPasswor("salt", "qwerty")
-                                <br/>
-                                hash should not be "qwerty"
-                            </code>
-                        </p>
-                        <h3>Bulletproof security</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Review section start -->
-<section class="review-section spad pb-0">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xl-7 offset-xl-2">
-                <div class="section-title">
-                    <h2>A bit of motivation</h2>
-                </div>
-                <div class="review-slider rs1 owl-carousel">
-                    <div class="single-review">
-                        <div class="qut">“</div>
-                        <p>
-                            Two weeks of coding save us two ours of planning
-                        </p>
-                        <h3></h3>
-                        <h4>Wise meme</h4>
-                    </div>
-                    <div class="single-review">
-                        <div class="qut">“</div>
-                        <p>
-                            Even a broken clock is right twice a day
-                        </p>
-                        <!--<h3>Robert G. Smith</h3>-->
-                        <!--<h4>Manager, Company</h4>-->
-                    </div>
-                    <div class="single-review">
-                        <div class="qut">“</div>
-                        <p>
-                            You are who you choose to be
-                        </p>
-                        <h3>Dean McCoppin</h3>
-                        <h4>Dude from cartoon Iron Giant</h4>
-                    </div>
-<!--                    <div class="single-review">-->
-<!--                        <div class="qut">“</div>-->
-<!--                        <p>-->
-<!--                            All of old. Nothing else ever. Ever tried. Ever failed. No matter. Try again. Fail again.-->
-<!--                            Fail better-->
-<!--                        </p>-->
-<!--                        <h3>Samuel Beckett</h3>-->
-<!--                        <h4>Irish playwright, novelist, poet and winner of the 1969 Nobel Prize in Literature</h4>-->
-<!--                    </div>-->
-                    <div class="single-review">
-                        <div class="qut">“</div>
-                        <p>
-
-                        </p>
-                        <h3>Everything is possible</h3>
-                        <h4 title="harik">The guy who infected me with tech</h4>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Review section end -->
-
-<!-- Portfolio section start -->
-<!--<section class="portfolio-section spad pb-0">-->
-<!--<div class="container-fluid">-->
-<!--<div class="row">-->
-<!--<div class="col-xl-4 col-md-8 offset-xl-2 ">-->
-<!--<div class="section-title">-->
-<!--<h2>Portfolio</h2>-->
-<!--</div>-->
-<!--</div>-->
-<!--&lt;!&ndash;<div class="col-md-4 text-md-right">&ndash;&gt;-->
-<!--&lt;!&ndash;<a href="#" class="site-btn mb-5">See All Portfolio</a>&ndash;&gt;-->
-<!--&lt;!&ndash;</div>&ndash;&gt;-->
-<!--</div>-->
-<!---->
-<!--<div class="portfolio-warp">-->
-<!--<div class="row">-->
-<!--<div class="col-xl-3 col-lg-6 col-md-6">-->
-<!--<div class="portfolio-item">-->
-<!--<a href="img/portfolio/1.jpg" class="set-bg port-pic" data-setbg="img/portfolio/1.jpg"></a>-->
-<!--<h2>Brand Campaign</h2>-->
-<!--<p>Graphic design</p>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="col-xl-3 col-lg-6 col-md-6">-->
-<!--<div class="portfolio-item">-->
-<!--<a href="img/portfolio/2.jpg" class="set-bg port-pic" data-setbg="img/portfolio/2.jpg"></a>-->
-<!--<h2>A Corporate Identity</h2>-->
-<!--<p>Graphic design</p>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="col-xl-3 col-lg-6 col-md-6">-->
-<!--<div class="portfolio-item">-->
-<!--<a href="img/portfolio/3.jpg" class="set-bg port-pic" data-setbg="img/portfolio/3.jpg"></a>-->
-<!--<h2>Web Design Website</h2>-->
-<!--<p>Graphic design</p>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="col-xl-3 col-lg-6 col-md-6">-->
-<!--<div class="portfolio-item">-->
-<!--<a href="img/portfolio/4.jpg" class="set-bg port-pic" data-setbg="img/portfolio/4.jpg"></a>-->
-<!--<h2>Logo design</h2>-->
-<!--<p>Graphic design</p>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</section>-->
-<!-- Portfolio section end -->
-
-<!-- Extra section start -->
-<!--<section class="extra-section spad pb-0">-->
-<!--<div class="container-fluid">-->
-<!--<div class="row">-->
-<!--<div class="col-xl-8 offset-xl-2">-->
-<!--<div class="section-title">-->
-<!--<h2>Extra Skills</h2>-->
-<!--</div>-->
-<!--<div class="row">-->
-
-<!--<div class="col-lg-3 col-md-6 pt-5">-->
-<!--<div class="fact-box trans">-->
-<!--<div class="fact-content">-->
-<!--<div class="circle-progress">-->
-<!--<div id="progress1" class="prog-circle"></div>-->
-<!--<div class="progress-info">-->
-<!--<h2>75%</h2>-->
-<!--</div>-->
-<!--<div class="prog-title">-->
-<!--<h3>75%</h3>-->
-<!--<p></p>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="col-lg-3 col-md-6 pt-5">-->
-<!--<div class="fact-box trans">-->
-<!--<div class="fact-content">-->
-<!--<div class="circle-progress">-->
-<!--<div id="progress2" class="prog-circle"></div>-->
-<!--<div class="progress-info">-->
-<!--<h2>83%</h2>-->
-<!--</div>-->
-<!--<div class="prog-title">-->
-<!--<h3>83%</h3>-->
-<!--<p></p>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="col-lg-3 col-md-6">-->
-<!--<div class="fact-box">-->
-<!--<div class="fact-content">-->
-<!--<img src="img/icon/1-w.png" alt="">-->
-<!--<h2>Platinum League</h2>-->
-<!--<p>Once got in StarCraft2</p>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="col-lg-3 col-md-6">-->
-<!--<div class="fact-box">-->
-<!--<div class="fact-content">-->
-<!--<img src="img/icon/2-w.png" alt="">-->
-<!--<h2><script>document.write(new Date().getFullYear() - 2009);</script></h2>-->
-<!--<p>Years of happy developing</p>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</section>-->
-<!-- Extra section end -->
-
-<!-- Contact section start -->
-<!-- <section class="contact-section spad">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xl-8 offset-xl-2">
-                <div class="section-title">
-                    <h2>Contact Me</h2>
-                </div>
-                <form method="POST" action="https://formspree.io/vpaul.play@gmail.com" class="contact-form">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <input type="email" name="email" placeholder="Your E-mail">
-                        </div>
-                        <div class="col-md-12">
-                            <textarea name="message" placeholder="Your Message to me"></textarea>
-                        </div>
-                    </div>
-                    <div class="text-md-right">
-                        <button class="site-btn">Send message</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section> -->
-<!-- Contact section end -->
-
-<br/>
-<div id="commit"></div>
-
-<!-- Footer section start -->
-<footer class="footer-section">
-    <div class="container text-center">
-        <div class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-            All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
-                    href="https://colorlib.com" target="_blank">Colorlib</a>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-        </div>
-    </div>
-</footer>
-<!-- Footer section end -->
-
-<div id="static_top_left">
-<a data-testid="linkElement" href="https://savelife.in.ua/en/donate-en/#donate-army-card-monthly" target="_self" class="xQ_iF"><wix-image id="img_comp-l011mm19" class="_1-6YJ _1Fe8-" data-image-info="{&quot;containerId&quot;:&quot;comp-l011mm19&quot;,&quot;targetWidth&quot;:175,&quot;targetHeight&quot;:73,&quot;displayMode&quot;:&quot;fill&quot;,&quot;imageData&quot;:{&quot;width&quot;:290,&quot;height&quot;:121,&quot;uri&quot;:&quot;dc8857_ec33c214eb6f4c8e8489c1086c5c041a~mv2.png&quot;,&quot;name&quot;:&quot;logo_SL_eng_2 (1).webp&quot;,&quot;displayMode&quot;:&quot;fill&quot;}}" data-bg-effect-name="" data-has-ssr-src="" data-src="https://static.wixstatic.com/media/dc8857_ec33c214eb6f4c8e8489c1086c5c041a~mv2.png/v1/fill/w_263,h_110,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/logo_SL_eng_2%20(1)_webp.png"><img src="https://static.wixstatic.com/media/dc8857_ec33c214eb6f4c8e8489c1086c5c041a~mv2.png/v1/fill/w_263,h_110,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/logo_SL_eng_2%20(1)_webp.png" alt="logo_SL_eng_2 (1).webp" style="width:175px;height:73px;object-fit:cover" srcset="https://static.wixstatic.com/media/dc8857_ec33c214eb6f4c8e8489c1086c5c041a~mv2.png/v1/fill/w_263,h_110,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/logo_SL_eng_2%20(1)_webp.png" fetchpriority="high"></wix-image></a>
-</div>
-<div id="static_top_right">
-    <a href="pages/games" target="_blank">My Sandbox</a>
-</div>
-
-<!--====== Javascripts & Jquery ======-->
-<script src="js/jquery-2.1.4.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/magnific-popup.min.js"></script>
-<script src="js/circle-progress.min.js"></script>
-<script src="js/main.js"></script>
-
 </body>
 </html>

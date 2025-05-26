@@ -1,0 +1,377 @@
+/* Clean, paper-like design with two-column layout */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: white;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 100%;
+    max-width: none;
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styles */
+.main-header {
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.main-header nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.main-header nav li {
+    padding: 0;
+}
+
+.main-header nav a {
+    display: block;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.main-header nav a:hover {
+    background-color: #f5f5f5;
+    color: #000;
+}
+
+.main-header nav li.active a {
+    color: #0077cc;
+    border-bottom: 3px solid #0077cc;
+}
+
+/* Two-column layout */
+.two-column-layout {
+    display: flex;
+    min-height: calc(100vh ); /* Adjusted to make room for header */
+    width: 100%;
+    padding-top: 50px;
+}
+
+.column {
+    padding: 2rem;
+}
+
+/* Left column: Profile and contacts */
+.left-column {
+    flex: 0 0 400px;
+    background-color: #f9f9f9;
+    border-right: 1px solid #eee;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 50px; /* Same as header height */
+    height: calc(100vh - 50px); /* Viewport height minus header */
+    overflow-y: auto;
+}
+
+.left-column h1 {
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+}
+
+.profile-image {
+    margin: 0 auto 1.5rem;
+    /* width: 300px;
+    height: 300px; */
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.social-links {
+    padding-top: 2rem;
+}
+
+.social-links h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #555;
+}
+
+.social-links ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: #0077cc;
+    font-weight: bold;
+    transition: color 0.2s;
+    font-size: 1.1rem;
+}
+
+.social-links a:hover {
+    color: #005fa3;
+    text-decoration: underline;
+}
+
+/* Right column: Description */
+.right-column {
+    flex: 1;
+    padding: 3rem;
+    overflow-y: auto;
+    height: calc(100vh - 50px); /* Viewport height minus header */
+}
+
+/* Timeline styles */
+.timeline-container h2 {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    color: #444;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+}
+
+/* Timeline filters */
+.timeline-filters {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+}
+
+.filter-option input {
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+}
+
+.filter-option span {
+    font-weight: 500;
+}
+
+.filter-option.work {
+    background-color: rgba(0, 119, 204, 0.1);
+}
+
+.filter-option.work span {
+    color: #0077cc;
+}
+
+.filter-option.personal {
+    background-color: rgba(40, 167, 69, 0.1);
+}
+
+.filter-option.personal span {
+    color: #28a745;
+}
+
+.timeline {
+    position: relative;
+    padding: 0 0 0 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 8px;
+    height: 100%;
+    width: 2px;
+    background-color: #0077cc;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 2px solid #0077cc;
+    z-index: 1;
+}
+
+/* Personal timeline items */
+.timeline-item.personal::before {
+    border-color: #28a745;
+}
+
+.timeline-item.personal .timeline-date {
+    color: #28a745;
+}
+
+.timeline-item.personal .timeline-content {
+    border-left: 3px solid #28a745;
+}
+
+.timeline-date {
+    font-weight: bold;
+    color: #0077cc;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.timeline-content {
+    background-color: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-left: 3px solid #0077cc;
+}
+
+.timeline-content h3 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    color: #333;
+}
+
+.timeline-content p {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.timeline-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Modal styles */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: 0;
+    padding: 0;
+    width: 80%;
+    max-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    animation: modalopen 0.3s;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+    text-shadow: 0 0 3px black;
+}
+
+.modal-close:hover {
+    color: #ccc;
+}
+
+#modalImage {
+    display: block;
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+}
+
+@keyframes modalopen {
+    from {opacity: 0; transform: scale(0.9);}
+    to {opacity: 1; transform: scale(1);}
+}
+
+/* Timeline loading and error states */
+.timeline-loading {
+    text-align: center;
+    padding: 2rem;
+    color: #777;
+    font-style: italic;
+}
+
+.timeline-error {
+    text-align: center;
+    padding: 2rem;
+    color: #d9534f;
+    background-color: rgba(217, 83, 79, 0.1);
+    border-radius: 5px;
+    margin: 1rem 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .two-column-layout {
+        flex-direction: column;
+    }
+    
+    .left-column {
+        flex: 0 0 auto;
+        border-right: none;
+        border-bottom: 1px solid #eee;
+    }
+}
