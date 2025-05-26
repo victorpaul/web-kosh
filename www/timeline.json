@@ -19,9 +19,17 @@
       "type": "work"
     },
     {
+      "date": "2020 - Present",
+      "title": "Home",
+      "description": ["We build our own home"],
+      "images": ["/img/home3.jpg","/img/home1.jpg","/img/home2.jpg"],
+      "type": "personal"
+    },
+    {
       "date": "2018 - Present",
       "title": "Father",
-      "description": ["Mark and Sophy were <a href=\"/img/kid2.jpg\" class=\"modal\">born</a>"],
+      "description": ["Mark and Sophy were born"],
+      "images": ["/img/kid2.jpg","/img/me_sophy.jpg","/img/me_mark.jpg"],
       "type": "personal"
     },
     {
@@ -29,6 +37,13 @@
       "title": "Java/Scala Developer",
       "description": ["Worked at <a href=\"https://www.ekreative.com\" target=\"_blank\">eKreative</a>"],
       "type": "work"
+    },
+    {
+      "date": "2014 - Present",
+      "title": "Game Changer",
+      "description": ["Lost my best friend, got the girl of my life"],
+      "images": ["/img/igor.jpg","/img/nat_fire_eyes2.jpg"],
+      "type": "personal"
     },
     {
       "date": "2012 - 2013",

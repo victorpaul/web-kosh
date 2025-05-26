@@ -1,0 +1,64 @@
+{
+  "skills": [
+    {
+      "title": "Java",
+      "image": "/img/skills/java.svg",
+      "description": "Experienced in Java for backend development, building robust and scalable applications."
+    },
+    {
+      "title": "Scala",
+      "image": "/img/skills/scala.svg",
+      "description": "Proficient in Scala for functional programming and concurrent systems."
+    },
+    {
+      "title": "Spring",
+      "image": "/img/skills/spring.svg",
+      "description": "Skilled in Spring Framework for creating enterprise-grade applications."
+    },
+    {
+      "title": "Android",
+      "image": "/img/skills/android.svg",
+      "description": "Capable of developing native Android applications with rich user experiences."
+    },
+    {
+      "title": "Docker",
+      "image": "/img/skills/docker.svg",
+      "description": "Experienced with Docker for containerization and deployment of applications."
+    },
+    {
+      "title": "AWS",
+      "image": "/img/skills/aws.svg",
+      "description": "Knowledgeable in Amazon Web Services for cloud computing solutions."
+    },
+    {
+      "title": "GCP",
+      "image": "/img/skills/gcp.svg",
+      "description": "Familiar with Google Cloud Platform for scalable cloud infrastructure."
+    },
+    {
+      "title": "TDD",
+      "image": "/img/skills/tdd.svg",
+      "description": "Strong advocate of Test-Driven Development for reliable and maintainable code."
+    },
+    {
+      "title": "Unreal Engine",
+      "image": "/img/skills/ue4.svg",
+      "description": "Passionate about game development with Unreal Engine using C++ and Blueprints."
+    },
+    {
+      "title": "JavaScript",
+      "image": "/img/skills/js.svg",
+      "description": "Competent in JavaScript for web development and interactive features."
+    },
+    {
+      "title": "Firebase",
+      "image": "/img/skills/firebase.svg",
+      "description": "Experienced with Firebase for real-time database and backend services."
+    },
+    {
+      "title": "IntelliJ IDEA",
+      "image": "/img/skills/idea.svg",
+      "description": "Primary development environment for efficient coding and debugging."
+    }
+  ]
+}

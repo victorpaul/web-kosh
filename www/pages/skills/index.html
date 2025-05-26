@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Skills Cloud</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/pages/skills/skills.css">
+    <script src="/theme.js"></script>
+    <script src="/pages/skills/skills.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <nav>
+            <ul>
+                <li><a href="/">Me</a></li>
+                <li class="active"><a href="/pages/skills">My Skills</a></li>
+                <li><a href="/pages/games">My Sandbox</a></li>                
+            </ul>
+        </nav>
+        <button id="theme-toggle" class="theme-toggle" title="Switch to Dark Mode">
+            <span id="theme-icon">🌙</span>
+        </button>
+    </header>
+    <div class="skills-container">
+        <div id="skills-cloud">
+            <!-- Skills will be loaded dynamically from skills.json -->
+        </div>
+    </div>
+</body>
+</html>

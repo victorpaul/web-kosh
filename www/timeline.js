@@ -22,32 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Create HTML for each timeline item
                 data.timelineItems.forEach(item => {
-                    const timelineItem = document.createElement('div');
-                    timelineItem.className = `timeline-item${item.type === 'personal' ? ' personal' : ''}`;
-                    
-                    const timelineDate = document.createElement('div');
-                    timelineDate.className = 'timeline-date';
-                    timelineDate.textContent = item.date;
-                    
-                    const timelineContent = document.createElement('div');
-                    timelineContent.className = 'timeline-content';
-                    
-                    const title = document.createElement('h3');
-                    title.textContent = item.title;
-                    timelineContent.appendChild(title);
-                    
-                    // Add each description paragraph
-                    item.description.forEach(desc => {
-                        const paragraph = document.createElement('p');
-                        paragraph.innerHTML = desc; // Using innerHTML to support HTML in descriptions
-                        timelineContent.appendChild(paragraph);
-                    });
-                    
-                    // Assemble the timeline item
-                    timelineItem.appendChild(timelineDate);
-                    timelineItem.appendChild(timelineContent);
-                    
-                    // Add to timeline
+                    const timelineItem = createTimelineItem(item);
                     timelineContainer.appendChild(timelineItem);
                 });
                 
@@ -58,6 +33,64 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error loading timeline data:', error);
                 timelineContainer.innerHTML = `<div class="timeline-error">Error loading timeline data: ${error.message}</div>`;
             });
+    }
+    
+    // Function to create timeline item with images if available
+    function createTimelineItem(item) {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = `timeline-item ${item.type}`;
+        
+        const dateDiv = document.createElement('div');
+        dateDiv.className = 'timeline-date';
+        dateDiv.textContent = item.date;
+        itemDiv.appendChild(dateDiv);
+        
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'timeline-content';
+
+        const textColumn = document.createElement('div');
+        textColumn.className = 'timeline-text-column';
+
+        const titleH3 = document.createElement('h3');
+        titleH3.textContent = item.title;
+        textColumn.appendChild(titleH3);
+
+        if (item.description && item.description.length > 0) {
+            const descP = document.createElement('p');
+            descP.innerHTML = item.description.join('<br>');
+            textColumn.appendChild(descP);
+        }
+        contentDiv.appendChild(textColumn);
+
+        // Check if images array exists and has entries
+        if (item.images && item.images.length > 0) {
+            const imagesColumn = document.createElement('div');
+            imagesColumn.className = 'timeline-images-column';
+            
+            const imagesContainer = document.createElement('div');
+            imagesContainer.className = 'timeline-images';
+            
+            item.images.forEach(imageSrc => {
+                const img = document.createElement('img');
+                img.src = imageSrc;
+                img.alt = 'Timeline image';
+                img.className = 'timeline-thumbnail';
+                img.addEventListener('click', () => {
+                    const modal = document.getElementById('imageModal');
+                    const modalImg = document.getElementById('modalImage');
+                    modalImg.src = imageSrc;
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                });
+                imagesContainer.appendChild(img);
+            });
+            
+            imagesColumn.appendChild(imagesContainer);
+            contentDiv.appendChild(imagesColumn);
+        }
+        
+        itemDiv.appendChild(contentDiv);
+        return itemDiv;
     }
     
     // Function to update timeline based on filters

@@ -1,0 +1,58 @@
+/* Skills Cloud Styling */
+.skills-container {
+    padding: 80px 20px 20px;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+}
+
+.skills-container h1 {
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    color: var(--text-color);
+    transition: color 0.3s;
+}
+
+#skills-cloud {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 160px);
+    margin: 0 auto;
+}
+
+.skill-cloud {
+    position: absolute;
+    width: calc(60px + var(--size) * 10px);
+    height: calc(60px + var(--size) * 10px);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+    cursor: pointer;
+}
+
+[data-theme="dark"] .skill-cloud {
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.skill-cloud img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.skill-cloud:hover {
+    transform: scale(1.1);
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .skill-cloud:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
