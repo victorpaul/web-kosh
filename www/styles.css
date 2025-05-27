@@ -160,10 +160,10 @@ body {
     flex: 0 0 400px;
     background-color: var(--left-column-bg);
     border-right: 1px solid var(--left-column-border);
-    text-align: center;
+    /* text-align: center; */
     display: flex;
     flex-direction: column;
-    position: sticky;
+    /* position: sticky; */
     top: 50px; /* Same as header height */
     height: calc(100vh - 50px); /* Viewport height minus header */
     overflow-y: auto;
@@ -176,7 +176,7 @@ body {
 }
 
 .profile-image {
-    margin: 0 auto 1.5rem;
+    margin: 0 auto 0;
     /* width: 300px;
     height: 300px; */
     overflow: hidden;
@@ -206,6 +206,49 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: #ddd;
+    color: #333;
+    text-align: center;
+    line-height: 40px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    transform: scale(1.1);
+    background-color: #bbb;
+    color: #fff;
+}
+
+/* Font Awesome icon styles */
+.fab, .fa {
+    font-size: 20px;
+    line-height: 40px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark mode styles for social icons */
+body.dark-mode .social-links a {
+    background-color: #555;
+    color: #eee;
+}
+
+body.dark-mode .social-links a:hover {
+    background-color: #777;
+    color: #fff;
 }
 
 a {

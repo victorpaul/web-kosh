@@ -4,72 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="timeline.js"></script>
-    <script src="modal.js"></script>
-    <script src="theme.js"></script>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/fonts/fontawesome.css">
+    <script src="/timeline.js"></script>
+    <script src="/modal.js"></script>
+    <script src="/theme.js"></script>
+    <script src="/typing-effect.js"></script>
 </head>
 <body>
-    <header class="main-header">
-        <nav>
-            <ul>
-                <li class="active"><a href="/">Me</a></li>
-                <li><a href="/pages/skills">My Skills</a></li>
-                <li><a href="/pages/games">My Sandbox</a></li>
-            </ul>
-        </nav>
-        <button id="theme-toggle" class="theme-toggle" title="Switch to Dark Mode">
-            <span id="theme-icon">🌙</span>
-        </button>
-    </header>
-    
-    <div class="container">
-        <div class="two-column-layout">
-            <!-- Column 1: Personal info and contacts -->
-            <div class="column left-column">
-                <h1>Kosh Victor Paul</h1>
-                <div class="profile-image">
-                    <img src="/img/kosh.jpg" alt="Victor Paul">
-                </div>
-                
-                <div class="social-links">
-                    <ul>
-                        <li><a target="_blank" href="https://www.linkedin.com/in/victorkosh/">LinkedIn</a></li>
-                        <li><a target="_blank" href="https://gitlab.com/victorpaul">gitLab</a></li>
-                        <li><a target="_blank" href="https://github.com/victorpaul">gitHub</a></li>
-                    </ul>
-                </div>
+<header class="main-header">
+    <nav>
+        <ul>
+            <li class="active"><a href="/">Me</a></li>
+            <li><a href="/pages/skills">My Skills</a></li>
+            <li><a href="/pages/games">My Sandbox</a></li>
+        </ul>
+    </nav>
+    <button id="theme-toggle" class="theme-toggle" title="Switch to Dark Mode">
+        <span id="theme-icon">🌙</span>
+    </button>
+</header>
+
+<div class="container">
+    <div class="two-column-layout">
+        <!-- Column 1: Personal info and contacts -->
+        <div class="column left-column">
+            <div class="profile-image">
+                <img src="/img/kosh.jpg" alt="Victor Paul">
             </div>
-            
-            <!-- Column 2: Timeline -->
-            <div class="column right-column">
-                <div class="timeline-container">
-                    <div class="timeline-filters">
-                        <label class="filter-option work">
-                            <input type="checkbox" name="filter-work" checked>
-                            <span>Work</span>
-                        </label>
-                        <label class="filter-option personal">
-                            <input type="checkbox" name="filter-personal" checked>
-                            <span>Personal</span>
-                        </label>
-                    </div>
-                    
-                    <div class="timeline">
-                        <!-- Timeline items will be loaded dynamically from timeline.json -->
-                        <div class="timeline-loading">Loading timeline...</div>
-                    </div>
-                    </div>
+
+            <div class="social-links">
+                <a target="_blank" href="https://www.linkedin.com/in/victorkosh/" title="LinkedIn"><i
+                        class="fab fa-linkedin" aria-hidden="true"></i></a>
+                <a target="_blank" href="https://gitlab.com/victorpaul" title="GitLab"><i class="fab fa-gitlab"
+                                                                                          aria-hidden="true"></i></a>
+                <a target="_blank" href="https://github.com/victorpaul" title="GitHub"><i class="fab fa-github"
+                                                                                          aria-hidden="true"></i></a>
+            </div>
+            <br/>
+            <div>
+                <p id="victor-say">
+                    Hi, I am Victor, a developer. Here you can see my personal web page, made in the most efficient
+                    way possible, with the help of AI.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Column 2: Timeline -->
+        <div class="column right-column">
+            <div class="timeline-container">
+                <div class="timeline-filters">
+                    <label class="filter-option work">
+                        <input type="checkbox" name="filter-work" checked>
+                        <span>Work</span>
+                    </label>
+                    <label class="filter-option personal">
+                        <input type="checkbox" name="filter-personal" checked>
+                        <span>Personal</span>
+                    </label>
+                </div>
+
+                <div class="timeline">
+                    <!-- Timeline items will be loaded dynamically from timeline.json -->
+                    <div class="timeline-loading">Loading timeline...</div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Image Modal -->
-    <div id="imageModal" class="modal-overlay">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <img id="modalImage" src="">
-        </div>
+</div>
+</div>
+<!-- Image Modal -->
+<div id="imageModal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <img id="modalImage" src="">
     </div>
+</div>
 </body>
 </html>
