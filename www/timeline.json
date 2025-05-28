@@ -7,6 +7,13 @@
       "type": "work"
     },
     {
+      "date": "2022 - Present",
+      "title": "Volunteer",
+      "description": ["The war began; russia attacked my country. In those first days, it was hard to gather my thoughts, so we tried to help the army and restore bomb shelters.<br/>Since we were young parents, my wife set up a shared children's area in the shelter so that kids had something to do during air raids.<br/>At first, I looked for ways to be useful—buying first aid kits, pouches, power banks, and thermal imagers. Over time, I found my niche: 3D printing for the army's needs."],
+      "type": "personal",
+      "images": ["/img/war1.jpg","/img/war2.jpg","/img/war3.jpg","/img/war4.jpg"]
+    },
+    {
       "date": "2021 - 2024",
       "title": "Senior Software Engineer",
       "description": ["Worked at a Startup (NDA)"],

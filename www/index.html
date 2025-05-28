@@ -56,11 +56,11 @@
             <div class="timeline-container">
                 <div class="timeline-filters">
                     <label class="filter-option work">
-                        <input type="checkbox" name="filter-work" checked>
+                        <input type="checkbox" name="filter-work" >
                         <span>Work</span>
                     </label>
                     <label class="filter-option personal">
-                        <input type="checkbox" name="filter-personal">
+                        <input type="checkbox" name="filter-personal" checked>
                         <span>Personal</span>
                     </label>
                 </div>
@@ -78,7 +78,16 @@
 <div id="imageModal" class="modal-overlay">
     <div class="modal-content">
         <span class="modal-close">&times;</span>
-        <img id="modalImage" src="">
+        <div class="modal-columns">
+            <div class="modal-thumbnails">
+                <div class="thumbnails-container" id="modalThumbnails">
+                    <!-- Thumbnails will be added dynamically here -->
+                </div>
+            </div>
+            <div class="modal-main-image">
+                <img id="modalImage" src="">
+            </div>
+        </div>
     </div>
 </div>
 </body>

@@ -70,17 +70,19 @@ document.addEventListener('DOMContentLoaded', function() {
             const imagesContainer = document.createElement('div');
             imagesContainer.className = 'timeline-images';
             
-            item.images.forEach(imageSrc => {
+            // Store all images in this timeline item
+            const imageGroup = [...item.images];
+            
+            item.images.forEach((imageSrc, index) => {
                 const img = document.createElement('img');
                 img.src = imageSrc;
                 img.alt = 'Timeline image';
                 img.className = 'timeline-thumbnail';
                 img.addEventListener('click', () => {
-                    const modal = document.getElementById('imageModal');
-                    const modalImg = document.getElementById('modalImage');
-                    modalImg.src = imageSrc;
-                    modal.style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
+                    // Use the new modal function to open image with its group
+                    if (window.modalFunctions && window.modalFunctions.openModalWithImage) {
+                        window.modalFunctions.openModalWithImage(imageSrc, imageGroup, index);
+                    }
                 });
                 imagesContainer.appendChild(img);
             });
