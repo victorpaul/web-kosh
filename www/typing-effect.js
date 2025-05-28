@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Set up variables for typing effect
         let charIndex = 0;
-        const typingSpeed = 50; // milliseconds per character
+        const typingSpeed = 5; // milliseconds per character
         
         // Function to type one character at a time
         function typeText() {
