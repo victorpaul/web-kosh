@@ -146,7 +146,7 @@ body {
 /* Two-column layout */
 .two-column-layout {
     display: flex;
-    min-height: calc(100vh ); /* Adjusted to make room for header */
+    min-height: calc(100vh); /* Adjusted to make room for header */
     width: 100%;
     padding-top: 50px;
 }
@@ -192,23 +192,6 @@ body {
 
 .social-links {
     padding-top: 2rem;
-}
-
-.social-links h2 {
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-    color: #555;
-}
-
-.social-links ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-}
-
-.social-links {
     display: flex;
     gap: 15px;
 }
@@ -420,7 +403,7 @@ h1, h2, h3 {
 .timeline-content h3 {
     margin-top: 0;
     margin-bottom: 0.75rem;
-    color: #333;
+    color: var(--text-color);
 }
 
 .timeline-content p {

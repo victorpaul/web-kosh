@@ -8,3 +8,6 @@ Add section om my machines
 Add sections games I played and liked
 
 Add aphorysms, phrases I likes, my vision of certain things
+# Run server from www
+    
+    python3 -m http.server 8080

@@ -9,7 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Load skills from JSON
     fetch('/pages/skills/skills.json')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to load skills data');
+            return response.json();
+        })
         .then(data => {
             const skills = data.skills.map(skill => {
                 const skillElement = document.createElement('div');
@@ -55,7 +58,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 const skillDesc = this.getAttribute('data-description');
                 const tooltip = document.createElement('div');
                 tooltip.className = 'tooltip';
-                tooltip.innerHTML = `<strong>${skillName}</strong>: ${skillDesc}`;
+                const strong = document.createElement('strong');
+                strong.textContent = skillName;
+                tooltip.appendChild(strong);
+                tooltip.appendChild(document.createTextNode(': ' + skillDesc));
                 this.appendChild(tooltip);
             });
             

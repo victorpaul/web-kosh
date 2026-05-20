@@ -11,13 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Set up variables for typing effect
         let charIndex = 0;
+        let builtText = '';
         const typingSpeed = 5; // milliseconds per character
-        
+
         // Function to type one character at a time
         function typeText() {
             if (charIndex < originalText.length) {
-                // Add the next character
-                victorSayElement.textContent += originalText.charAt(charIndex);
+                builtText += originalText.charAt(charIndex);
+                victorSayElement.textContent = builtText;
                 charIndex++;
                 
                 // Schedule the next character

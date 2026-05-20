@@ -1,7 +1,13 @@
 {
   "timelineItems": [
     {
-      "date": "2024 - Present",
+      "date": "2026 - Present",
+      "title": "Senior Software Developer",
+      "description": ["Working at <a href=\"https://sigma.software/\", target=\"_blank\">SIGMA Software</a>"],
+      "type": "work"
+    },
+    {
+      "date": "2024 - 205",
       "title": "Senior Software Engineer",
       "description": ["Working at <a href=\"https://www.eskimi.com/\" target=\"_blank\">Eskimi</a>"],
       "type": "work"

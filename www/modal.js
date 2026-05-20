@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
             imageGroup.forEach((src, i) => {
                 const thumbnail = document.createElement('img');
                 thumbnail.src = src;
-                thumbnail.alt = 'Thumbnail';
+                thumbnail.alt = 'Image ' + (i + 1);
                 thumbnail.className = 'modal-thumbnail';
                 if (i === index) {
                     thumbnail.classList.add('active');

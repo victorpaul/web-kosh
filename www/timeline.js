@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to create timeline items from JSON data
     function createTimelineItems() {
         // Fetch the timeline data from JSON file
-        fetch('timeline.json')
+        fetch('/timeline.json')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Failed to load timeline data');
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
             item.images.forEach((imageSrc, index) => {
                 const img = document.createElement('img');
                 img.src = imageSrc;
-                img.alt = 'Timeline image';
+                img.alt = item.title;
                 img.className = 'timeline-thumbnail';
                 img.addEventListener('click', () => {
                     // Use the new modal function to open image with its group
