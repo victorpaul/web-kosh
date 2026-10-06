@@ -57,38 +57,46 @@
     max-width: 100%;
   }
 
-  /* ---------- builder layout: settings rail + sheet ---------- */
+  /* ---------- builder layout: the same shape as the home page and the dashboard —
+     a full-height column on the left (here: the settings), the content on the right ---------- */
   &.wrap {
-    display: grid;
-    grid-template-columns: 300px minmax(0, 1fr);
-    gap: 24px;
-    /* content stays within 1280px, while the background still spans the window */
-    padding: calc(var(--header-height) + 24px) max(20px, calc((100% - 1240px) / 2)) 24px;
-    align-items: start;
-  }
-  @media (max-width: 900px) {
-    &.wrap {
-      grid-template-columns: 1fr;
-    }
+    display: flex;
+    align-items: flex-start;
   }
 
   .rail {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 18px;
+    flex: 0 0 320px;
     display: flex;
     flex-direction: column;
     gap: 18px;
+    padding: 24px 24px 28px;
+    background: var(--panel);
+    border-right: 1px solid var(--line);
+    /* stays put while the sheets scroll; scrolls on its own when the settings are long */
     position: sticky;
-    top: calc(var(--header-height) + 24px);
-    max-height: calc(100vh - var(--header-height) - 48px);
-    overflow: auto;
+    top: var(--header-height);
+    height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+  }
+  .stage {
+    flex: 1;
+    min-width: 0;
+    padding: 24px;
   }
   @media (max-width: 900px) {
+    &.wrap {
+      flex-direction: column;
+      align-items: stretch;
+    }
     .rail {
+      flex: none;
       position: static;
-      max-height: none;
+      height: auto;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .stage {
+      padding: 16px;
     }
   }
   .back {
@@ -104,7 +112,8 @@
   }
   .brand h1 {
     font-family: var(--display);
-    font-size: 22px;
+    font-size: 26px;
+    line-height: 1.15;
   }
   .brand p {
     margin: 2px 0 0;
@@ -407,6 +416,7 @@
     }
     .stage {
       display: block;
+      padding: 0;
     }
     .sheet {
       box-shadow: none;

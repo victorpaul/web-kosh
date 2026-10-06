@@ -1,85 +1,84 @@
-<div class="ws">
-  <div class="page">
-    <header>
-      <h1>{{ 'app.name' | t }}</h1>
-      <p>{{ 'kids.intro' | t }}</p>
-    </header>
-
-    <div class="cards">
-      <a class="card" routerLink="writing">
-        <h2>{{ 'kids.writing.title' | t }}</h2>
-        <div class="peek">
-          <div class="trace">{{ 'kids.peek.letters' | t }}</div>
-          <div class="rule"></div>
-          <div class="word">{{ 'w.default.home' | t }}</div>
-          <div class="rule"></div>
-        </div>
-        <p>{{ 'kids.writing.text' | t }}</p>
-        <span class="go">{{ 'kids.writing.go' | t }}</span>
-      </a>
-
-      <a class="card" routerLink="math">
-        <h2>{{ 'kids.math.title' | t }}</h2>
-        <div class="peek">
-          <div class="sum"><span>4 + 3 =</span><span class="box"></span></div>
-          <div class="sum"><span>🍎🍎 + 🍎🍎🍎 =</span><span class="box"></span></div>
-        </div>
-        <p>{{ 'kids.math.text' | t }}</p>
-        <span class="go">{{ 'kids.math.go' | t }}</span>
-      </a>
-
-      <a class="card" routerLink="colors">
-        <h2>{{ 'kids.colors.title' | t }}</h2>
-        <div class="peek">
-          <div class="shapes">
-            <app-shape shape="circle" color="green" [mm]="5.8" />
-            <app-shape shape="square" color="red" [mm]="5.8" />
-            <app-shape shape="triangle" color="blue" [mm]="5.8" />
-            <app-shape shape="circle" [mm]="5.8" />
-          </div>
-          <div class="word green">{{ 'c.col.green' | t }}</div>
-        </div>
-        <p>{{ 'kids.colors.text' | t }}</p>
-        <span class="go">{{ 'kids.colors.go' | t }}</span>
-      </a>
-
-      <a class="card" routerLink="words">
-        <h2>{{ 'kids.words.title' | t }}</h2>
-        <div class="peek match">
-          <div class="pair"><span class="w">{{ 'v.cat' | t }}</span><span class="dot"></span><span class="line l1"></span><span class="dot"></span><span class="e">🍎</span></div>
-          <div class="pair"><span class="w">{{ 'v.apple' | t }}</span><span class="dot"></span><span class="line l2"></span><span class="dot"></span><span class="e">🐱</span></div>
-        </div>
-        <p>{{ 'kids.words.text' | t }}</p>
-        <span class="go">{{ 'kids.words.go' | t }}</span>
-      </a>
-
-      <a class="card" routerLink="paths">
-        <h2>{{ 'kids.paths.title' | t }}</h2>
-        <div class="peek path">
-          <div class="moves"><span>3 →</span><span>2 ↓</span><span>1 →</span></div>
-          <svg viewBox="-0.5 -0.5 7 5" aria-hidden="true">
-            <path class="grid" d="M0 0H6M0 1H6M0 2H6M0 3H6M0 4H6M0 0V4M1 0V4M2 0V4M3 0V4M4 0V4M5 0V4M6 0V4" />
-            <path class="route" d="M0 1H3V3H4" />
-            <circle cx="0" cy="1" r="0.18" /><circle cx="4" cy="3" r="0.18" />
-          </svg>
-        </div>
-        <p>{{ 'kids.paths.text' | t }}</p>
-        <span class="go">{{ 'kids.paths.go' | t }}</span>
-      </a>
-
-      <a class="card" routerLink="papers">
-        <h2>{{ 'kids.papers.title' | t }}</h2>
-        <div class="peek doc">
-          <div>Директору ____________</div>
-          <div class="center">Заява</div>
-          <div class="docrule"></div>
-          <div class="docrule short"></div>
-        </div>
-        <p>{{ 'kids.papers.text' | t }}</p>
-        <span class="go">{{ 'kids.papers.go' | t }}</span>
-      </a>
-    </div>
-
+<!-- same shape as the home page: an intro column on the left, the content on the right -->
+<div class="ws layout">
+  <aside class="intro">
+    <h1>{{ 'app.name' | t }}</h1>
+    <p>{{ 'kids.intro' | t }}</p>
     <footer>{{ 'kids.footer' | t }}</footer>
+  </aside>
+
+  <div class="cards">
+    <a class="card" routerLink="writing">
+      <h2>{{ 'kids.writing.title' | t }}</h2>
+      <div class="peek">
+        <div class="trace">{{ 'kids.peek.letters' | t }}</div>
+        <div class="rule"></div>
+        <div class="word">{{ 'w.default.home' | t }}</div>
+        <div class="rule"></div>
+      </div>
+      <p>{{ 'kids.writing.text' | t }}</p>
+      <span class="go">{{ 'kids.writing.go' | t }}</span>
+    </a>
+
+    <a class="card" routerLink="math">
+      <h2>{{ 'kids.math.title' | t }}</h2>
+      <div class="peek">
+        <div class="sum"><span>4 + 3 =</span><span class="box"></span></div>
+        <div class="sum"><span>🍎🍎 + 🍎🍎🍎 =</span><span class="box"></span></div>
+      </div>
+      <p>{{ 'kids.math.text' | t }}</p>
+      <span class="go">{{ 'kids.math.go' | t }}</span>
+    </a>
+
+    <a class="card" routerLink="colors">
+      <h2>{{ 'kids.colors.title' | t }}</h2>
+      <div class="peek">
+        <div class="shapes">
+          <app-shape shape="circle" color="green" [mm]="5.8" />
+          <app-shape shape="square" color="red" [mm]="5.8" />
+          <app-shape shape="triangle" color="blue" [mm]="5.8" />
+          <app-shape shape="circle" [mm]="5.8" />
+        </div>
+        <div class="word green">{{ 'c.col.green' | t }}</div>
+      </div>
+      <p>{{ 'kids.colors.text' | t }}</p>
+      <span class="go">{{ 'kids.colors.go' | t }}</span>
+    </a>
+
+    <a class="card" routerLink="words">
+      <h2>{{ 'kids.words.title' | t }}</h2>
+      <div class="peek match">
+        <div class="pair"><span class="w">{{ 'v.cat' | t }}</span><span class="dot"></span><span class="line l1"></span><span class="dot"></span><span class="e">🍎</span></div>
+        <div class="pair"><span class="w">{{ 'v.apple' | t }}</span><span class="dot"></span><span class="line l2"></span><span class="dot"></span><span class="e">🐱</span></div>
+      </div>
+      <p>{{ 'kids.words.text' | t }}</p>
+      <span class="go">{{ 'kids.words.go' | t }}</span>
+    </a>
+
+    <a class="card" routerLink="paths">
+      <h2>{{ 'kids.paths.title' | t }}</h2>
+      <div class="peek path">
+        <div class="moves"><span>3 →</span><span>2 ↓</span><span>1 →</span></div>
+        <svg viewBox="-0.5 -0.5 7 5" aria-hidden="true">
+          <path class="grid" d="M0 0H6M0 1H6M0 2H6M0 3H6M0 4H6M0 0V4M1 0V4M2 0V4M3 0V4M4 0V4M5 0V4M6 0V4" />
+          <path class="route" d="M0 1H3V3H4" />
+          <circle cx="0" cy="1" r="0.18" /><circle cx="4" cy="3" r="0.18" />
+        </svg>
+      </div>
+      <p>{{ 'kids.paths.text' | t }}</p>
+      <span class="go">{{ 'kids.paths.go' | t }}</span>
+    </a>
+
+    <a class="card" routerLink="papers">
+      <h2>{{ 'kids.papers.title' | t }}</h2>
+      <div class="peek doc">
+        <div>Директору ____________</div>
+        <div class="center">Заява</div>
+        <div class="docrule"></div>
+        <div class="docrule short"></div>
+      </div>
+      <p>{{ 'kids.papers.text' | t }}</p>
+      <span class="go">{{ 'kids.papers.go' | t }}</span>
+    </a>
   </div>
+
 </div>

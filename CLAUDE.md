@@ -40,6 +40,10 @@ A new page should read almost like a list of `<app-*>` tags in its template.
   - `timeline/` — fetches timeline items via `TimelineService`, renders the
     work/personal filter toggles and the timeline list, delegating any
     per-item images to `image-gallery`.
+- **One page shape everywhere:** a full-height column on the left (home: photo
+  and links; kid-tasks dashboard: intro, 320px; worksheet pages: the settings,
+  320px, sticky) and the content on the right; it stacks on phones. New pages
+  follow it. Exception: the CV, which is a centred sheet of paper.
 - `layout/` — structural chrome shared across pages: the header with the nav,
   the language switch and the theme toggle. Every page, including kid tasks,
   gets language and theme from this one top panel — never add page-local

@@ -1,32 +1,59 @@
-.page {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 48px 20px 64px;
+.layout {
   display: flex;
-  flex-direction: column;
-  gap: 36px;
+  /* exactly one screen: .ws already reserves the top panel's height as padding */
+  height: 100vh;
 }
-header h1 {
-  font-family: var(--display);
-  font-size: 38px;
-  letter-spacing: 0.2px;
-}
-header p {
-  margin: 6px 0 0;
-  color: var(--ink-soft);
-  font-size: 16px;
-  max-width: 52ch;
-}
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
-}
-a.card {
+
+/* ---------- left: what this is ---------- */
+.intro {
+  flex: 0 0 320px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 22px;
+  padding: 32px 28px;
+  background: var(--panel);
+  border-right: 1px solid var(--line);
+  overflow-y: auto;
+
+  h1 {
+    font-family: var(--display);
+    font-size: 34px;
+    line-height: 1.1;
+    letter-spacing: 0.2px;
+  }
+  p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  footer {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    color: var(--pencil);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}
+
+/* ---------- right: the worksheets, 3 × 2, filling the screen ---------- */
+.cards {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  padding: 24px;
+}
+a.card {
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 20px;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -45,18 +72,66 @@ a.card {
 }
 .card h2 {
   font-family: var(--display);
-  font-size: 21px;
+  font-size: 20px;
+  line-height: 1.2;
 }
 .card p {
   font-size: 14px;
   color: var(--ink-soft);
-  line-height: 1.5;
+  line-height: 1.45;
+  /* on short screens the description gives way first, never the title or the preview */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+/* short screens (e.g. 1280×720): 3 lines, still ending on a whole line */
+@media (max-height: 820px) and (min-width: 1101px) {
+  .card p {
+    -webkit-line-clamp: 3;
+  }
 }
 .card .go {
+  /* the link always sits at the bottom of the card */
+  margin-top: auto;
   font-size: 13px;
   font-weight: 600;
   color: var(--blue);
-  margin-top: auto;
+}
+
+/* ---------- smaller screens: the grid can't fit one screen any more, so the page scrolls ---------- */
+@media (max-width: 1100px), (max-height: 600px) {
+  .layout {
+    height: auto;
+    min-height: 100vh;
+  }
+  /* the page scrolls now, so descriptions can be shown in full */
+  .card p {
+    -webkit-line-clamp: unset;
+  }
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+  }
+}
+@media (max-width: 760px) {
+  .layout {
+    flex-direction: column;
+  }
+  .intro {
+    flex: none;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 20px;
+
+    footer {
+      margin-top: 4px;
+    }
+  }
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 16px;
+  }
 }
 
 /* miniature sheets: paper-white in both themes */
@@ -223,9 +298,4 @@ a.card {
     width: 60%;
   }
 }
-footer {
-  color: var(--pencil);
-  font-size: 13px;
-  border-top: 1px solid var(--line);
-  padding-top: 18px;
-}
+
