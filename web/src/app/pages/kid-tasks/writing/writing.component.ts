@@ -4,7 +4,10 @@ import { I18nService } from '../../../core/i18n/i18n.service';
 import { WorksheetLayoutComponent } from '../components/worksheet-layout/worksheet-layout.component';
 import { SavedListComponent } from '../components/saved-list/saved-list.component';
 import { WorksheetStore } from '../kit/worksheet-store';
-import { chooseFiles, clampField, readAsDataUrl } from '../kit/files';
+import { chooseFiles, readAsDataUrl } from '../kit/files';
+import { NumberStepperComponent } from '../components/number-stepper/number-stepper.component';
+import { RailGroupComponent } from '../components/rail-group/rail-group.component';
+import { SheetActionsComponent } from '../components/sheet-actions/sheet-actions.component';
 import {
   Block, BlockKind, Cell, FONT_KEYS, FontKey, ImageBlock, RATIOS, RATIO_KEYS, RatioKey, STYLE_KEYS, TextBlock, TextStyleKey,
   WritingSheet, blankSheet, newBlock, textBlockStyle,
@@ -15,7 +18,7 @@ const KEY = 'worksheet-press-v2';
 @Component({
   selector: 'app-writing',
   standalone: true,
-  imports: [TranslatePipe, WorksheetLayoutComponent, SavedListComponent],
+  imports: [TranslatePipe, WorksheetLayoutComponent, SavedListComponent, NumberStepperComponent, RailGroupComponent, SheetActionsComponent],
   templateUrl: './writing.component.html',
   styleUrl: './writing.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,20 +46,17 @@ export class WritingComponent {
     this.state.title = title;
     this.persist();
   }
-  setCols(field: HTMLInputElement): void {
-    this.state.cols = clampField(field, 1, 4, 1);
+  setCols(cols: number): void {
+    this.state.cols = cols;
     this.commit();
   }
-  setRows(field: HTMLInputElement): void {
-    this.state.rows = clampField(field, 1, 6, 1);
+  setRows(rows: number): void {
+    this.state.rows = rows;
     this.commit();
   }
   setSize(size: string): void {
     this.state.size = size === 'letter' ? 'letter' : 'a4';
     this.commit();
-  }
-  print(): void {
-    window.print();
   }
   newSheet(): void {
     this.state = this.blankSheet();
@@ -104,8 +104,8 @@ export class WritingComponent {
     block.font = font as FontKey;
     this.commit();
   }
-  setFontSize(block: TextBlock, field: HTMLInputElement): void {
-    block.size = clampField(field, 8, 96, 24);
+  setFontSize(block: TextBlock, size: number): void {
+    block.size = size;
     this.commit();
   }
   toggleBold(block: TextBlock): void {
@@ -119,16 +119,16 @@ export class WritingComponent {
   fadePercent(block: TextBlock): number {
     return Math.round((block.fade ?? 0.2) * 100);
   }
-  setFade(block: TextBlock, field: HTMLInputElement): void {
-    block.fade = clampField(field, 5, 100, 20) / 100;
+  setFade(block: TextBlock, percent: number): void {
+    block.fade = percent / 100;
     this.commit();
   }
   setRatio(block: ImageBlock, ratio: string): void {
     block.ratio = ratio as RatioKey;
     this.commit();
   }
-  setLineCount(block: Block & { kind: 'lines' }, field: HTMLInputElement): void {
-    block.count = clampField(field, 1, 12, 1);
+  setLineCount(block: Block & { kind: 'lines' }, count: number): void {
+    block.count = count;
     this.commit();
   }
   async pickImage(block: ImageBlock): Promise<void> {

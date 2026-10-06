@@ -4,9 +4,13 @@ import { TranslatePipe } from '../../../core/i18n/translate.pipe';
 import { I18nService } from '../../../core/i18n/i18n.service';
 import { WorksheetLayoutComponent } from '../components/worksheet-layout/worksheet-layout.component';
 import { SavedListComponent } from '../components/saved-list/saved-list.component';
-import { TogglePillDirective } from '../components/toggle-pill.directive';
 import { WorksheetStore } from '../kit/worksheet-store';
-import { chooseFiles, clampField, downscaleImage, readAsDataUrl } from '../kit/files';
+import { chooseFiles, downscaleImage, readAsDataUrl } from '../kit/files';
+import { NumberStepperComponent } from '../components/number-stepper/number-stepper.component';
+import { RailGroupComponent } from '../components/rail-group/rail-group.component';
+import { CheckOptionComponent } from '../components/check-option/check-option.component';
+import { ToggleGroupComponent, ToggleOption } from '../components/toggle-group/toggle-group.component';
+import { SheetActionsComponent } from '../components/sheet-actions/sheet-actions.component';
 import {
   MODE_KEYS, MathSheet, MathTask, Mode, OPS, OP_KEYS, OpKey, PRESET_SETS, SET_KEYS, activeSets, counterSizeMm,
   generateTasks, maxPics, normPic, picPool,
@@ -17,7 +21,7 @@ const KEY = 'worksheet-press-math-v1';
 @Component({
   selector: 'app-math',
   standalone: true,
-  imports: [NgTemplateOutlet, TranslatePipe, WorksheetLayoutComponent, SavedListComponent, TogglePillDirective],
+  imports: [NgTemplateOutlet, TranslatePipe, WorksheetLayoutComponent, SavedListComponent, NumberStepperComponent, RailGroupComponent, CheckOptionComponent, ToggleGroupComponent, SheetActionsComponent],
   templateUrl: './math.component.html',
   styleUrl: './math.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,10 +34,9 @@ export class MathComponent {
   state: MathSheet = { ...this.defaults(), ...this.store.load({}) };
 
   readonly ops = OPS;
-  readonly opKeys = OP_KEYS;
+  readonly opOptions: ToggleOption[] = OP_KEYS.map((k) => ({ value: k, label: OPS[k].label }));
   readonly modeKeys = MODE_KEYS;
   readonly setKeys = SET_KEYS;
-  readonly presetSets = PRESET_SETS;
   readonly normPic = normPic;
   readonly nameOf = (s: MathSheet) => s.title;
 
@@ -44,6 +47,9 @@ export class MathComponent {
   /* ---------- derived view data ---------- */
   activeSets(): string[] {
     return activeSets(this.state);
+  }
+  setOptions(): ToggleOption[] {
+    return SET_KEYS.map((k) => ({ value: k, label: `${PRESET_SETS[k][0]} ${this.i18n.t('m.set.' + k)}` }));
   }
   builtinPics(): string[] {
     return this.activeSets().flatMap((k) => PRESET_SETS[k] || []);
@@ -90,10 +96,8 @@ export class MathComponent {
     this.state.tasks = generateTasks(this.state);
     this.persist();
   }
-  toggleOp(op: OpKey): void {
-    const { ops } = this.state;
-    this.state.ops = ops.includes(op) ? ops.filter((o) => o !== op) : ops.concat(op);
-    if (!this.state.ops.length) this.state.ops = [op];
+  setOps(ops: string[]): void {
+    this.state.ops = ops as OpKey[];
     this.generate();
   }
   setMode(mode: Mode): void {
@@ -104,13 +108,12 @@ export class MathComponent {
     this.state.missing = on;
     this.generate();
   }
-  setNumber(key: 'min' | 'max' | 'count' | 'cols', field: HTMLInputElement, lo: number, hi: number): void {
-    this.state[key] = clampField(field, lo, hi);
+  setNumber(key: 'min' | 'max' | 'count' | 'cols', value: number): void {
+    this.state[key] = value;
     this.generate();
   }
-  toggleSet(key: string): void {
-    const on = this.activeSets();
-    this.state.sets = on.includes(key) ? on.filter((x) => x !== key) : on.concat(key);
+  setSets(sets: string[]): void {
+    this.state.sets = sets;
     this.state.preset = true;
     this.generate();
   }
@@ -132,9 +135,6 @@ export class MathComponent {
   setTitle(title: string): void {
     this.state.title = title;
     this.persist();
-  }
-  print(): void {
-    window.print();
   }
   save(): void {
     if (!this.store.remember(this.state, this.nameOf)) alert(this.i18n.t('m.storageTooBig'));

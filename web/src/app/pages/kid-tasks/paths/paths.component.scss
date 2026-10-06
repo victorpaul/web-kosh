@@ -1,5 +1,7 @@
-/* steps on the left, grid on the right (the shared page body is a column) */
-.sheet.page > .body.puzzle {
+/* steps on the left, grid on the right, in the middle of the page */
+.puzzle {
+  flex: 1;
+  display: flex;
   flex-direction: row;
   /* the puzzle sits in the middle of the page, not stuck under the instruction */
   align-items: center;

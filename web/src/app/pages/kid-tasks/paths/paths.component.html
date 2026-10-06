@@ -1,70 +1,32 @@
 <app-worksheet-layout titleKey="a.title" taglineKey="a.tagline" [stacked]="true">
   <ng-container ngProjectAs="[rail]">
-    <div class="grp">
-      <label>
-        <span class="lbl">{{ 'a.steps' | t }}</span>
-        <input #steps class="field" type="number" [min]="minSteps" [max]="maxSteps" [value]="state.steps" (change)="setSteps(steps)" />
-      </label>
-      <p class="hint">{{ 'a.stepsHint' | t: { min: minSteps, max: maxSteps } }}</p>
-      <label>
-        <span class="lbl">{{ 'a.obstacles' | t }}</span>
-        <input #obstacles class="field" type="number" min="0" [max]="maxObstacles" [value]="state.obstacles" (change)="setObstacles(obstacles)" />
-      </label>
-      <p class="hint">{{ 'a.obstaclesHint' | t: { max: maxObstacles } }}</p>
-    </div>
+    <app-rail-group titleKey="a.steps" hintKey="a.stepsHint" [hintParams]="{ min: minSteps, max: maxSteps }">
+      <app-number-stepper [label]="'a.steps' | t" [value]="state.steps" [min]="minSteps" [max]="maxSteps" (valueChange)="setSteps($event)" />
+    </app-rail-group>
 
-    <div class="grp">
-      <span class="lbl">{{ 'a.characters' | t }}</span>
-      <div class="toggles">
-        @for (key of pairKeys; track key) {
-          <button wsTogglePill [on]="state.pairs.includes(key)" (click)="togglePair(key)">
-            {{ pairs[key][0] }} → {{ pairs[key][1] }}
-          </button>
-        }
-      </div>
-      <p class="hint">{{ 'a.charactersHint' | t }}</p>
-    </div>
+    <app-rail-group titleKey="a.obstacles" hintKey="a.obstaclesHint" [hintParams]="{ max: maxObstacles }">
+      <app-number-stepper [label]="'a.obstacles' | t" [value]="state.obstacles" [min]="0" [max]="maxObstacles" (valueChange)="setObstacles($event)" />
+    </app-rail-group>
 
-    <div class="grp">
-      <span class="lbl">{{ 'm.sheet' | t }}</span>
-      <label>
-        <span class="cap">{{ 'a.sheets' | t }}</span>
-        <input #count class="field" type="number" min="1" max="4" [value]="state.count" (change)="setCount(count)" />
-      </label>
-      <label class="check">
-        <input #done type="checkbox" [checked]="state.done" (change)="setDone(done.checked)" />
-        <span>{{ 'c.doneBox' | t }}</span>
-      </label>
-    </div>
+    <app-rail-group titleKey="a.characters" hintKey="a.charactersHint">
+      <app-toggle-group [options]="pairOptions" [selected]="state.pairs" minMessageKey="a.minPairs" (selectedChange)="setPairs($event)" />
+    </app-rail-group>
 
-    <div class="grp">
-      <button class="btn primary" type="button" (click)="regenerate()">{{ 'm.generate' | t }}</button>
-      <button class="btn" type="button" (click)="print()">{{ 'c.print' | t }}</button>
-      <label>
-        <span class="cap">{{ 'common.saveAs' | t }}</span>
-        <input #name class="field" type="text" [value]="state.name" (input)="setName(name.value)" />
-      </label>
-      <button class="btn" type="button" (click)="save()">{{ 'm.saveSheet' | t }}</button>
-      <p class="hint">{{ 'a.printerHint' | t }}</p>
-    </div>
+    <app-rail-group titleKey="m.sheet">
+      <app-number-stepper captionKey="a.sheets" [value]="state.count" [min]="1" [max]="4" (valueChange)="setCount($event)" />
+      <app-check-option labelKey="c.doneBox" [checked]="state.done" (checkedChange)="setDone($event)" />
+    </app-rail-group>
 
-    <div class="grp">
-      <span class="lbl">{{ 'm.saved' | t }}</span>
+    <app-sheet-actions [name]="state.name" [showGenerate]="true" hintKey="a.printerHint" (generate)="regenerate()" (nameChange)="setName($event)" (save)="save()" />
+
+    <app-rail-group titleKey="m.saved">
       <app-saved-list [store]="store" [nameOf]="nameOf" (opened)="open($event)" />
-    </div>
-
-    <p class="hint">{{ 'common.storage' | t }}</p>
+    </app-rail-group>
   </ng-container>
 
   @for (p of state.puzzles; track $index) {
-    <section class="sheet page">
-      <p class="how">
-        {{ 'a.how' | t }}
-        @if (p.obstacles?.length) {
-          <br />{{ 'a.howObstacles' | t }}
-        }
-      </p>
-      <div class="body puzzle">
+    <app-page-sheet [how]="'a.how' | t" [note]="p.obstacles?.length ? ('a.howObstacles' | t) : ''" [done]="state.done">
+      <div class="puzzle">
         <ol class="steps">
           @for (step of p.steps; track $index) {
             <li>
@@ -92,9 +54,6 @@
           <text class="pic" [attr.x]="goalAt(p).x" [attr.y]="goalAt(p).y">{{ pairs[p.pair][1] }}</text>
         </svg>
       </div>
-      @if (state.done) {
-        <div class="done">{{ 'c.done' | t }}<span class="tick"></span></div>
-      }
-    </section>
+    </app-page-sheet>
   }
 </app-worksheet-layout>

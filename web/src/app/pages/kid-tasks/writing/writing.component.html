@@ -1,37 +1,23 @@
-<app-worksheet-layout titleKey="w.title" taglineKey="w.tagline">
+<app-worksheet-layout titleKey="w.title" taglineKey="w.tagline" [previewOnPhones]="true">
   <ng-container ngProjectAs="[rail]">
-    <div class="grp">
-      <span class="lbl">{{ 'w.grid' | t }}</span>
+    <app-rail-group titleKey="w.grid" hintKey="w.gridHint">
       <div class="row2">
-        <label><input #cols class="field" type="number" min="1" max="4" step="1" [title]="'w.cols' | t" [value]="state.cols" (change)="setCols(cols)" /></label>
-        <label><input #rows class="field" type="number" min="1" max="6" step="1" [title]="'w.rows' | t" [value]="state.rows" (change)="setRows(rows)" /></label>
+        <app-number-stepper captionKey="w.cols" [value]="state.cols" [min]="1" [max]="4" (valueChange)="setCols($event)" />
+        <app-number-stepper captionKey="w.rows" [value]="state.rows" [min]="1" [max]="6" (valueChange)="setRows($event)" />
       </div>
-      <p class="hint">{{ 'w.gridHint' | t }}</p>
       <select #size class="field" [value]="state.size" (change)="setSize(size.value)">
         <option value="a4" [selected]="state.size === 'a4'">{{ 'w.a4' | t }}</option>
         <option value="letter" [selected]="state.size === 'letter'">{{ 'w.letter' | t }}</option>
       </select>
-    </div>
+    </app-rail-group>
 
-    <div class="grp">
-      <span class="lbl">{{ 'w.sheet' | t }}</span>
-      <button class="btn primary" type="button" (click)="print()">{{ 'common.print' | t }}</button>
-      <label>
-        <span class="cap">{{ 'common.saveAs' | t }}</span>
-        <input #name class="field" type="text" [value]="state.title" (input)="setTitle(name.value)" />
-      </label>
-      <div class="row2">
-        <button class="btn" type="button" (click)="save()">{{ 'common.save' | t }}</button>
-        <button class="btn" type="button" (click)="newSheet()">{{ 'common.new' | t }}</button>
-      </div>
-    </div>
+    <app-sheet-actions titleKey="w.sheet" [name]="state.title" printKey="common.print" saveKey="common.save" (nameChange)="setTitle($event)" (save)="save()">
+      <button class="btn" type="button" (click)="newSheet()">{{ 'common.new' | t }}</button>
+    </app-sheet-actions>
 
-    <div class="grp">
-      <span class="lbl">{{ 'w.saved' | t }}</span>
+    <app-rail-group titleKey="w.saved">
       <app-saved-list [store]="store" [nameOf]="nameOf" (opened)="open($event)" />
-    </div>
-
-    <p class="hint">{{ 'common.storage' | t }}</p>
+    </app-rail-group>
   </ng-container>
 
   <div class="sheet" [class.letter]="state.size === 'letter'">
@@ -59,7 +45,7 @@
                           <option [value]="k" [selected]="k === block.font">{{ 'w.font.' + k | t }}</option>
                         }
                       </select>
-                      <input #fsize type="number" min="8" max="96" step="2" [value]="block.size" [title]="'w.sizeTip' | t" (change)="setFontSize(block, fsize)" />
+                      <app-number-stepper class="num" size="small" [value]="block.size" [min]="8" [max]="96" [step]="2" [label]="'w.sizeTip' | t" (valueChange)="setFontSize(block, $event)" />
                       <button type="button" class="icon bold" [class.on]="block.bold" [title]="'w.boldTip' | t" (click)="toggleBold(block)">B</button>
                       <select #style [title]="'w.styleTip' | t" (change)="setStyle(block, style.value)">
                         @for (k of styleKeys; track k) {
@@ -67,7 +53,7 @@
                         }
                       </select>
                       @if ((block.style || 'solid') !== 'solid') {
-                        <input #fade type="number" min="5" max="100" step="5" [value]="fadePercent(block)" [title]="'w.fadeTip' | t" (change)="setFade(block, fade)" />
+                        <app-number-stepper class="num" size="small" [value]="fadePercent(block)" [min]="5" [max]="100" [step]="5" [label]="'w.fadeTip' | t" (valueChange)="setFade(block, $event)" />
                       }
                     }
                     @case ('image') {
@@ -81,7 +67,7 @@
                     }
                     @case ('lines') {
                       <span>{{ 'w.lines' | t }}</span>
-                      <input #count type="number" min="1" max="12" [value]="block.count" [title]="'w.linesTip' | t" (change)="setLineCount(block, count)" />
+                      <app-number-stepper class="num" size="small" [value]="block.count" [min]="1" [max]="12" [label]="'w.linesTip' | t" (valueChange)="setLineCount(block, $event)" />
                     }
                   }
                   <span class="sp"></span>

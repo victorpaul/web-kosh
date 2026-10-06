@@ -5,7 +5,11 @@ import { WorksheetLayoutComponent } from '../components/worksheet-layout/workshe
 import { SavedListComponent } from '../components/saved-list/saved-list.component';
 import { TaskRowComponent } from '../components/task-row/task-row.component';
 import { MatchBlockComponent } from '../components/match-block/match-block.component';
-import { TogglePillDirective } from '../components/toggle-pill.directive';
+import { PageSheetComponent } from '../components/page-sheet/page-sheet.component';
+import { RailGroupComponent } from '../components/rail-group/rail-group.component';
+import { CheckOptionComponent } from '../components/check-option/check-option.component';
+import { ToggleGroupComponent, ToggleOption } from '../components/toggle-group/toggle-group.component';
+import { SheetActionsComponent } from '../components/sheet-actions/sheet-actions.component';
 import { COLORS, ColorKey, SHAPES, ShapeComponent, ShapeKey } from '../components/shape/shape.component';
 import { WorksheetStore } from '../kit/worksheet-store';
 import {
@@ -18,7 +22,7 @@ const KEY = 'worksheet-press-colors-v1';
 @Component({
   selector: 'app-colors',
   standalone: true,
-  imports: [TranslatePipe, MatchBlockComponent, WorksheetLayoutComponent, SavedListComponent, TaskRowComponent, TogglePillDirective, ShapeComponent],
+  imports: [TranslatePipe, MatchBlockComponent, PageSheetComponent, WorksheetLayoutComponent, SavedListComponent, TaskRowComponent, ShapeComponent, RailGroupComponent, CheckOptionComponent, ToggleGroupComponent, SheetActionsComponent],
   templateUrl: './colors.component.html',
   styleUrl: './colors.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,7 +34,7 @@ export class ColorsComponent {
   state: ColorsSheet = this.hydrate(this.store.load({}));
 
   readonly tasks = TASKS;
-  readonly colorKeys = COLOR_KEYS;
+  readonly minColors = MIN_COLORS;
   readonly colors = COLORS;
   readonly nameOf = (s: ColorsSheet) => s.name;
 
@@ -82,13 +86,11 @@ export class ColorsComponent {
     delete this.state.pages[task];
     this.syncPages();
   }
-  toggleColor(c: ColorKey): void {
-    const active = this.state.colors.includes(c);
-    if (active && this.state.colors.length <= MIN_COLORS) {
-      alert(this.i18n.t('c.minColors', { n: MIN_COLORS }));
-      return;
-    }
-    this.state.colors = active ? this.state.colors.filter((x) => x !== c) : this.state.colors.concat(c);
+  colorOptions(): ToggleOption[] {
+    return COLOR_KEYS.map((c) => ({ value: c, label: this.colorWord(c), color: COLORS[c] }));
+  }
+  setColors(colors: string[]): void {
+    this.state.colors = colors as ColorKey[];
     this.state.pages = {};
     this.syncPages();
   }
@@ -107,9 +109,6 @@ export class ColorsComponent {
   regenerate(): void {
     this.state.pages = {};
     this.syncPages();
-  }
-  print(): void {
-    window.print();
   }
   save(): void {
     this.store.remember(this.state, this.nameOf);

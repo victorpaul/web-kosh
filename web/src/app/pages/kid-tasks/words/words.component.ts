@@ -5,9 +5,13 @@ import { WorksheetLayoutComponent } from '../components/worksheet-layout/workshe
 import { SavedListComponent } from '../components/saved-list/saved-list.component';
 import { MatchBlockComponent } from '../components/match-block/match-block.component';
 import { WorksheetStore } from '../kit/worksheet-store';
-import { clampField } from '../kit/files';
+import { NumberStepperComponent } from '../components/number-stepper/number-stepper.component';
+import { PageSheetComponent } from '../components/page-sheet/page-sheet.component';
+import { RailGroupComponent } from '../components/rail-group/rail-group.component';
+import { CheckOptionComponent } from '../components/check-option/check-option.component';
+import { ToggleGroupComponent, ToggleOption } from '../components/toggle-group/toggle-group.component';
+import { SheetActionsComponent } from '../components/sheet-actions/sheet-actions.component';
 import { VOCABULARY, VOCABULARY_SETS } from './vocabulary';
-import { TogglePillDirective } from '../components/toggle-pill.directive';
 import {
   DEFAULT_WORDS, MAX_LENGTH, MAX_WORDS, MIN_LENGTH, MIN_WORDS, WordsPage, candidates, makePage,
 } from './words.model';
@@ -34,7 +38,7 @@ interface WordsSheet {
 @Component({
   selector: 'app-words',
   standalone: true,
-  imports: [TranslatePipe, WorksheetLayoutComponent, SavedListComponent, MatchBlockComponent, TogglePillDirective],
+  imports: [TranslatePipe, WorksheetLayoutComponent, SavedListComponent, MatchBlockComponent, PageSheetComponent, NumberStepperComponent, RailGroupComponent, CheckOptionComponent, ToggleGroupComponent, SheetActionsComponent],
   templateUrl: './words.component.html',
   styleUrl: './words.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -48,9 +52,8 @@ export class WordsComponent {
 
   readonly limits = { minWords: MIN_WORDS, maxWords: MAX_WORDS, minLength: MIN_LENGTH, maxLength: MAX_LENGTH };
   readonly nameOf = (s: WordsSheet) => s.name;
-  readonly sets = VOCABULARY_SETS;
   /* each set's pill shows its first picture */
-  readonly setIcon = new Map(VOCABULARY_SETS.map((set) => [set, VOCABULARY.find((v) => v.set === set)!.pic]));
+  private readonly setIcon = new Map(VOCABULARY_SETS.map((set) => [set, VOCABULARY.find((v) => v.set === set)!.pic]));
 
   constructor() {
     /* word lengths depend on the language: after a switch, only pages whose words no longer fit are remade */
@@ -75,31 +78,29 @@ export class WordsComponent {
   }
 
   /* ---------- actions ---------- */
-  setCount(field: HTMLInputElement): void {
-    this.state.count = clampField(field, MIN_WORDS, MAX_WORDS, DEFAULT_WORDS);
+  setCount(count: number): void {
+    this.state.count = count;
     this.syncPages();
   }
-  setMinLength(field: HTMLInputElement): void {
-    this.state.minLength = clampField(field, MIN_LENGTH, MAX_LENGTH);
+  setMinLength(length: number): void {
+    this.state.minLength = length;
     if (this.state.maxLength < this.state.minLength) this.state.maxLength = this.state.minLength;
     this.syncPages();
   }
-  setMaxLength(field: HTMLInputElement): void {
-    this.state.maxLength = clampField(field, MIN_LENGTH, MAX_LENGTH, MAX_LENGTH);
+  setMaxLength(length: number): void {
+    this.state.maxLength = length;
     if (this.state.minLength > this.state.maxLength) this.state.minLength = this.state.maxLength;
     this.syncPages();
   }
-  setSheets(field: HTMLInputElement): void {
-    this.state.sheets = clampField(field, 1, MAX_SHEETS);
+  setSheets(sheets: number): void {
+    this.state.sheets = sheets;
     this.syncPages();
   }
-  toggleSet(set: string): void {
-    const on = this.state.sets.includes(set);
-    if (on && this.state.sets.length === 1) {
-      alert(this.i18n.t('wp.minSets'));
-      return;
-    }
-    this.state.sets = on ? this.state.sets.filter((s) => s !== set) : this.state.sets.concat(set);
+  setOptions(): ToggleOption[] {
+    return VOCABULARY_SETS.map((set) => ({ value: set, label: `${this.setIcon.get(set)} ${this.i18n.t('m.set.' + set)}` }));
+  }
+  setSets(sets: string[]): void {
+    this.state.sets = sets;
     this.syncPages();
   }
   setCaps(on: boolean): void {
@@ -117,9 +118,6 @@ export class WordsComponent {
   regenerate(): void {
     this.state.pages = [];
     this.syncPages();
-  }
-  print(): void {
-    window.print();
   }
   save(): void {
     this.store.remember(this.state, this.nameOf);

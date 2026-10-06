@@ -3,6 +3,9 @@ import { TranslatePipe } from '../../../core/i18n/translate.pipe';
 import { I18nService } from '../../../core/i18n/i18n.service';
 import { WorksheetLayoutComponent } from '../components/worksheet-layout/worksheet-layout.component';
 import { SavedListComponent } from '../components/saved-list/saved-list.component';
+import { RailGroupComponent } from '../components/rail-group/rail-group.component';
+import { CheckOptionComponent } from '../components/check-option/check-option.component';
+import { SheetActionsComponent } from '../components/sheet-actions/sheet-actions.component';
 import { WorksheetStore } from '../kit/worksheet-store';
 import { DETAIL_FIELDS, DetailField, PapersSheet, TEMPLATES, defaultPaper, formatDate, todayISO } from './papers.model';
 
@@ -11,7 +14,7 @@ const KEY = 'worksheet-press-papers-v1';
 @Component({
   selector: 'app-papers',
   standalone: true,
-  imports: [TranslatePipe, WorksheetLayoutComponent, SavedListComponent],
+  imports: [TranslatePipe, WorksheetLayoutComponent, SavedListComponent, RailGroupComponent, CheckOptionComponent, SheetActionsComponent],
   templateUrl: './papers.component.html',
   styleUrl: './papers.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -52,9 +55,6 @@ export class PapersComponent {
   setBlankDate(on: boolean): void {
     this.state.blankDate = on;
     this.persist();
-  }
-  print(): void {
-    window.print();
   }
   save(): void {
     this.state.name = (this.state.name || '').trim() || this.state.children || this.i18n.t('p.untitled');

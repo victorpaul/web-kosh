@@ -1,56 +1,38 @@
 <app-worksheet-layout titleKey="m.title" taglineKey="m.tagline">
   <ng-container ngProjectAs="[rail]">
-    <div class="grp">
-      <span class="lbl">{{ 'm.operations' | t }}</span>
-      <div class="toggles">
-        @for (op of opKeys; track op) {
-          <button wsTogglePill [on]="state.ops.includes(op)" (click)="toggleOp(op)">{{ ops[op].label }}</button>
-        }
-      </div>
-      <label class="check">
-        <input #missing type="checkbox" [checked]="state.missing" (change)="setMissing(missing.checked)" />
-        <span>{{ 'm.missing' | t }}</span>
-        <span class="cap">{{ 'm.missingExample' | t }}</span>
-      </label>
-    </div>
+    <app-rail-group titleKey="m.operations">
+      <app-toggle-group [options]="opOptions" [selected]="state.ops" (selectedChange)="setOps($event)" />
+      <app-check-option labelKey="m.missing" noteKey="m.missingExample" [checked]="state.missing" (checkedChange)="setMissing($event)" />
+    </app-rail-group>
 
-    <div class="grp">
-      <span class="lbl">{{ 'm.look' | t }}</span>
+    <app-rail-group titleKey="m.look">
       <div class="modes">
         @for (mode of modeKeys; track mode) {
           <button type="button" class="mode" [attr.aria-pressed]="state.mode === mode" (click)="setMode(mode)">{{ 'm.mode.' + mode | t }}</button>
         }
       </div>
-    </div>
+    </app-rail-group>
 
-    <div class="grp">
-      <span class="lbl">{{ 'm.range' | t }}</span>
+    <app-rail-group titleKey="m.range">
       <div class="row2">
-        <label><span class="cap">{{ 'm.min' | t }}</span><input #min class="field" type="number" min="0" max="999" [value]="state.min" (change)="setNumber('min', min, 0, 999)" /></label>
-        <label><span class="cap">{{ 'm.max' | t }}</span><input #max class="field" type="number" min="1" max="999" [value]="state.max" (change)="setNumber('max', max, 1, 999)" /></label>
+        <app-number-stepper captionKey="m.min" [value]="state.min" [min]="0" [max]="999" (valueChange)="setNumber('min', $event)" />
+        <app-number-stepper captionKey="m.max" [value]="state.max" [min]="1" [max]="999" (valueChange)="setNumber('max', $event)" />
       </div>
       <p class="hint">{{ rangeNote() }}</p>
-    </div>
+    </app-rail-group>
 
-    <div class="grp">
-      <span class="lbl">{{ 'm.sheet' | t }}</span>
+    <app-rail-group titleKey="m.sheet" hintKey="m.colsHint">
       <div class="row2">
-        <label><span class="cap">{{ 'm.tasks' | t }}</span><input #count class="field" type="number" min="1" max="30" [value]="state.count" (change)="setNumber('count', count, 1, 30)" /></label>
-        <label><span class="cap">{{ 'w.cols' | t }}</span><input #cols class="field" type="number" min="1" max="3" [value]="state.cols" (change)="setNumber('cols', cols, 1, 3)" /></label>
+        <app-number-stepper captionKey="m.tasks" [value]="state.count" [min]="1" [max]="30" (valueChange)="setNumber('count', $event)" />
+        <app-number-stepper captionKey="w.cols" [value]="state.cols" [min]="1" [max]="3" (valueChange)="setNumber('cols', $event)" />
       </div>
       @if (missingTasks() > 0) {
         <p class="hint">{{ 'm.fewTasks' | t: { n: state.tasks.length, want: state.count } }}</p>
       }
-      <p class="hint">{{ 'm.colsHint' | t }}</p>
-    </div>
+    </app-rail-group>
 
-    <div class="grp">
-      <span class="lbl">{{ 'm.pictureSet' | t }}</span>
-      <div class="toggles">
-        @for (set of setKeys; track set) {
-          <button wsTogglePill [on]="activeSets().includes(set)" (click)="toggleSet(set)">{{ presetSets[set][0] }} {{ 'm.set.' + set | t }}</button>
-        }
-      </div>
+    <app-rail-group titleKey="m.pictureSet" hintKey="m.uploadHint">
+      <app-toggle-group [options]="setOptions()" [selected]="activeSets()" [min]="0" (selectedChange)="setSets($event)" />
       <div class="lib">
         @for (emoji of builtinPics(); track $index) {
           <div class="thumb builtin"><span>{{ emoji }}</span></div>
@@ -63,26 +45,13 @@
         }
         <button type="button" class="add" [title]="'m.addPics' | t" (click)="addImages()">+</button>
       </div>
-      <p class="hint">{{ 'm.uploadHint' | t }}</p>
-    </div>
+    </app-rail-group>
 
-    <div class="grp">
-      <button class="btn primary" type="button" (click)="generate()">{{ 'm.generate' | t }}</button>
-      <button class="btn" type="button" (click)="print()">{{ 'common.print' | t }}</button>
-      <label>
-        <span class="cap">{{ 'common.saveAs' | t }}</span>
-        <input #name class="field" type="text" [value]="state.title" (input)="setTitle(name.value)" />
-      </label>
-      <button class="btn" type="button" (click)="save()">{{ 'm.saveSheet' | t }}</button>
-    </div>
+    <app-sheet-actions [name]="state.title" [showGenerate]="true" printKey="common.print" (generate)="generate()" (nameChange)="setTitle($event)" (save)="save()" />
 
-    <div class="grp">
-      <span class="lbl">{{ 'm.saved' | t }}</span>
+    <app-rail-group titleKey="m.saved" hintKey="m.savedHint">
       <app-saved-list [store]="store" [nameOf]="nameOf" (opened)="open($event)" />
-      <p class="hint">{{ 'm.savedHint' | t }}</p>
-    </div>
-
-    <p class="hint">{{ 'common.storage' | t }}</p>
+    </app-rail-group>
   </ng-container>
 
   <div class="sheet">

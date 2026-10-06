@@ -1,7 +1,6 @@
 <app-worksheet-layout titleKey="c.title" taglineKey="c.tagline" [stacked]="true">
   <ng-container ngProjectAs="[rail]">
-    <div class="grp">
-      <span class="lbl">{{ 'c.tasks' | t }}</span>
+    <app-rail-group titleKey="c.tasks" hintKey="c.levelHint">
       <div class="taskrows">
         @for (task of tasks; track task) {
           <app-task-row
@@ -15,50 +14,26 @@
           />
         }
       </div>
-      <p class="hint">{{ 'c.levelHint' | t }}</p>
-    </div>
+    </app-rail-group>
 
-    <div class="grp">
-      <span class="lbl">{{ 'c.colors' | t }}</span>
-      <div class="toggles">
-        @for (c of colorKeys; track c) {
-          <button wsTogglePill [on]="state.colors.includes(c)" (click)="toggleColor(c)">
-            <span class="dot" [style.background]="colors[c]"></span>{{ colorWord(c) }}
-          </button>
-        }
-      </div>
-      <p class="hint">{{ 'c.colorsHint' | t }}</p>
-    </div>
+    <app-rail-group titleKey="c.colors" hintKey="c.colorsHint">
+      <app-toggle-group [options]="colorOptions()" [selected]="state.colors" [min]="minColors" minMessageKey="c.minColors" (selectedChange)="setColors($event)" />
+    </app-rail-group>
 
-    <div class="grp">
-      <span class="lbl">{{ 'm.sheet' | t }}</span>
-      <label class="check"><input #example type="checkbox" [checked]="state.example" (change)="setExample(example.checked)" /> <span>{{ 'c.example' | t }}</span></label>
-      <label class="check"><input #done type="checkbox" [checked]="state.done" (change)="setDone(done.checked)" /> <span>{{ 'c.doneBox' | t }}</span></label>
-    </div>
+    <app-rail-group titleKey="m.sheet">
+      <app-check-option labelKey="c.example" [checked]="state.example" (checkedChange)="setExample($event)" />
+      <app-check-option labelKey="c.doneBox" [checked]="state.done" (checkedChange)="setDone($event)" />
+    </app-rail-group>
 
-    <div class="grp">
-      <button class="btn primary" type="button" (click)="regenerate()">{{ 'm.generate' | t }}</button>
-      <button class="btn" type="button" (click)="print()">{{ 'c.print' | t }}</button>
-      <label>
-        <span class="cap">{{ 'common.saveAs' | t }}</span>
-        <input #name class="field" type="text" [value]="state.name" (input)="setName(name.value)" />
-      </label>
-      <button class="btn" type="button" (click)="save()">{{ 'm.saveSheet' | t }}</button>
-      <p class="hint">{{ 'c.printerHint' | t }}</p>
-    </div>
+    <app-sheet-actions [name]="state.name" [showGenerate]="true" hintKey="c.printerHint" (generate)="regenerate()" (nameChange)="setName($event)" (save)="save()" />
 
-    <div class="grp">
-      <span class="lbl">{{ 'm.saved' | t }}</span>
+    <app-rail-group titleKey="m.saved">
       <app-saved-list [store]="store" [nameOf]="nameOf" (opened)="open($event)" />
-    </div>
-
-    <p class="hint">{{ 'common.storage' | t }}</p>
+    </app-rail-group>
   </ng-container>
 
   @for (task of activeTasks(); track task) {
-    <section class="sheet page">
-      <p class="how">{{ howKey(task) | t }}</p>
-      <div class="body">
+    <app-page-sheet [how]="howKey(task) | t" [done]="state.done">
         @switch (task) {
           @case ('match') {
             @for (block of page('match').blocks; track $index; let bi = $index) {
@@ -154,11 +129,7 @@
             </div>
           }
         }
-      </div>
-      @if (state.done) {
-        <div class="done">{{ 'c.done' | t }}<span class="tick"></span></div>
-      }
-    </section>
+    </app-page-sheet>
   } @empty {
     <p class="empty">{{ 'c.noTasks' | t }}</p>
   }

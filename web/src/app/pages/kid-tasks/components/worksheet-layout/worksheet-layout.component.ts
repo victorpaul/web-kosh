@@ -17,8 +17,9 @@ import { TranslatePipe } from '../../../../core/i18n/translate.pipe';
           <p>{{ taglineKey() | t }}</p>
         </div>
         <ng-content select="[rail]" />
+        <p class="hint">{{ storageKey() | t }}</p>
       </aside>
-      <main class="stage" [class.stacked]="stacked()">
+      <main class="stage" [class.stacked]="stacked()" [class.phone-hidden]="!previewOnPhones()">
         <ng-content />
       </main>
     </div>
@@ -30,4 +31,8 @@ export class WorksheetLayoutComponent {
   readonly taglineKey = input.required<string>();
   /* several sheets stacked vertically instead of one centred sheet */
   readonly stacked = input(false);
+  /* On phones the sheet preview is hidden (it is still printed). Pages where you edit inside the sheet keep it. */
+  readonly previewOnPhones = input(false);
+  /* the "everything stays in this browser" note at the bottom of the rail */
+  readonly storageKey = input('common.storage');
 }

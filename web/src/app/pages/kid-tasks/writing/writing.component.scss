@@ -66,8 +66,7 @@
   background: var(--panel);
 
   select,
-  input[type='text'],
-  input[type='number'] {
+  input[type='text'] {
     padding: 3px 5px;
     border: 1px solid var(--line);
     border-radius: 5px;
@@ -80,8 +79,9 @@
     flex: 1;
     min-width: 60px;
   }
-  input[type='number'] {
-    width: 46px;
+  /* number steppers in the toolbar: field + − + */
+  .num {
+    width: 104px;
   }
   span {
     color: var(--ink);

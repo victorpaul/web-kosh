@@ -1,7 +1,6 @@
-<app-worksheet-layout titleKey="p.title" taglineKey="p.tagline">
+<app-worksheet-layout titleKey="p.title" taglineKey="p.tagline" storageKey="p.storage">
   <ng-container ngProjectAs="[rail]">
-    <div class="grp">
-      <span class="lbl">{{ 'p.template' | t }}</span>
+    <app-rail-group titleKey="p.template">
       <div class="picks">
         @for (tpl of templates; track tpl.key) {
           <button type="button" class="pick" [attr.aria-pressed]="state.template === tpl.key">
@@ -10,10 +9,9 @@
           </button>
         }
       </div>
-    </div>
+    </app-rail-group>
 
-    <div class="grp">
-      <span class="lbl">{{ 'p.details' | t }}</span>
+    <app-rail-group titleKey="p.details">
       @for (f of detailFields; track f.key) {
         <label>
           <span class="cap">{{ f.labelKey | t }}</span>
@@ -24,35 +22,31 @@
           }
         </label>
       }
-    </div>
+    </app-rail-group>
 
-    <div class="grp">
-      <span class="lbl">{{ 'p.thisPrint' | t }}</span>
+    <app-rail-group titleKey="p.thisPrint">
       <label>
         <span class="cap">{{ 'p.date' | t }}</span>
         <input #date class="field" type="date" [value]="state.date" [disabled]="state.useToday || state.blankDate" (change)="setDate(date.value)" />
       </label>
-      <label class="check"><input #today type="checkbox" [checked]="state.useToday" (change)="setUseToday(today.checked)" /> <span>{{ 'p.useToday' | t }}</span></label>
-      <label class="check"><input #blank type="checkbox" [checked]="state.blankDate" (change)="setBlankDate(blank.checked)" /> <span>{{ 'p.blankDate' | t }}</span></label>
-    </div>
+      <app-check-option labelKey="p.useToday" [checked]="state.useToday" (checkedChange)="setUseToday($event)" />
+      <app-check-option labelKey="p.blankDate" [checked]="state.blankDate" (checkedChange)="setBlankDate($event)" />
+    </app-rail-group>
 
-    <div class="grp">
-      <button class="btn primary" type="button" (click)="print()">{{ 'p.print' | t }}</button>
-      <label>
-        <span class="cap">{{ 'p.saveAs' | t }}</span>
-        <input #name class="field" type="text" [value]="state.name" [placeholder]="'p.savePlaceholder' | t" (input)="setName(name.value)" />
-      </label>
-      <button class="btn" type="button" (click)="save()">{{ 'p.saveBtn' | t }}</button>
-    </div>
+    <app-sheet-actions
+      [name]="state.name"
+      printKey="p.print"
+      saveAsKey="p.saveAs"
+      namePlaceholderKey="p.savePlaceholder"
+      saveKey="p.saveBtn"
+      (nameChange)="setName($event)"
+      (save)="save()"
+    />
 
-    <div class="grp">
-      <span class="lbl">{{ 'p.saved' | t }}</span>
+    <app-rail-group titleKey="p.saved" hintKey="p.savedHint">
       <app-saved-list [store]="store" [nameOf]="nameOf" deleteTitleKey="p.deleteTip" (opened)="open($event)" />
-      <p class="hint">{{ 'p.savedHint' | t }}</p>
       <button class="btn" type="button" (click)="clear()">{{ 'p.clear' | t }}</button>
-    </div>
-
-    <p class="hint">{{ 'p.storage' | t }}</p>
+    </app-rail-group>
   </ng-container>
 
   <!-- The form itself is a Ukrainian school document, so its wording is not translated. -->

@@ -3,9 +3,13 @@ import { TranslatePipe } from '../../../core/i18n/translate.pipe';
 import { I18nService } from '../../../core/i18n/i18n.service';
 import { WorksheetLayoutComponent } from '../components/worksheet-layout/worksheet-layout.component';
 import { SavedListComponent } from '../components/saved-list/saved-list.component';
-import { TogglePillDirective } from '../components/toggle-pill.directive';
 import { WorksheetStore } from '../kit/worksheet-store';
-import { clampField } from '../kit/files';
+import { NumberStepperComponent } from '../components/number-stepper/number-stepper.component';
+import { PageSheetComponent } from '../components/page-sheet/page-sheet.component';
+import { RailGroupComponent } from '../components/rail-group/rail-group.component';
+import { CheckOptionComponent } from '../components/check-option/check-option.component';
+import { ToggleGroupComponent, ToggleOption } from '../components/toggle-group/toggle-group.component';
+import { SheetActionsComponent } from '../components/sheet-actions/sheet-actions.component';
 import { pick } from '../kit/random';
 import {
   DEFAULT_OBSTACLES, DEFAULT_STEPS, DIRS, Dir, MAX_OBSTACLES, MAX_STEPS, MIN_STEPS, PAIRS, PAIR_KEYS, PathPuzzle, goalOffset,
@@ -31,7 +35,7 @@ interface PathsSheet {
 @Component({
   selector: 'app-paths',
   standalone: true,
-  imports: [TranslatePipe, WorksheetLayoutComponent, SavedListComponent, TogglePillDirective],
+  imports: [TranslatePipe, WorksheetLayoutComponent, SavedListComponent, PageSheetComponent, NumberStepperComponent, RailGroupComponent, CheckOptionComponent, ToggleGroupComponent, SheetActionsComponent],
   templateUrl: './paths.component.html',
   styleUrl: './paths.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,7 +46,7 @@ export class PathsComponent {
   readonly store = new WorksheetStore<PathsSheet>(KEY);
   state: PathsSheet = this.hydrate(this.store.load({}));
 
-  readonly pairKeys = PAIR_KEYS;
+  readonly pairOptions: ToggleOption[] = PAIR_KEYS.map((k) => ({ value: k, label: `${PAIRS[k][0]} → ${PAIRS[k][1]}` }));
   readonly pairs = PAIRS;
   readonly minSteps = MIN_STEPS;
   readonly maxSteps = MAX_STEPS;
@@ -74,25 +78,20 @@ export class PathsComponent {
   }
 
   /* ---------- actions ---------- */
-  setSteps(field: HTMLInputElement): void {
-    this.state.steps = clampField(field, MIN_STEPS, MAX_STEPS, DEFAULT_STEPS);
+  setSteps(steps: number): void {
+    this.state.steps = steps;
     this.syncPuzzles();
   }
-  setObstacles(field: HTMLInputElement): void {
-    this.state.obstacles = clampField(field, 0, MAX_OBSTACLES, 0);
+  setObstacles(obstacles: number): void {
+    this.state.obstacles = obstacles;
     this.syncPuzzles();
   }
-  setCount(field: HTMLInputElement): void {
-    this.state.count = clampField(field, 1, MAX_SHEETS);
+  setCount(count: number): void {
+    this.state.count = count;
     this.syncPuzzles();
   }
-  togglePair(key: string): void {
-    const on = this.state.pairs.includes(key);
-    if (on && this.state.pairs.length === 1) {
-      alert(this.i18n.t('a.minPairs'));
-      return;
-    }
-    this.state.pairs = on ? this.state.pairs.filter((k) => k !== key) : this.state.pairs.concat(key);
+  setPairs(pairs: string[]): void {
+    this.state.pairs = pairs;
     this.regenerate();
   }
   setDone(on: boolean): void {
@@ -106,9 +105,6 @@ export class PathsComponent {
   regenerate(): void {
     this.state.puzzles = [];
     this.syncPuzzles();
-  }
-  print(): void {
-    window.print();
   }
   save(): void {
     this.store.remember(this.state, this.nameOf);

@@ -120,13 +120,35 @@ Ported from a standalone plain-JS app, behaviour kept 1:1.
   functions** returning data) + a component (state, actions) + a template
   that renders that data. Generators never produce text, only keys
   (colour, shape, operation), so saved sheets survive a language switch.
+- **Phones (below 900px, `PHONE_LAYOUT_QUERY` in `kit/layout.ts`):** no sheet
+  preview and no Generate button; Print generates fresh tasks and then prints
+  (`sheet-actions`). Desktop prints exactly the preview. Pages where you edit
+  inside the sheet (Writing) set `[previewOnPhones]="true"`. The preview is
+  hidden with `@media screen` only, so it still prints.
+- **A new task is assembled from the kit**, not hand-built: its rail is a list of
+  `app-rail-group`s holding kit controls, then `app-sheet-actions`, then the
+  saved list; page-per-puzzle sheets are `app-page-sheet`s. The page itself only
+  owns its settings logic, generator (`<task>.model.ts`) and the sheet body.
+  Never hand-write `.grp`, checkboxes, pill loops, print buttons or the storage
+  note in a page — if a control is missing, add it to the kit.
 - `components/` — the reusable worksheet kit:
   - `worksheet-layout` — rail + stage shell (`titleKey`, `taglineKey`,
-    `[stacked]` for several sheets); rail content is projected with
+    `[stacked]` for several sheets, `storageKey` for the note at the rail's end); rail content is projected with
     `<ng-container ngProjectAs="[rail]">`.
   - `toggle-pill.directive` (`button[wsTogglePill] [on]`), `level-picker`
     (1·2·3), `task-row` (pill + level + hint), `saved-list` (saved sheets),
     `shape` (coloured SVG shapes + the `COLORS`/`SHAPES` tables),
+    `rail-group` (rail block: `titleKey`, content, `hintKey` + `hintParams`),
+    `check-option` (checkbox + label + optional note),
+    `toggle-group` (on/off pills from `ToggleOption[]`, optional colour dot,
+    keeps `min` on and shows `minMessageKey` with `{n}`),
+    `sheet-actions` (Generate? / Print / "save as" name / Save / hint; extra
+    buttons projected; printing is handled inside),
+    `page-sheet` (one A4 page: `how`, optional `note`, body, "Done!" box; owns
+    the page break),
+    `number-stepper` (field + big − / + buttons, optional `captionKey`, clamps to min/max itself and
+    emits a clean number; `size="small"` for in-sheet toolbars — use it for
+    every number setting, never a bare `<input type="number">`),
     `match-block` (two columns joined by pencil lines; the page passes
     `let-i` templates for each side — used by colours and words & pictures).
 - `kit/` — `WorksheetStore` (working state + saved library in localStorage),

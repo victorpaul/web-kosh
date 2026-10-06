@@ -35,10 +35,3 @@ export function downscaleImage(dataUrl: string, side: number): Promise<string | 
     img.src = dataUrl;
   });
 }
-
-/* Clamps a number field's value, writes the clamped value back so the field shows it, and returns it. */
-export function clampField(field: HTMLInputElement, lo: number, hi: number, fallback = lo): number {
-  const value = Math.max(lo, Math.min(hi, Number(field.value) || fallback));
-  field.value = String(value);
-  return value;
-}

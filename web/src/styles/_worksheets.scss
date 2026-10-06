@@ -83,6 +83,27 @@
     min-width: 0;
     padding: 24px;
   }
+  /* phone layout (keep in sync with PHONE_LAYOUT_QUERY in kit/layout.ts) */
+  .phone-only {
+    display: none;
+  }
+  @media screen and (max-width: 900px) {
+    .phone-only {
+      display: block;
+    }
+    .desktop-only {
+      display: none !important;
+    }
+    /* no preview on phones: you print and see the result (the sheets stay in the page for printing) */
+    .stage.phone-hidden {
+      display: none;
+    }
+    .btn.phone-primary {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+  }
   @media (max-width: 900px) {
     &.wrap {
       flex-direction: column;
@@ -427,11 +448,6 @@
       width: 210mm;
       height: 297mm;
       padding: 10mm;
-      break-after: page;
-
-      &:last-child {
-        break-after: auto;
-      }
     }
     .sheet * {
       -webkit-print-color-adjust: exact;
