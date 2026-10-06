@@ -1,0 +1,125 @@
+.picks {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.pick {
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--panel);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1.35;
+
+  &:hover {
+    border-color: var(--blue);
+  }
+  &[aria-pressed='true'] {
+    border-color: var(--blue);
+    background: var(--blue-soft);
+  }
+  b {
+    display: block;
+    font-size: 14px;
+  }
+  span {
+    color: var(--pencil);
+  }
+}
+
+/* ---------- the sheet ---------- */
+.sheet {
+  padding: 15mm;
+  display: flex;
+  flex-direction: column;
+  gap: 10mm;
+}
+.doc {
+  font-family: var(--doc);
+  font-size: 12.5pt;
+  line-height: 1.75;
+  color: #111;
+
+  h2 {
+    font-family: var(--doc);
+    font-weight: 400;
+    font-size: 13pt;
+    text-align: center;
+    margin: 7mm 0 4mm;
+  }
+}
+.addressee {
+  width: 64%;
+  margin-left: 36%;
+  text-align: left;
+
+  .row {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5mm;
+    flex-wrap: wrap;
+  }
+}
+.body p {
+  margin: 0;
+  text-align: justify;
+  text-indent: 10mm;
+}
+.fill {
+  border-bottom: 1px solid #111;
+  padding: 0 2mm;
+  min-width: 22mm;
+  display: inline-block;
+  text-align: center;
+  white-space: pre-wrap;
+  text-indent: 0;
+
+  &.grow {
+    min-width: 60mm;
+  }
+  &.wide {
+    flex: 1;
+    min-width: 30mm;
+  }
+}
+.signrow {
+  display: flex;
+  gap: 10mm;
+  margin-top: 12mm;
+  align-items: flex-end;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1mm;
+  }
+  .sig {
+    min-width: 45mm;
+  }
+  .val {
+    border-bottom: 1px solid #111;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 1mm;
+    min-height: 7mm;
+  }
+  .note {
+    font-size: 9.5pt;
+    color: #333;
+  }
+}
+
+@media print {
+  .sheet {
+    width: 100%;
+    min-height: auto;
+    padding: 14mm;
+  }
+  .doc {
+    break-inside: avoid;
+  }
+}

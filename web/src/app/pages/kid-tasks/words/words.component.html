@@ -1,0 +1,73 @@
+<app-worksheet-layout titleKey="wp.title" taglineKey="wp.tagline" [stacked]="true">
+  <ng-container ngProjectAs="[rail]">
+    <div class="grp">
+      <label>
+        <span class="lbl">{{ 'wp.count' | t }}</span>
+        <input #count class="field" type="number" [min]="limits.minWords" [max]="limits.maxWords" [value]="state.count" (change)="setCount(count)" />
+      </label>
+      <span class="lbl">{{ 'wp.length' | t }}</span>
+      <div class="row2">
+        <label><span class="cap">{{ 'm.min' | t }}</span><input #min class="field" type="number" [min]="limits.minLength" [max]="limits.maxLength" [value]="state.minLength" (change)="setMinLength(min)" /></label>
+        <label><span class="cap">{{ 'm.max' | t }}</span><input #max class="field" type="number" [min]="limits.minLength" [max]="limits.maxLength" [value]="state.maxLength" (change)="setMaxLength(max)" /></label>
+      </div>
+      <p class="hint">{{ 'wp.lengthHint' | t: { n: available() } }}</p>
+      @if (available() < state.count) {
+        <p class="hint warn">{{ 'wp.fewWords' | t: { n: available(), want: state.count } }}</p>
+      }
+      <span class="lbl">{{ 'wp.sets' | t }}</span>
+      <div class="toggles">
+        @for (set of sets; track set) {
+          <button wsTogglePill [on]="state.sets.includes(set)" (click)="toggleSet(set)">{{ setIcon.get(set) }} {{ 'm.set.' + set | t }}</button>
+        }
+      </div>
+      <label class="check">
+        <input #caps type="checkbox" [checked]="state.caps" (change)="setCaps(caps.checked)" />
+        <span>{{ 'wp.caps' | t }}</span>
+      </label>
+    </div>
+
+    <div class="grp">
+      <span class="lbl">{{ 'm.sheet' | t }}</span>
+      <label>
+        <span class="cap">{{ 'a.sheets' | t }}</span>
+        <input #sheets class="field" type="number" min="1" max="4" [value]="state.sheets" (change)="setSheets(sheets)" />
+      </label>
+      <label class="check">
+        <input #done type="checkbox" [checked]="state.done" (change)="setDone(done.checked)" />
+        <span>{{ 'c.doneBox' | t }}</span>
+      </label>
+    </div>
+
+    <div class="grp">
+      <button class="btn primary" type="button" (click)="regenerate()">{{ 'm.generate' | t }}</button>
+      <button class="btn" type="button" (click)="print()">{{ 'c.print' | t }}</button>
+      <label>
+        <span class="cap">{{ 'common.saveAs' | t }}</span>
+        <input #name class="field" type="text" [value]="state.name" (input)="setName(name.value)" />
+      </label>
+      <button class="btn" type="button" (click)="save()">{{ 'm.saveSheet' | t }}</button>
+      <p class="hint">{{ 'wp.printerHint' | t }}</p>
+    </div>
+
+    <div class="grp">
+      <span class="lbl">{{ 'm.saved' | t }}</span>
+      <app-saved-list [store]="store" [nameOf]="nameOf" (opened)="open($event)" />
+    </div>
+
+    <p class="hint">{{ 'common.storage' | t }}</p>
+  </ng-container>
+
+  @for (page of state.pages; track $index) {
+    <section class="sheet page">
+      <p class="how">{{ 'wp.how' | t }}</p>
+      <div class="body">
+        <app-match-block [rows]="page.words.length" leftWidth="72mm" rightWidth="34mm" [left]="wordCell" [right]="picCell" />
+        <ng-template #wordCell let-i><span class="word" [class.caps]="state.caps">{{ word(page.words[i]) }}</span></ng-template>
+        <ng-template #picCell let-i><span class="pic">{{ pic(page.words[page.right[i]]) }}</span></ng-template>
+      </div>
+      @if (state.done) {
+        <div class="done">{{ 'c.done' | t }}<span class="tick"></span></div>
+      }
+    </section>
+  }
+</app-worksheet-layout>

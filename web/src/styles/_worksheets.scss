@@ -1,0 +1,431 @@
+/* Kid tasks (worksheets) — styles shared by every worksheet page and the kit components.
+   Everything is scoped under `.ws`, so the main site's styles and these never touch.
+   Page components keep only what is specific to them (their sheet layout and task styling). */
+
+/* ---------- tokens ---------- */
+:root {
+  --ink: #16243c;
+  --ink-soft: #42526e;
+  --pencil: #8c97a8;
+  --ground: #eef1f6;
+  --panel: #ffffff;
+  --sheet: #ffffff;
+  --line: #d3dae6;
+  --blue: #2f6fd8;
+  --blue-soft: #e4edfb;
+  --coral: #de6a4e;
+  --guide: #c3cbd9;
+  --ui: 'Source Sans 3', system-ui, sans-serif;
+  --display: 'Baloo 2', 'Source Sans 3', system-ui, sans-serif;
+  --kid: 'Andika', 'Comic Sans MS', system-ui, sans-serif;
+  --dots: 'Raleway Dots', 'Andika', system-ui, sans-serif;
+  --doc: 'PT Serif', Georgia, 'Times New Roman', serif;
+}
+
+[data-theme='dark'] {
+  --ink: #e7ecf4;
+  --ink-soft: #aeb9cc;
+  --pencil: #8a95a8;
+  --ground: #151a22;
+  --panel: #1d242f;
+  --line: #333d4d;
+  --blue: #6d9ef2;
+  --blue-soft: #22304a;
+  --coral: #e88468;
+}
+
+.ws {
+  /* undo the main site's typography so sheets measure the same as before */
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--ui);
+  line-height: normal;
+  min-height: 100vh;
+  padding-top: var(--header-height);
+
+  a {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  h1,
+  h2,
+  h3 {
+    color: inherit;
+    margin: 0;
+  }
+  img {
+    max-width: 100%;
+  }
+
+  /* ---------- builder layout: settings rail + sheet ---------- */
+  &.wrap {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 24px;
+    /* content stays within 1280px, while the background still spans the window */
+    padding: calc(var(--header-height) + 24px) max(20px, calc((100% - 1240px) / 2)) 24px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    &.wrap {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .rail {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    position: sticky;
+    top: calc(var(--header-height) + 24px);
+    max-height: calc(100vh - var(--header-height) - 48px);
+    overflow: auto;
+  }
+  @media (max-width: 900px) {
+    .rail {
+      position: static;
+      max-height: none;
+    }
+  }
+  .back {
+    display: inline-block;
+    font-size: 12px;
+    color: var(--blue);
+    text-decoration: none;
+    margin-bottom: 6px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .brand h1 {
+    font-family: var(--display);
+    font-size: 22px;
+  }
+  .brand p {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: var(--pencil);
+  }
+  .grp {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .lbl {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--pencil);
+    font-weight: 600;
+  }
+  .cap {
+    font-size: 12px;
+    color: var(--pencil);
+  }
+  .hint {
+    font-size: 12px;
+    color: var(--pencil);
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  /* ---------- inputs ---------- */
+  input,
+  select,
+  button,
+  textarea {
+    font-family: inherit;
+    font-size: 14px;
+    color: inherit;
+  }
+  .field {
+    width: 100%;
+    padding: 7px 9px;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    background: var(--panel);
+    color: var(--ink);
+  }
+  textarea.field {
+    resize: vertical;
+    min-height: 52px;
+    line-height: 1.35;
+  }
+  .field:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 1px;
+  }
+  .row2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .check {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    cursor: pointer;
+
+    input {
+      accent-color: var(--blue);
+      width: 15px;
+      height: 15px;
+    }
+  }
+  .btn {
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    background: var(--panel);
+    color: var(--ink);
+    cursor: pointer;
+    font-weight: 600;
+
+    &:hover {
+      border-color: var(--blue);
+      background: var(--blue-soft);
+    }
+    &.primary {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+
+      &:hover {
+        filter: brightness(1.07);
+      }
+    }
+  }
+
+  /* TogglePillDirective — on/off pill */
+  .toggles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tog {
+    padding: 6px 11px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--panel);
+    color: var(--ink);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    &[aria-pressed='true'] {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 1px solid rgba(22, 36, 60, 0.5);
+    }
+  }
+
+  /* LevelPickerComponent — 1 · 2 · 3 (keeps its own width inside a rail group) */
+  .grp > app-level-picker {
+    align-self: flex-start;
+  }
+  .lvl {
+    display: flex;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    overflow: hidden;
+    flex: none;
+
+    button {
+      border: 0;
+      background: var(--panel);
+      color: var(--ink-soft);
+      cursor: pointer;
+      width: 28px;
+      height: 30px;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    button + button {
+      border-left: 1px solid var(--line);
+    }
+    button[aria-pressed='true'] {
+      background: var(--blue-soft);
+      color: var(--ink);
+      box-shadow: inset 0 -2px 0 var(--blue);
+    }
+    &[data-off='true'] {
+      opacity: 0.45;
+    }
+  }
+
+  /* TaskRowComponent — pill + level picker + hint */
+  .taskrows {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .taskrow {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .tog {
+      flex: 1;
+      justify-content: flex-start;
+      text-align: left;
+    }
+  }
+
+  /* SavedListComponent */
+  .saved {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-height: 170px;
+    overflow: auto;
+
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .item button {
+      background: none;
+      border: 0;
+      cursor: pointer;
+      color: var(--ink-soft);
+      font-size: 13px;
+      padding: 5px 7px;
+      border-radius: 6px;
+    }
+    .item button:first-child {
+      flex: 1;
+      text-align: left;
+    }
+    .item button:hover {
+      background: var(--blue-soft);
+      color: var(--ink);
+    }
+  }
+
+  /* ---------- the printed sheet: always paper-white, whatever the theme ---------- */
+  .stage {
+    display: flex;
+    justify-content: center;
+
+    &.stacked {
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+  }
+  .sheet {
+    background: var(--sheet);
+    width: 210mm;
+    min-height: 297mm;
+    box-shadow: 0 2px 18px rgba(22, 36, 60, 0.16);
+    color: #16243c;
+    max-width: 100%;
+  }
+
+  /* `.sheet.page`: exactly one A4 page — instruction line, body, optional "Done!" box (colours, arrow paths) */
+  .sheet.page {
+    height: 297mm;
+    padding: 12mm;
+    display: flex;
+    flex-direction: column;
+    gap: 5mm;
+    overflow: hidden;
+
+    > .how {
+      font-family: var(--kid);
+      font-size: 15pt;
+      margin: 0;
+      line-height: 1.35;
+    }
+    > .body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    > .done {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 3mm;
+      font-family: var(--kid);
+      font-size: 15pt;
+      font-weight: 700;
+
+      .tick {
+        width: 10mm;
+        height: 10mm;
+        border: 2px solid #16243c;
+        border-radius: 2mm;
+      }
+    }
+  }
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  .ws {
+    background: #fff;
+    min-height: 0;
+    padding: 0;
+
+    &.wrap {
+      display: block;
+      padding: 0;
+      margin: 0;
+    }
+    .rail {
+      display: none !important;
+    }
+    .stage {
+      display: block;
+    }
+    .sheet {
+      box-shadow: none;
+      max-width: none;
+      border-radius: 0;
+    }
+    .sheet.page {
+      width: 210mm;
+      height: 297mm;
+      padding: 10mm;
+      break-after: page;
+
+      &:last-child {
+        break-after: auto;
+      }
+    }
+    .sheet * {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+}

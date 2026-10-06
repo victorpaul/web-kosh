@@ -1,0 +1,13 @@
+<div class="language-switch" role="group" [attr.aria-label]="'app.language' | t">
+  @for (lang of langs; track lang.code) {
+    <button
+      type="button"
+      [attr.aria-pressed]="i18n.lang() === lang.code"
+      [title]="lang.name"
+      [attr.lang]="lang.code"
+      (click)="i18n.lang.set(lang.code)"
+    >
+      {{ lang.code.toUpperCase() }}
+    </button>
+  }
+</div>

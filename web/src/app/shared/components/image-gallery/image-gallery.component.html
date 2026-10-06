@@ -1,0 +1,35 @@
+<div class="gallery-grid">
+  @for (src of images; track src; let i = $index) {
+    <img
+      class="gallery-thumbnail"
+      [src]="src"
+      [alt]="alt"
+      (click)="open(i)"
+    />
+  }
+</div>
+
+@if (isOpen() && activeIndex() !== null) {
+  <div class="gallery-overlay" (click)="close()">
+    <div class="gallery-close-container">
+      <span class="gallery-close" (click)="close()">&times;</span>
+      <span class="gallery-esc-hint">Esc</span>
+    </div>
+    <div class="gallery-modal-columns" (click)="$event.stopPropagation()">
+      <div class="gallery-thumbnails">
+        @for (src of images; track src; let i = $index) {
+          <img
+            class="gallery-modal-thumbnail"
+            [class.active]="i === activeIndex()"
+            [src]="src"
+            [alt]="alt"
+            (click)="select(i)"
+          />
+        }
+      </div>
+      <div class="gallery-main-image">
+        <img [src]="images[activeIndex()!]" [alt]="alt" />
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,156 @@
+/* ---------- sheets: one A4 page per task type ---------- */
+.empty {
+  color: var(--pencil);
+  font-size: 15px;
+  padding: 40px 0;
+}
+.sheet svg {
+  display: block;
+  flex: none;
+}
+.ex {
+  font-family: var(--ui);
+  font-size: 8pt;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8c97a8;
+}
+.word {
+  font-family: var(--kid);
+  font-weight: 700;
+  font-size: 19pt;
+}
+
+/* rows of choices */
+.rows {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.row {
+  flex: 1;
+  display: grid;
+  align-items: center;
+  gap: 4mm;
+  border-bottom: 1px dashed #c9d1de;
+  padding: 2mm 0;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+  &.find {
+    grid-template-columns: 52mm 1fr;
+  }
+  &.stroop {
+    grid-template-columns: 68mm 1fr;
+  }
+  .label {
+    display: flex;
+    flex-direction: column;
+    gap: 1mm;
+  }
+}
+.choices {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.choice {
+  position: relative;
+  padding: 1.5mm;
+  border-radius: 50%;
+
+  &.ring {
+    outline: 2px dashed #8c97a8;
+    outline-offset: 1mm;
+  }
+}
+.pill {
+  font-family: var(--kid);
+  font-size: 15pt;
+  font-weight: 700;
+  padding: 1.5mm 4mm;
+  border-radius: 999px;
+
+  &.ring {
+    outline: 2px dashed #8c97a8;
+    outline-offset: 1mm;
+  }
+}
+.ink {
+  font-family: var(--kid);
+  font-weight: 700;
+  font-size: 24pt;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  -webkit-text-stroke: 0.35px #16243c;
+}
+
+/* colour-by-rule */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4mm 10mm;
+  justify-content: center;
+  padding: 3mm 0 5mm;
+  border-bottom: 1px dashed #c9d1de;
+  margin-bottom: 5mm;
+
+  .rule {
+    display: flex;
+    align-items: center;
+    gap: 3mm;
+  }
+  .arrow {
+    font-size: 16pt;
+    color: #42526e;
+  }
+}
+.cgrid {
+  flex: 1;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+/* colour sudoku */
+.pal {
+  display: flex;
+  justify-content: center;
+  gap: 8mm;
+  padding-bottom: 4mm;
+
+  .sw {
+    display: flex;
+    align-items: center;
+    gap: 2mm;
+  }
+}
+.puzzles {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+}
+.sgrid {
+  display: grid;
+  grid-template-columns: repeat(4, 18mm);
+  grid-template-rows: repeat(4, 18mm);
+  border: 2.5px solid #16243c;
+
+  .sc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #9aa5b8;
+  }
+  &.boxes .sc:nth-child(4n + 2) {
+    border-right: 2.5px solid #16243c;
+  }
+  &.boxes .sc:nth-child(n + 5):nth-child(-n + 8) {
+    border-bottom: 2.5px solid #16243c;
+  }
+}

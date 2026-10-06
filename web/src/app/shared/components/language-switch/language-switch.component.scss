@@ -1,0 +1,37 @@
+.language-switch {
+  display: flex;
+  border: 1px solid var(--header-border);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-right: 0.75rem;
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.35rem 0.6rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--text-color);
+    transition: background-color 0.2s, color 0.2s;
+
+    & + button {
+      border-left: 1px solid var(--header-border);
+    }
+
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.1);
+    }
+
+    &[aria-pressed='true'] {
+      background-color: var(--link-color);
+      color: var(--header-bg);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--link-color);
+      outline-offset: -2px;
+    }
+  }
+}

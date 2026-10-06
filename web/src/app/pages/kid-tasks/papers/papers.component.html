@@ -1,0 +1,95 @@
+<app-worksheet-layout titleKey="p.title" taglineKey="p.tagline">
+  <ng-container ngProjectAs="[rail]">
+    <div class="grp">
+      <span class="lbl">{{ 'p.template' | t }}</span>
+      <div class="picks">
+        @for (tpl of templates; track tpl.key) {
+          <button type="button" class="pick" [attr.aria-pressed]="state.template === tpl.key">
+            <b>{{ tpl.nameKey | t }}</b>
+            <span>{{ tpl.aboutKey | t }}</span>
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="grp">
+      <span class="lbl">{{ 'p.details' | t }}</span>
+      @for (f of detailFields; track f.key) {
+        <label>
+          <span class="cap">{{ f.labelKey | t }}</span>
+          @if (f.multiline) {
+            <textarea #area class="field" rows="2" [value]="state[f.key]" (input)="setDetail(f.key, area.value)"></textarea>
+          } @else {
+            <input #field class="field" type="text" [value]="state[f.key]" (input)="setDetail(f.key, field.value)" />
+          }
+        </label>
+      }
+    </div>
+
+    <div class="grp">
+      <span class="lbl">{{ 'p.thisPrint' | t }}</span>
+      <label>
+        <span class="cap">{{ 'p.date' | t }}</span>
+        <input #date class="field" type="date" [value]="state.date" [disabled]="state.useToday || state.blankDate" (change)="setDate(date.value)" />
+      </label>
+      <label class="check"><input #today type="checkbox" [checked]="state.useToday" (change)="setUseToday(today.checked)" /> <span>{{ 'p.useToday' | t }}</span></label>
+      <label class="check"><input #blank type="checkbox" [checked]="state.blankDate" (change)="setBlankDate(blank.checked)" /> <span>{{ 'p.blankDate' | t }}</span></label>
+    </div>
+
+    <div class="grp">
+      <button class="btn primary" type="button" (click)="print()">{{ 'p.print' | t }}</button>
+      <label>
+        <span class="cap">{{ 'p.saveAs' | t }}</span>
+        <input #name class="field" type="text" [value]="state.name" [placeholder]="'p.savePlaceholder' | t" (input)="setName(name.value)" />
+      </label>
+      <button class="btn" type="button" (click)="save()">{{ 'p.saveBtn' | t }}</button>
+    </div>
+
+    <div class="grp">
+      <span class="lbl">{{ 'p.saved' | t }}</span>
+      <app-saved-list [store]="store" [nameOf]="nameOf" deleteTitleKey="p.deleteTip" (opened)="open($event)" />
+      <p class="hint">{{ 'p.savedHint' | t }}</p>
+      <button class="btn" type="button" (click)="clear()">{{ 'p.clear' | t }}</button>
+    </div>
+
+    <p class="hint">{{ 'p.storage' | t }}</p>
+  </ng-container>
+
+  <!-- The form itself is a Ukrainian school document, so its wording is not translated. -->
+  <div class="sheet">
+    <div class="doc">
+      <div class="addressee">
+        <div>Директору {{ state.school || '________________________' }}</div>
+        <div class="row"><span class="fill wide">{{ state.director || nbsp }}</span></div>
+        <div class="row"><span class="fill wide">{{ state.parentGen || nbsp }}</span>,</div>
+        <div class="row">батька (матері) учня <span class="fill">{{ state.cls || nbsp }}</span> класу,</div>
+        <div class="row">моб.т. <span class="fill wide">{{ state.phone || nbsp }}</span></div>
+      </div>
+
+      <h2>Заява</h2>
+
+      <div class="body">
+        <p>
+          Прошу Вашого дозволу на те, щоб я, <span class="fill grow">{{ state.parent || nbsp }}</span>, забрав (забрала) мого (мою) сина (доньку),
+          <span class="fill grow">{{ state.children || nbsp }}</span>, під час повітряної тривоги. Відповідальність за життя і здоров’я своєї
+          дитини беру на себе.
+        </p>
+      </div>
+
+      <div class="signrow">
+        <div>
+          <div class="val">{{ printedDate() }}</div>
+          <div class="note">(дата)</div>
+        </div>
+        <div class="sig">
+          <div class="val"></div>
+          <div class="note">(підпис)</div>
+        </div>
+        <div class="sig">
+          <div class="val">{{ state.signer }}</div>
+          <div class="note">(ім’я, прізвище)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-worksheet-layout>

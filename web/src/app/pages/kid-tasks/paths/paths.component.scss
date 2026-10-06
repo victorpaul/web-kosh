@@ -1,0 +1,69 @@
+/* steps on the left, grid on the right (the shared page body is a column) */
+.sheet.page > .body.puzzle {
+  flex-direction: row;
+  /* the puzzle sits in the middle of the page, not stuck under the instruction */
+  align-items: center;
+  gap: 6mm;
+}
+
+/* the steps to follow: "3 →", "4 ↓" … */
+.steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3mm;
+  flex: none;
+  width: 24mm;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2mm;
+    height: 10mm;
+    border: 1.5px solid #c9d1de;
+    border-radius: 3mm;
+    font-family: var(--kid);
+    font-size: 18pt;
+    font-weight: 700;
+  }
+  .arrow {
+    width: 7mm;
+    height: 7mm;
+
+    path {
+      fill: none;
+      stroke: #de6a4e;
+      stroke-width: 2.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+  }
+}
+
+.grid {
+  display: block;
+  flex: none;
+
+  .gl {
+    stroke: #c3cbd9;
+    stroke-width: 0.035;
+  }
+  .dot {
+    fill: #de6a4e;
+  }
+  .obstacle {
+    font-size: 0.72px;
+    text-anchor: middle;
+    dominant-baseline: central;
+    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  }
+  .pic {
+    font-size: 0.95px;
+    text-anchor: middle;
+    dominant-baseline: central;
+    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  }
+}

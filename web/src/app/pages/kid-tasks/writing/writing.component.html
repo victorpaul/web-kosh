@@ -1,0 +1,126 @@
+<app-worksheet-layout titleKey="w.title" taglineKey="w.tagline">
+  <ng-container ngProjectAs="[rail]">
+    <div class="grp">
+      <span class="lbl">{{ 'w.grid' | t }}</span>
+      <div class="row2">
+        <label><input #cols class="field" type="number" min="1" max="4" step="1" [title]="'w.cols' | t" [value]="state.cols" (change)="setCols(cols)" /></label>
+        <label><input #rows class="field" type="number" min="1" max="6" step="1" [title]="'w.rows' | t" [value]="state.rows" (change)="setRows(rows)" /></label>
+      </div>
+      <p class="hint">{{ 'w.gridHint' | t }}</p>
+      <select #size class="field" [value]="state.size" (change)="setSize(size.value)">
+        <option value="a4" [selected]="state.size === 'a4'">{{ 'w.a4' | t }}</option>
+        <option value="letter" [selected]="state.size === 'letter'">{{ 'w.letter' | t }}</option>
+      </select>
+    </div>
+
+    <div class="grp">
+      <span class="lbl">{{ 'w.sheet' | t }}</span>
+      <button class="btn primary" type="button" (click)="print()">{{ 'common.print' | t }}</button>
+      <label>
+        <span class="cap">{{ 'common.saveAs' | t }}</span>
+        <input #name class="field" type="text" [value]="state.title" (input)="setTitle(name.value)" />
+      </label>
+      <div class="row2">
+        <button class="btn" type="button" (click)="save()">{{ 'common.save' | t }}</button>
+        <button class="btn" type="button" (click)="newSheet()">{{ 'common.new' | t }}</button>
+      </div>
+    </div>
+
+    <div class="grp">
+      <span class="lbl">{{ 'w.saved' | t }}</span>
+      <app-saved-list [store]="store" [nameOf]="nameOf" (opened)="open($event)" />
+    </div>
+
+    <p class="hint">{{ 'common.storage' | t }}</p>
+  </ng-container>
+
+  <div class="sheet" [class.letter]="state.size === 'letter'">
+    <div class="grid" [style.grid-template-columns]="'repeat(' + state.cols + ', minmax(0, 1fr))'">
+      @for (cell of state.cells; track $index; let ci = $index) {
+        <div class="card" [style.grid-column]="cell.wide ? '1 / -1' : null">
+          <div class="cardbar">
+            <button type="button" class="icon add" [title]="'w.addTextTip' | t" (click)="addBlock(cell, 'text')">{{ 'w.addText' | t }}</button>
+            <button type="button" class="icon add" [title]="'w.addImageTip' | t" (click)="addBlock(cell, 'image')">{{ 'w.addImage' | t }}</button>
+            <button type="button" class="icon add" [title]="'w.addLinesTip' | t" (click)="addBlock(cell, 'lines')">{{ 'w.addLines' | t }}</button>
+            <span class="sp"></span>
+            <button type="button" class="icon" [title]="'w.wideTip' | t" (click)="toggleWide(cell)">⇔</button>
+            <button type="button" class="icon" [title]="'w.clearCardTip' | t" (click)="clearCard(ci)">✕</button>
+          </div>
+
+          <div class="blocks">
+            @for (block of cell.blocks; track $index; let bi = $index) {
+              <div class="block" [class.grow]="block.kind !== 'text'">
+                <div class="blockbar">
+                  @switch (block.kind) {
+                    @case ('text') {
+                      <input #text type="text" [value]="block.text" [placeholder]="'w.textPlaceholder' | t" (input)="setText(block, text.value)" />
+                      <select #font [title]="'w.fontTip' | t" (change)="setFont(block, font.value)">
+                        @for (k of fontKeys; track k) {
+                          <option [value]="k" [selected]="k === block.font">{{ 'w.font.' + k | t }}</option>
+                        }
+                      </select>
+                      <input #fsize type="number" min="8" max="96" step="2" [value]="block.size" [title]="'w.sizeTip' | t" (change)="setFontSize(block, fsize)" />
+                      <button type="button" class="icon bold" [class.on]="block.bold" [title]="'w.boldTip' | t" (click)="toggleBold(block)">B</button>
+                      <select #style [title]="'w.styleTip' | t" (change)="setStyle(block, style.value)">
+                        @for (k of styleKeys; track k) {
+                          <option [value]="k" [selected]="k === (block.style || 'solid')">{{ 'w.style.' + k | t }}</option>
+                        }
+                      </select>
+                      @if ((block.style || 'solid') !== 'solid') {
+                        <input #fade type="number" min="5" max="100" step="5" [value]="fadePercent(block)" [title]="'w.fadeTip' | t" (change)="setFade(block, fade)" />
+                      }
+                    }
+                    @case ('image') {
+                      <span>{{ 'w.image' | t }}</span>
+                      <select #ratio [title]="'w.shapeTip' | t" (change)="setRatio(block, ratio.value)">
+                        @for (k of ratioKeys; track k) {
+                          <option [value]="k" [selected]="k === block.ratio">{{ 'w.shape.' + k | t }}</option>
+                        }
+                      </select>
+                      <button type="button" class="icon" [title]="'w.pickImage' | t" (click)="pickImage(block)">🖼</button>
+                    }
+                    @case ('lines') {
+                      <span>{{ 'w.lines' | t }}</span>
+                      <input #count type="number" min="1" max="12" [value]="block.count" [title]="'w.linesTip' | t" (change)="setLineCount(block, count)" />
+                    }
+                  }
+                  <span class="sp"></span>
+                  <button type="button" class="icon" [title]="'w.up' | t" (click)="moveBlock(cell, bi, -1)">↑</button>
+                  <button type="button" class="icon" [title]="'w.down' | t" (click)="moveBlock(cell, bi, 1)">↓</button>
+                  <button type="button" class="icon" [title]="'w.removeBlock' | t" (click)="removeBlock(cell, bi)">✕</button>
+                </div>
+
+                <!-- printed part -->
+                @switch (block.kind) {
+                  @case ('text') {
+                    <div class="b-text" [style]="textStyle(block)">{{ block.text }}</div>
+                  }
+                  @case ('image') {
+                    <div class="b-image">
+                      <div class="frame" [style.aspect-ratio]="ratios[block.ratio]">
+                        @if (block.img) {
+                          <img [src]="block.img" alt="" />
+                        } @else {
+                          <div class="drop" (click)="pickImage(block)">{{ 'w.dropHint' | t }}</div>
+                        }
+                      </div>
+                    </div>
+                  }
+                  @case ('lines') {
+                    <div class="bands">
+                      @for (line of lines(block.count); track line) {
+                        <div class="band"></div>
+                      }
+                    </div>
+                  }
+                }
+              </div>
+            } @empty {
+              <div class="empty">{{ 'w.emptyCard' | t }}</div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</app-worksheet-layout>

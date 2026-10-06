@@ -1,0 +1,613 @@
+{
+  "name": "Viktor Koshovyi",
+  "title": "Senior Java/Scala Developer",
+  "note": "Not applicable for military serving",
+  "contacts": [
+    {
+      "kind": "telegram",
+      "label": "@koshVpaul",
+      "url": "https://t.me/koshVpaul"
+    },
+    {
+      "kind": "email",
+      "label": "vpaul.play@gmail.com",
+      "url": "mailto:vpaul.play@gmail.com"
+    },
+    {
+      "kind": "location",
+      "label": "Ukraine, Cherkasy"
+    },
+    {
+      "kind": "website",
+      "label": "kosh.top",
+      "url": "https://kosh.top"
+    },
+    {
+      "kind": "linkedin",
+      "label": "linkedin.com/in/victorkosh",
+      "url": "https://www.linkedin.com/in/victorkosh/"
+    }
+  ],
+  "about": [
+    "Strong advocate for TDD. I focus on understanding business needs and delivering scalable solutions rather than just implementing requirements.",
+    "Programming is both my profession and hobby, I maintain diverse pet projects where I enjoy designing custom algorithms to various technical challenges.",
+    "Regarding both programming languages and frameworks, I know much more than I indicated in my resume, but I don't want to create chaos, so I only left the things that I use in my work."
+  ],
+  "ai": {
+    "title": "Me and AI",
+    "paragraphs": [
+      "As soon as this tool appeared on the market, I started using it widely and gaining experience. I don't do vibe coding; for me, AI is an opportunity to practice pair programming and rubber duck debugging simultaneously without another person. With AI, we can do code reviews of each other, find better approaches to solving problems, explain to each other what we're doing, create documentation or scripts for process automation. AI is a tool that requires your attention and understanding; it's not a magic wand that you trust and perceive its work as magic.",
+      "I've managed to create several successful integrations with AI services in existing products to improve data analysis. In my daily work, I prefer Claude Code; it has proven itself as a reliable assistant. I use Gemini CLI a bit when working on my own projects, and from time to time I check the state of things in ChatGPT. AI tools are currently developing at an incredible speed, so I have to adapt to these changes to keep up with the market."
+    ]
+  },
+  "experience": [
+    {
+      "company": "SIGMA Software",
+      "url": "https://sigma.software/",
+      "start": "2026",
+      "end": null,
+      "roles": [
+        "senior developer"
+      ],
+      "responsibilities": [],
+      "stack": []
+    },
+    {
+      "company": "Eskimi",
+      "url": "https://www.eskimi.com/",
+      "start": "2024-09",
+      "end": "2025-09",
+      "roles": [
+        "adtech Scala developer"
+      ],
+      "links": [
+        {
+          "label": "Cover letter",
+          "url": "https://shorturl.at/RjbxG"
+        }
+      ],
+      "responsibilities": [
+        "Analyzed and optimized system performance, reducing response latency and improving throughput",
+        "Enhanced system stability and reliability in high-load distributed environments",
+        "Identified and resolved performance bottlenecks in critical business processes",
+        "Implemented comprehensive monitoring and alerting solutions for proactive issue detection",
+        "Expanded test coverage across core system components",
+        "Implemented new features aligned with business requirements",
+        "Maintained and improved existing system functionality",
+        "Collaborated with cross-functional teams to deliver scalable solutions"
+      ],
+      "stack": [
+        "Scala",
+        "Akka",
+        "Kafka",
+        "Aerospike",
+        "Redis",
+        "Graphite & StatsD",
+        "Grafana",
+        "Docker"
+      ]
+    },
+    {
+      "company": "Startup (NDA)",
+      "start": "2021-10",
+      "end": "2024-09",
+      "roles": [
+        "team lead",
+        "mentor",
+        "developer"
+      ],
+      "responsibilities": [
+        "Designed and implemented project microservice architecture from scratch.",
+        "Designed and implemented CI/CD for all environments for all platforms for: running unit tests, functional tests, UI tests, building, signing, deploying app to GCP/Play Market/App Store.",
+        "Designed and implemented database structure, configuring secure access from all clients.",
+        "Conducted sprint planning, code reviews, and production releases.",
+        "Mentored teammates.",
+        "Cooperated with QA and design teams.",
+        "Maintained direct communication with product owner."
+      ],
+      "stack": [
+        "Java",
+        "Microservices",
+        "GCP",
+        "Firebase",
+        "Firestore",
+        "Kubernetes",
+        "GitHub Actions",
+        "Docker"
+      ]
+    },
+    {
+      "company": "Epam",
+      "url": "https://www.epam.com/",
+      "start": "2021-02",
+      "end": "2021-09",
+      "roles": [
+        "Java developer"
+      ],
+      "responsibilities": [
+        "Ensured compliance with safety standards.",
+        "Implemented new features in Java project and covered them with tests.",
+        "Implemented CI/CD.",
+        "Supported legacy code.",
+        "Analyzed code with SonarQube, fixed issues through refactoring.",
+        "Implemented infrastructure code that created/updated AWS resources.",
+        "Participated in sprint planning and code reviewing.",
+        "Demoed sprint results to stakeholders/clients."
+      ],
+      "stack": [
+        "Java",
+        "JUnit",
+        "AWS",
+        "Infrastructure as code",
+        "Jenkins",
+        "SonarQube"
+      ]
+    },
+    {
+      "company": "eKreative",
+      "url": "https://www.ekreative.com",
+      "start": "2013-08",
+      "end": "2020-12",
+      "roles": [
+        "key developer",
+        "mentor",
+        "team lead"
+      ],
+      "responsibilities": [
+        "Designed and implemented Java/Scala applications from scratch.",
+        "Designed and implemented PostgreSQL DB structure from scratch.",
+        "Designed and implemented non-trivial solutions that involved multiple platforms.",
+        "Supported existing projects.",
+        "Configured hosting infrastructure, remote instances, GCP, AWS.",
+        "Configured containerized apps that automatically scaled under load.",
+        "Worked with various REST APIs.",
+        "Designed, implemented and demoed proofs of concept.",
+        "Integrated with payment systems like PayPal and Stripe.",
+        "Followed TDD methodology, wrote CI/CD scripts for running tests, building and packing apps into Docker images, deploying.",
+        "Wrote custom Docker images.",
+        "Mentored backend/frontend developers in creating CI/CD scripts and implementing tests.",
+        "Mentored QAs in automation Selenium tests.",
+        "Helped developers from other platforms to set up CI/CD and cover code with tests.",
+        "Designed and implemented native Android applications.",
+        "Maintained direct communication with clients/product owners.",
+        "Participated in sprint planning and code reviewing."
+      ],
+      "stack": [
+        "Java",
+        "Scala",
+        "PostgreSQL",
+        "TDD",
+        "Docker",
+        "GitLab CI",
+        "GCP",
+        "AWS",
+        "Android"
+      ]
+    },
+    {
+      "company": "friend2friend",
+      "url": "https://www.facebook.com/Friend2Friend",
+      "start": "2012-02",
+      "end": "2013-08",
+      "roles": [
+        "Java backend developer",
+        "Facebook apps developer"
+      ],
+      "links": [
+        {
+          "label": "Performance review",
+          "url": "https://shorturl.at/GQ1q2"
+        }
+      ],
+      "responsibilities": [
+        "Extended existing database.",
+        "Implemented Java solutions using internal framework.",
+        "Implemented new features for internal framework.",
+        "Implemented frontend. Cooperated with designers.",
+        "Performed deep integration with LinkedIn and Facebook services.",
+        "Communicated and collaborated with foreign team."
+      ],
+      "stack": [
+        "Java",
+        "MySQL",
+        "JavaScript",
+        "Facebook API",
+        "LinkedIn API"
+      ]
+    },
+    {
+      "company": "Visual-Craft",
+      "url": "https://www.visual-craft.com/",
+      "start": "2009-09",
+      "end": "2012-02",
+      "roles": [
+        "PHP backend developer",
+        "frontend developer"
+      ],
+      "responsibilities": [
+        "Designed and implemented backend and frontend solutions from scratch.",
+        "Designed and implemented database structure.",
+        "Learned technologies required for the project.",
+        "Configured remote instances for PHP backend.",
+        "Converted design into HTML, CSS, JS."
+      ],
+      "stack": [
+        "PHP",
+        "MySQL",
+        "JavaScript",
+        "HTML & CSS"
+      ]
+    }
+  ],
+  "projects": {
+    "intro": "Constant learning is one of my hobbies, apart from commercial experience I have some non-commercial experience in development.",
+    "items": [
+      {
+        "title": "Gamedev experience",
+        "paragraphs": [
+          "Even as a child, I wanted to be a programmer to make computer games, so one of my hobbies is gamedev. I really enjoy implementing interesting algorithms or mechanics from video games, such as procedural generation of caves and buildings, procedural animation, AI enemies that make decisions based on circumstances and seek cover. Cover-seeking is also a separate big topic. All of this is very interesting because there are always many challenges: on one hand, finding the right algorithm that produces results, and on the other hand, it needs to be efficient so it can be scaled.",
+          "I use Unreal Engine as my main framework, but I am also familiar with Godot and Unity."
+        ],
+        "links": [
+          {
+            "label": "Samples of what I do",
+            "url": "https://kosh.top/pages/games/"
+          }
+        ]
+      },
+      {
+        "title": "Open source experience",
+        "paragraphs": [
+          "I had Garmin smartwatches, and for a long time I could not find a watch face I liked, so I decided to create my own. Apparently it became pretty popular: at the moment of writing, it has <strong>100k+ downloads</strong>.",
+          "I uploaded the watch face code to a public GitHub repository, and it became pretty popular too."
+        ],
+        "links": [
+          {
+            "label": "Watch face",
+            "url": "https://t.ly/SEZ91"
+          }
+        ]
+      },
+      {
+        "title": "Mobile idea that was implemented before Google",
+        "paragraphs": [
+          "And again, I had a problem - I created a solution. My wife went to the gym after work, and I was worried that she had to come back home late at night. So I created a simple Android application where we could share our locations in real time. Later I added more options, like funny animal avatars, adding friends, settings.",
+          "Later, Google announced the exact same feature in their map application, and I abandoned my app and started using the Google one. The project was started in 2016, <strong>long before Google released their implementation</strong> of real-time location sharing in Google Maps."
+        ],
+        "links": [
+          {
+            "label": "Photo album of how it looked",
+            "url": "https://t.ly/4l5FI"
+          }
+        ]
+      }
+    ],
+    "languages": [
+      "Kotlin",
+      "Dart",
+      "C++",
+      "Monkey C"
+    ]
+  },
+  "summary": [
+    "I love tests and CI/CD. I'm kinda proud that I'm among those not many developers who appreciate the power of TDD. Writing reliable, test-covered code has become part of my routine for many years already. So I started focusing on new things—I started thinking more about the product, goals, and tasks, participating in planning and improving business logic. I figured out that what product owners want and what they ask for may not be the same, and my responsibility is not to waste their time implementing things they don't need. My responsibility is to understand what they really need, form their ideas into goals, and decompose them into simple tickets.",
+    "I always try to set up work processes as transparently as possible to avoid any misunderstandings or conflicts. Humiliating or blaming other teammates is not about me. I take a professional, non-emotional approach to handling issues that occur.",
+    "Even though my main area of responsibility is the backend, my managers quickly understood that they could throw me at anything in case of emergency, so I was often involved in projects for which the company didn't have qualified developers. My duty was to create a PoC, impress the client, show the results, and give my team time to learn the stack and prepare for picking up the project."
+  ],
+  "skillGroups": [
+    {
+      "name": "Languages",
+      "skills": [
+        {
+          "name": "Java",
+          "core": true
+        },
+        {
+          "name": "Scala",
+          "core": true
+        }
+      ]
+    },
+    {
+      "name": "Testing",
+      "skills": [
+        {
+          "name": "TDD",
+          "core": true
+        },
+        {
+          "name": "JUnit",
+          "core": true
+        },
+        {
+          "name": "Mockito"
+        },
+        {
+          "name": "ScalaTest"
+        }
+      ]
+    },
+    {
+      "name": "Architecture",
+      "skills": [
+        {
+          "name": "Microservices"
+        },
+        {
+          "name": "Serverless"
+        },
+        {
+          "name": "Monolith"
+        }
+      ]
+    },
+    {
+      "name": "Streaming & data",
+      "skills": [
+        {
+          "name": "Kafka",
+          "core": true
+        },
+        {
+          "name": "Spark",
+          "core": true
+        },
+        {
+          "name": "Akka",
+          "core": true
+        }
+      ]
+    },
+    {
+      "name": "Databases",
+      "skills": [
+        {
+          "name": "PostgreSQL",
+          "core": true
+        },
+        {
+          "name": "MySQL",
+          "core": true
+        },
+        {
+          "name": "MongoDB",
+          "core": true
+        },
+        {
+          "name": "DynamoDB",
+          "core": true
+        },
+        {
+          "name": "Firestore"
+        },
+        {
+          "name": "Redis",
+          "core": true
+        },
+        {
+          "name": "Aerospike",
+          "core": true
+        }
+      ]
+    },
+    {
+      "name": "CI/CD & containers",
+      "skills": [
+        {
+          "name": "GitLab CI",
+          "core": true
+        },
+        {
+          "name": "Jenkins",
+          "core": true
+        },
+        {
+          "name": "Bitbucket Pipelines",
+          "core": true
+        },
+        {
+          "name": "GitHub Actions",
+          "core": true
+        },
+        {
+          "name": "Docker",
+          "core": true
+        },
+        {
+          "name": "Docker Compose",
+          "core": true
+        },
+        {
+          "name": "Kubernetes",
+          "core": true
+        },
+        {
+          "name": "Infrastructure as code"
+        },
+        {
+          "name": "SonarQube"
+        }
+      ]
+    },
+    {
+      "name": "Build tools",
+      "skills": [
+        {
+          "name": "Maven",
+          "core": true
+        },
+        {
+          "name": "Gradle",
+          "core": true
+        },
+        {
+          "name": "sbt",
+          "core": true
+        },
+        {
+          "name": "npm",
+          "core": true
+        }
+      ]
+    },
+    {
+      "name": "GCP",
+      "skills": [
+        {
+          "name": "GCP",
+          "core": true
+        },
+        {
+          "name": "Firebase",
+          "core": true
+        },
+        {
+          "name": "BigQuery"
+        },
+        {
+          "name": "Cloud Run"
+        },
+        {
+          "name": "Cloud Storage"
+        },
+        {
+          "name": "Cloud Functions"
+        },
+        {
+          "name": "Cloud SQL"
+        },
+        {
+          "name": "Pub/Sub"
+        },
+        {
+          "name": "Vertex AI"
+        }
+      ]
+    },
+    {
+      "name": "AWS",
+      "skills": [
+        {
+          "name": "AWS",
+          "core": true
+        },
+        {
+          "name": "EC2"
+        },
+        {
+          "name": "S3"
+        },
+        {
+          "name": "RDS"
+        },
+        {
+          "name": "Lambda"
+        },
+        {
+          "name": "VPC"
+        },
+        {
+          "name": "IAM"
+        },
+        {
+          "name": "CloudFront"
+        },
+        {
+          "name": "Route 53"
+        },
+        {
+          "name": "ECS"
+        },
+        {
+          "name": "SNS"
+        },
+        {
+          "name": "SQS"
+        },
+        {
+          "name": "CloudWatch"
+        }
+      ]
+    },
+    {
+      "name": "Observability",
+      "skills": [
+        {
+          "name": "Grafana"
+        },
+        {
+          "name": "ELK",
+          "core": true
+        },
+        {
+          "name": "Graphite & StatsD",
+          "core": true
+        }
+      ]
+    },
+    {
+      "name": "AI",
+      "skills": [
+        {
+          "name": "AI product integrations"
+        },
+        {
+          "name": "Claude Code",
+          "core": true
+        },
+        {
+          "name": "Gemini CLI",
+          "core": true
+        },
+        {
+          "name": "Ollama",
+          "core": true
+        }
+      ]
+    },
+    {
+      "name": "Privacy regulations",
+      "skills": [
+        {
+          "name": "GDPR"
+        },
+        {
+          "name": "CCPA"
+        }
+      ]
+    }
+  ],
+  "domains": [
+    "AdTech",
+    "FinTech",
+    "E-Commerce",
+    "Social Networks",
+    "Health Care"
+  ],
+  "softSkills": [
+    "Patience",
+    "Learning agility",
+    "Empathy",
+    "Adaptability"
+  ],
+  "languages": [
+    {
+      "name": "English",
+      "level": "advanced"
+    },
+    {
+      "name": "Ukrainian",
+      "level": "native"
+    },
+    {
+      "name": "Spanish",
+      "level": "beginner"
+    }
+  ],
+  "hobbies": [
+    "Game development, gaming",
+    "Self-education",
+    "3D printing",
+    "Volunteering"
+  ]
+}
