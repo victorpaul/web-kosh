@@ -26,8 +26,8 @@ permissions:
   pull-requests: write
 
 env:
-  # `firebase init hosting:github` names the secret after the project; a hand-made one may be called FIREBASE_SERVICE_ACCOUNT
-  FIREBASE_SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SUKINSAN || secrets.FIREBASE_SERVICE_ACCOUNT }}
+  # service-account key JSON (role: Firebase Hosting Admin), stored as a repository secret
+  FIREBASE_SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
 
 jobs:
   deploy:
@@ -49,8 +49,9 @@ jobs:
         working-directory: web
         run: npx ng build
 
+      # Dependabot PRs get no secrets, so they are only built (a check that the update doesn't break the site)
       - name: Deploy preview
-        if: github.event_name == 'pull_request' || inputs.channel == 'preview'
+        if: (github.event_name == 'pull_request' && github.actor != 'dependabot[bot]') || inputs.channel == 'preview'
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
