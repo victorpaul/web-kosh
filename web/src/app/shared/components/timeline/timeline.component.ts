@@ -44,6 +44,12 @@ export class TimelineComponent implements OnInit {
     return (item.description ?? []).map((line) => this.i18n.localize(line)).join('<br>');
   }
 
+  /* still going on ("… - Present"): its dot glows */
+  isCurrent(item: TimelineItem): boolean {
+    const date = typeof item.date === 'string' ? item.date : (item.date.en ?? '');
+    return /present/i.test(date);
+  }
+
   isVisible(type: TimelineItemType): boolean {
     return type === 'work' ? this.showWork() : this.showPersonal();
   }

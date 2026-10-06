@@ -1,5 +1,8 @@
-import { ChangeDetectionStrategy, Component, HostListener, Input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, signal, viewChild } from '@angular/core';
 
+/* Thumbnail grid; clicking one opens a full-screen viewer. The viewer is a native modal <dialog>: it renders
+   in the browser's top layer, so no parent (a transformed card, an overflow:hidden box) can clip or trap it,
+   and Esc, focus trapping and an inert page behind come for free. */
 @Component({
   selector: 'app-image-gallery',
   standalone: true,
@@ -12,16 +15,25 @@ export class ImageGalleryComponent {
   @Input() alt = '';
 
   readonly activeIndex = signal<number | null>(null);
-  readonly isOpen = signal(false);
+  private readonly dialog = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
 
   open(index: number): void {
     this.activeIndex.set(index);
-    this.isOpen.set(true);
+    this.dialog().nativeElement.showModal();
   }
 
   close(): void {
-    this.isOpen.set(false);
+    this.dialog().nativeElement.close();
+  }
+
+  /* fires for every way of closing: the × button, Esc, a click outside the picture */
+  onClosed(): void {
     this.activeIndex.set(null);
+  }
+
+  /* a click that lands on the dialog itself (the dimmed area), not on its content */
+  onDialogClick(event: MouseEvent): void {
+    if (event.target === this.dialog().nativeElement) this.close();
   }
 
   select(index: number): void {
@@ -33,25 +45,11 @@ export class ImageGalleryComponent {
       return;
     }
     const current = this.activeIndex() ?? 0;
-    const next = (current + direction + this.images.length) % this.images.length;
-    this.activeIndex.set(next);
+    this.activeIndex.set((current + direction + this.images.length) % this.images.length);
   }
 
-  @HostListener('document:keydown', ['$event'])
   onKeydown(event: KeyboardEvent): void {
-    if (!this.isOpen()) {
-      return;
-    }
-    switch (event.key) {
-      case 'Escape':
-        this.close();
-        break;
-      case 'ArrowRight':
-        this.navigate(1);
-        break;
-      case 'ArrowLeft':
-        this.navigate(-1);
-        break;
-    }
+    if (event.key === 'ArrowRight') this.navigate(1);
+    if (event.key === 'ArrowLeft') this.navigate(-1);
   }
 }

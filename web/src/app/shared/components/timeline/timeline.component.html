@@ -1,41 +1,40 @@
 <div class="timeline-container">
-  <div class="timeline-filters">
-    <label class="filter-option work">
+  <div class="filters" role="group">
+    <label class="filter work" [class.on]="showWork()">
       <input type="checkbox" [checked]="showWork()" (change)="toggleWork()" />
-      <span>{{ 'timeline.work' | t }}</span>
+      <span class="dot" aria-hidden="true"></span>
+      {{ 'timeline.work' | t }}
     </label>
-    <label class="filter-option personal">
+    <label class="filter personal" [class.on]="showPersonal()">
       <input type="checkbox" [checked]="showPersonal()" (change)="togglePersonal()" />
-      <span>{{ 'timeline.personal' | t }}</span>
+      <span class="dot" aria-hidden="true"></span>
+      {{ 'timeline.personal' | t }}
     </label>
   </div>
 
-  <div class="timeline">
-    @if (loading()) {
-      <div class="timeline-loading">{{ 'timeline.loading' | t }}</div>
-    } @else if (error()) {
-      <div class="timeline-error">{{ 'timeline.error' | t: { msg: error()! } }}</div>
-    } @else {
+  @if (loading()) {
+    <div class="timeline-loading">{{ 'timeline.loading' | t }}</div>
+  } @else if (error()) {
+    <div class="timeline-error">{{ 'timeline.error' | t: { msg: error()! } }}</div>
+  } @else {
+    <ol class="timeline">
       @for (item of items(); track $index) {
         @if (isVisible(item.type)) {
-          <div class="timeline-item" [class.personal]="item.type === 'personal'">
-            <div class="timeline-date">{{ item.date | localize }}</div>
-            <div class="timeline-content">
-              <div class="timeline-text-column">
-                <h3>{{ item.title | localize }}</h3>
-                @if (item.description?.length) {
-                  <p [innerHTML]="description(item)"></p>
-                }
-              </div>
-              @if (item.images?.length) {
-                <div class="timeline-images-column">
-                  <app-image-gallery [images]="item.images!" [alt]="item.title | localize" />
-                </div>
+          <li class="item" [class.personal]="item.type === 'personal'" [class.current]="isCurrent(item)">
+            <span class="marker" aria-hidden="true"></span>
+            <div class="date">{{ item.date | localize }}</div>
+            <article class="card">
+              <h3>{{ item.title | localize }}</h3>
+              @if (item.description?.length) {
+                <p class="text" [innerHTML]="description(item)"></p>
               }
-            </div>
-          </div>
+              @if (item.images?.length) {
+                <app-image-gallery class="photos" [images]="item.images!" [alt]="item.title | localize" />
+              }
+            </article>
+          </li>
         }
       }
-    }
-  </div>
+    </ol>
+  }
 </div>

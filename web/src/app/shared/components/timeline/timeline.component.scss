@@ -1,161 +1,209 @@
-.timeline-filters {
+/* Colours come from the global theme tokens; everything else is derived here so light and dark both work. */
+:host {
+  display: block;
+  --tl-work: var(--link-color);
+  --tl-personal: var(--timeline-personal-color);
+  --tl-card: var(--timeline-content-bg);
+  --tl-line: color-mix(in srgb, var(--text-color) 14%, transparent);
+  --tl-muted: color-mix(in srgb, var(--text-color) 65%, transparent);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  max-width: 760px;
+}
+
+/* ---------- Work / Personal toggles ---------- */
+.filters {
   display: flex;
-  gap: 1.5rem;
+  gap: 0.6rem;
   margin-bottom: 2rem;
 }
 
-.filter-option {
-  display: flex;
+.filter {
+  --c: var(--tl-work);
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  padding: 0.4rem 0.95rem;
+  border: 1px solid var(--tl-line);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--tl-muted);
   cursor: pointer;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  transition: all 0.2s ease;
+  user-select: none;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
 
+  &.personal {
+    --c: var(--tl-personal);
+  }
+  /* the real checkbox stays for keyboards and screen readers, just invisible */
   input {
-    width: 1.2rem;
-    height: 1.2rem;
-    cursor: pointer;
-  }
-
-  span {
-    font-weight: 500;
-  }
-
-  &.work {
-    background-color: var(--work-filter-bg);
-    transition: background-color 0.3s;
-
-    span {
-      color: var(--link-color);
-      transition: color 0.3s;
-    }
-  }
-
-  &.personal {
-    background-color: var(--personal-filter-bg);
-    transition: background-color 0.3s;
-
-    span {
-      color: var(--timeline-personal-color);
-      transition: color 0.3s;
-    }
-  }
-}
-
-.timeline {
-  position: relative;
-  padding: 0 0 0 2rem;
-
-  &::before {
-    content: '';
     position: absolute;
-    top: 0;
-    left: 8px;
-    height: 100%;
-    width: 2px;
-    background-color: var(--timeline-border);
-    transition: background-color 0.3s;
+    opacity: 0;
+    pointer-events: none;
   }
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 2.5rem;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: -2rem;
-    top: 5px;
-    width: 16px;
-    height: 16px;
+  .dot {
+    width: 0.55rem;
+    height: 0.55rem;
     border-radius: 50%;
-    background-color: var(--bg-color);
-    border: 2px solid var(--timeline-border);
-    z-index: 1;
-    transition: background-color 0.3s, border-color 0.3s;
+    border: 1.5px solid var(--c);
+    transition: background-color 0.2s;
   }
+  &:hover {
+    border-color: var(--c);
+  }
+  &.on {
+    color: var(--c);
+    border-color: color-mix(in srgb, var(--c) 45%, transparent);
+    background-color: color-mix(in srgb, var(--c) 12%, transparent);
+
+    .dot {
+      background-color: var(--c);
+    }
+  }
+  &:has(input:focus-visible) {
+    outline: 2px solid var(--c);
+    outline-offset: 2px;
+  }
+}
+
+/* ---------- the line and its entries ---------- */
+.timeline {
+  list-style: none;
+  position: relative;
+  margin: 0;
+  padding: 0 0 0 1.75rem;
+
+  /* the vertical line, fading out at the bottom */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0.45rem;
+    bottom: 0;
+    left: 5px;
+    width: 2px;
+    border-radius: 2px;
+    background: linear-gradient(to bottom, var(--tl-line) 85%, transparent);
+  }
+}
+
+.item {
+  --c: var(--tl-work);
+  position: relative;
+  padding-bottom: 1.75rem;
 
   &.personal {
-    &::before {
-      border-color: var(--timeline-personal-color);
-    }
-
-    .timeline-date {
-      color: var(--timeline-personal-color);
-    }
-
-    .timeline-content {
-      border-left: 3px solid var(--timeline-personal-color);
-    }
+    --c: var(--tl-personal);
+  }
+  &:last-child {
+    padding-bottom: 0;
   }
 }
 
-.timeline-date {
-  font-weight: bold;
-  color: var(--link-color);
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-  transition: color 0.3s;
+.marker {
+  position: absolute;
+  left: calc(-1.75rem + 1px);
+  top: 0.3rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c);
+  /* a ring in the page colour separates the dot from the line */
+  box-shadow: 0 0 0 4px var(--bg-color);
 }
 
-.timeline-content {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  width: 100%;
-  background-color: var(--timeline-content-bg);
-  padding: 1.5rem;
-  border-radius: 5px;
-  box-shadow: 0 1px 3px var(--timeline-content-shadow);
-  border-left: 3px solid var(--timeline-border);
-  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+/* ongoing entries ("… - Present") get a soft halo */
+.item.current .marker {
+  box-shadow:
+    0 0 0 4px var(--bg-color),
+    0 0 0 7px color-mix(in srgb, var(--c) 30%, transparent);
+}
+
+.date {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c);
+  margin-bottom: 0.5rem;
+}
+
+.card {
+  background: var(--tl-card);
+  border: 1px solid var(--tl-line);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--c) 35%, transparent);
+    box-shadow: 0 8px 24px var(--timeline-content-shadow);
+  }
 
   h3 {
-    margin-top: 0;
-    margin-bottom: 0.75rem;
+    margin: 0;
+    font-size: 1.02rem;
+    font-weight: 600;
+    line-height: 1.4;
     color: var(--text-color);
   }
 
-  p {
-    margin-bottom: 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
+  .text {
+    margin: 0.35rem 0 0;
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--tl-muted);
+  }
 
-    &:last-child {
-      margin-bottom: 0;
+  /* company and school links inside the text */
+  .text ::ng-deep a {
+    font-size: inherit;
+    font-weight: 500;
+    color: var(--c);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--c) 35%, transparent);
+    transition: border-color 0.2s;
+
+    &:hover {
+      text-decoration: none;
+      border-bottom-color: var(--c);
+    }
+  }
+
+  .photos {
+    display: block;
+    margin-top: 0.9rem;
+    --gallery-thumb-size: 84px;
+    --gallery-thumb-radius: 8px;
+  }
+}
+
+/* entries fade in as they scroll into view (browsers that support scroll-driven animations) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .item {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
     }
   }
 }
 
-:host-context([data-theme='dark']) .timeline-item h3 {
-  color: #ffffff;
-}
-
-.timeline-text-column {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.timeline-images-column {
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  max-width: 200px;
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .timeline-loading {
   text-align: center;
   padding: 2rem;
-  color: #777;
+  color: var(--tl-muted);
   font-style: italic;
 }
 
@@ -164,18 +212,12 @@
   padding: 2rem;
   color: #d9534f;
   background-color: rgba(217, 83, 79, 0.1);
-  border-radius: 5px;
+  border-radius: 12px;
   margin: 1rem 0;
 }
 
 @media (max-width: 768px) {
-  .timeline-content {
-    flex-direction: column;
-  }
-
-  .timeline-images-column {
-    align-items: flex-start;
-    margin-top: 15px;
-    max-width: 100%;
+  .card .photos {
+    --gallery-thumb-size: 72px;
   }
 }
