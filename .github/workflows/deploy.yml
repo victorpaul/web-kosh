@@ -1,23 +1,69 @@
-name: Deploy to AWS S3
+name: Deploy to Firebase Hosting
+
 on:
+  # every push to master goes live
   push:
-    branches:
-      - master
+    branches: [master]
+  # pull requests get a temporary preview URL, posted as a comment on the PR
+  pull_request:
+  # manual run from the Actions tab (or `gh workflow run deploy.yml --ref <branch>`) for any branch
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: 'live = the real site; preview = a temporary URL (7 days)'
+        type: choice
+        options: [live, preview]
+        default: live
+
+# one deploy per branch at a time; a newer push cancels the older run
+concurrency:
+  group: firebase-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
+env:
+  # `firebase init hosting:github` names the secret after the project; a hand-made one may be called FIREBASE_SERVICE_ACCOUNT
+  FIREBASE_SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SUKINSAN || secrets.FIREBASE_SERVICE_ACCOUNT }}
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
+      - uses: actions/checkout@v4
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+      - uses: actions/setup-node@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
 
-      - name: Deploy static site to S3 bucket
-        run: aws s3 sync www/. s3://web-kosh --delete
+      - name: Install
+        working-directory: web
+        run: npm ci
+
+      - name: Build
+        working-directory: web
+        run: npx ng build
+
+      - name: Deploy preview
+        if: github.event_name == 'pull_request' || inputs.channel == 'preview'
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ env.FIREBASE_SA }}
+          projectId: sukinsan
+          channelId: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.number) || 'manual-preview' }}
+          expires: 7d
+
+      - name: Deploy live
+        if: github.event_name != 'pull_request' && inputs.channel != 'preview'
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ env.FIREBASE_SA }}
+          projectId: sukinsan
+          channelId: live

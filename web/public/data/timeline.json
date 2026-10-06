@@ -1,0 +1,234 @@
+{
+  "timelineItems": [
+    {
+      "date": {
+        "en": "2026 - Present",
+        "uk": "2026 - дотепер"
+      },
+      "title": "Senior Software Developer",
+      "description": [
+        "<a href=\"https://sigma.software/\", target=\"_blank\">SIGMA Software</a>"
+      ],
+      "type": "work"
+    },
+    {
+      "date": "2024 - 205",
+      "title": "Senior Software Engineer",
+      "description": [
+        "<a href=\"https://www.eskimi.com/\" target=\"_blank\">Eskimi</a>"
+      ],
+      "type": "work"
+    },
+    {
+      "date": {
+        "en": "2022 - Present",
+        "uk": "2022 - дотепер"
+      },
+      "title": "Volunteer",
+      "description": [
+        {
+          "en": "The war began; russia attacked my country. In those first days, it was hard to gather my thoughts, so we tried to help the army and restore bomb shelters.<br/>Since we were young parents, my wife set up a shared children's area in the shelter so that kids had something to do during air raids.<br/>At first, I looked for ways to be useful—buying first aid kits, pouches, power banks, and thermal imagers. Over time, I found my niche: 3D printing for the army's needs.",
+          "uk": "Почалася війна: росія напала на мою країну. У перші дні було важко зібратися з думками, тож ми намагалися допомагати армії та відновлювати бомбосховища.<br/>Ми були молодими батьками, тому дружина облаштувала в укритті спільний дитячий куточок, щоб діти мали чим зайнятися під час повітряних тривог.<br/>Спершу я шукав, чим можу бути корисним, — купував аптечки, підсумки, павербанки й тепловізори. Згодом знайшов свою нішу: 3D-друк для потреб армії."
+        }
+      ],
+      "type": "personal",
+      "images": [
+        "/img/war1.jpg",
+        "/img/war2.jpg",
+        "/img/war3.jpg",
+        "/img/war4.jpg"
+      ]
+    },
+    {
+      "date": "2021 - 2024",
+      "title": "Senior Software Engineer",
+      "description": [
+        {
+          "en": "Worked at a Startup (NDA)",
+          "uk": "Працював у стартапі (NDA)"
+        }
+      ],
+      "type": "work"
+    },
+    {
+      "date": "2021",
+      "title": "Senior Software Engineer",
+      "description": [
+        {
+          "en": "Worked at <a href=\"https://www.epam.com/\" target=\"_blank\">Epam</a>",
+          "uk": "Працював в <a href=\"https://www.epam.com/\" target=\"_blank\">Epam</a>"
+        }
+      ],
+      "type": "work"
+    },
+    {
+      "date": {
+        "en": "2020 - Present",
+        "uk": "2020 - дотепер"
+      },
+      "title": "Home",
+      "description": [
+        {
+          "en": "We build our own home",
+          "uk": "Будуємо власний дім"
+        }
+      ],
+      "type": "personal",
+      "images": [
+        "/img/home3.jpg",
+        "/img/home1.jpg",
+        "/img/home2.jpg"
+      ]
+    },
+    {
+      "date": {
+        "en": "2018 - Present",
+        "uk": "2018 - дотепер"
+      },
+      "title": "Father",
+      "description": [
+        {
+          "en": "Mark and Sophy were born",
+          "uk": "Народилися Марк і Софі"
+        }
+      ],
+      "type": "personal",
+      "images": [
+        "/img/kid2.jpg",
+        "/img/me_sophy.jpg",
+        "/img/me_mark.jpg"
+      ]
+    },
+    {
+      "date": "2013 - 2020",
+      "title": "Java/Scala Developer",
+      "description": [
+        {
+          "en": "Worked at <a href=\"https://www.ekreative.com\" target=\"_blank\">eKreative</a>",
+          "uk": "Працював в <a href=\"https://www.ekreative.com\" target=\"_blank\">eKreative</a>"
+        }
+      ],
+      "type": "work"
+    },
+    {
+      "date": {
+        "en": "2014 - Present",
+        "uk": "2014 - дотепер"
+      },
+      "title": "Game Changer",
+      "description": [
+        {
+          "en": "Lost my best friend, got the girl of my life",
+          "uk": "Втратив найкращого друга, зустрів дівчину свого життя"
+        }
+      ],
+      "type": "personal",
+      "images": [
+        "/img/igor.jpg",
+        "/img/nat_fire_eyes2.jpg"
+      ]
+    },
+    {
+      "date": "2012 - 2013",
+      "title": "Java Developer",
+      "description": [
+        {
+          "en": "Worked at <a href=\"https://www.facebook.com/Friend2Friend\" target=\"_blank\">friend2friend</a>",
+          "uk": "Працював у <a href=\"https://www.facebook.com/Friend2Friend\" target=\"_blank\">friend2friend</a>"
+        }
+      ],
+      "type": "work"
+    },
+    {
+      "date": "2009 - 2012",
+      "title": "PHP Developer",
+      "description": [
+        {
+          "en": "Worked at <a href=\"https://www.visual-craft.com/\" target=\"_blank\">visual-craft</a>",
+          "uk": "Працював у <a href=\"https://www.visual-craft.com/\" target=\"_blank\">visual-craft</a>"
+        },
+        {
+          "en": "First experience with PHP, HTML, CSS, MySQL, JavaScript, APIs, payment systems",
+          "uk": "Перший досвід із PHP, HTML, CSS, MySQL, JavaScript, API та платіжними системами"
+        }
+      ],
+      "type": "work"
+    },
+    {
+      "date": "2006 - 2009",
+      "title": "Student",
+      "description": [
+        {
+          "en": "Studied at <a href=\"http://www.cdu.edu.ua\" target=\"_blank\">National University</a>",
+          "uk": "Навчався в <a href=\"http://www.cdu.edu.ua\" target=\"_blank\">Національному університеті</a>"
+        },
+        {
+          "en": "Got another diploma. Played Diablo2 and StarCraft a lot, got beard",
+          "uk": "Отримав ще один диплом. Багато грав у Diablo 2 і StarCraft, відростив бороду"
+        }
+      ],
+      "type": "personal"
+    },
+    {
+      "date": "2002 - 2006",
+      "title": "Student",
+      "description": [
+        {
+          "en": "Studied at <a href=\"http://polytechnic.ck.ua\" target=\"_blank\">College</a>",
+          "uk": "Навчався в <a href=\"http://polytechnic.ck.ua\" target=\"_blank\">коледжі</a>"
+        },
+        {
+          "en": "Got first diploma",
+          "uk": "Отримав перший диплом"
+        }
+      ],
+      "type": "personal"
+    },
+    {
+      "date": "1999 - 2002",
+      "title": "Teenager, Advanced PC User",
+      "description": [
+        {
+          "en": "Had an old PC with 40MHz CPU, 4MB of RAM",
+          "uk": "Мав старий ПК із процесором на 40 МГц і 4 МБ оперативної пам’яті"
+        },
+        {
+          "en": "Learned DOS and batch scripts to run games and support the system",
+          "uk": "Вивчив DOS і batch-скрипти, щоб запускати ігри й підтримувати систему"
+        }
+      ],
+      "type": "personal"
+    },
+    {
+      "date": "1996 - 1999",
+      "title": "Lego Developer",
+      "description": [
+        {
+          "en": "\"Even now I love to play with all kind of constructors\"",
+          "uk": "«Досі люблю гратися з усілякими конструкторами»"
+        }
+      ],
+      "type": "personal"
+    },
+    {
+      "date": "1996",
+      "title": "Kid",
+      "description": [
+        {
+          "en": "That wanted to create video games",
+          "uk": "Яка мріяла створювати відеоігри"
+        }
+      ],
+      "type": "personal"
+    },
+    {
+      "date": "1987",
+      "title": "Born",
+      "description": [
+        "Far far away from home among bears in Moscow",
+        "Friday, fall, cold, early in the morning. Little kosh was born."
+      ],
+      "type": "personal"
+    }
+  ]
+}

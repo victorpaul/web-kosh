@@ -1,0 +1,156 @@
+<app-worksheet-layout titleKey="m.title" taglineKey="m.tagline">
+  <ng-container ngProjectAs="[rail]">
+    <div class="grp">
+      <span class="lbl">{{ 'm.operations' | t }}</span>
+      <div class="toggles">
+        @for (op of opKeys; track op) {
+          <button wsTogglePill [on]="state.ops.includes(op)" (click)="toggleOp(op)">{{ ops[op].label }}</button>
+        }
+      </div>
+      <label class="check">
+        <input #missing type="checkbox" [checked]="state.missing" (change)="setMissing(missing.checked)" />
+        <span>{{ 'm.missing' | t }}</span>
+        <span class="cap">{{ 'm.missingExample' | t }}</span>
+      </label>
+    </div>
+
+    <div class="grp">
+      <span class="lbl">{{ 'm.look' | t }}</span>
+      <div class="modes">
+        @for (mode of modeKeys; track mode) {
+          <button type="button" class="mode" [attr.aria-pressed]="state.mode === mode" (click)="setMode(mode)">{{ 'm.mode.' + mode | t }}</button>
+        }
+      </div>
+    </div>
+
+    <div class="grp">
+      <span class="lbl">{{ 'm.range' | t }}</span>
+      <div class="row2">
+        <label><span class="cap">{{ 'm.min' | t }}</span><input #min class="field" type="number" min="0" max="999" [value]="state.min" (change)="setNumber('min', min, 0, 999)" /></label>
+        <label><span class="cap">{{ 'm.max' | t }}</span><input #max class="field" type="number" min="1" max="999" [value]="state.max" (change)="setNumber('max', max, 1, 999)" /></label>
+      </div>
+      <p class="hint">{{ rangeNote() }}</p>
+    </div>
+
+    <div class="grp">
+      <span class="lbl">{{ 'm.sheet' | t }}</span>
+      <div class="row2">
+        <label><span class="cap">{{ 'm.tasks' | t }}</span><input #count class="field" type="number" min="1" max="30" [value]="state.count" (change)="setNumber('count', count, 1, 30)" /></label>
+        <label><span class="cap">{{ 'w.cols' | t }}</span><input #cols class="field" type="number" min="1" max="3" [value]="state.cols" (change)="setNumber('cols', cols, 1, 3)" /></label>
+      </div>
+      @if (missingTasks() > 0) {
+        <p class="hint">{{ 'm.fewTasks' | t: { n: state.tasks.length, want: state.count } }}</p>
+      }
+      <p class="hint">{{ 'm.colsHint' | t }}</p>
+    </div>
+
+    <div class="grp">
+      <span class="lbl">{{ 'm.pictureSet' | t }}</span>
+      <div class="toggles">
+        @for (set of setKeys; track set) {
+          <button wsTogglePill [on]="activeSets().includes(set)" (click)="toggleSet(set)">{{ presetSets[set][0] }} {{ 'm.set.' + set | t }}</button>
+        }
+      </div>
+      <div class="lib">
+        @for (emoji of builtinPics(); track $index) {
+          <div class="thumb builtin"><span>{{ emoji }}</span></div>
+        }
+        @for (raw of state.images; track $index; let i = $index) {
+          <div class="thumb">
+            <img [src]="normPic(raw).v" alt="" />
+            <button type="button" [title]="'m.removePic' | t" (click)="removeImage(i)">✕</button>
+          </div>
+        }
+        <button type="button" class="add" [title]="'m.addPics' | t" (click)="addImages()">+</button>
+      </div>
+      <p class="hint">{{ 'm.uploadHint' | t }}</p>
+    </div>
+
+    <div class="grp">
+      <button class="btn primary" type="button" (click)="generate()">{{ 'm.generate' | t }}</button>
+      <button class="btn" type="button" (click)="print()">{{ 'common.print' | t }}</button>
+      <label>
+        <span class="cap">{{ 'common.saveAs' | t }}</span>
+        <input #name class="field" type="text" [value]="state.title" (input)="setTitle(name.value)" />
+      </label>
+      <button class="btn" type="button" (click)="save()">{{ 'm.saveSheet' | t }}</button>
+    </div>
+
+    <div class="grp">
+      <span class="lbl">{{ 'm.saved' | t }}</span>
+      <app-saved-list [store]="store" [nameOf]="nameOf" (opened)="open($event)" />
+      <p class="hint">{{ 'm.savedHint' | t }}</p>
+    </div>
+
+    <p class="hint">{{ 'common.storage' | t }}</p>
+  </ng-container>
+
+  <div class="sheet">
+    <div class="tasks">
+      @if (hasCompare()) {
+        <p class="howto">
+          @for (part of compareHowParts(); track $index) {
+            @if (part.sign) {
+              <strong>{{ part.text }}</strong>
+            } @else {
+              {{ part.text }}
+            }
+          }
+        </p>
+      }
+      <div class="band" [class.tight]="state.cols > 1" [style.grid-template-columns]="'repeat(' + state.cols + ', minmax(0, 1fr))'">
+        @for (task of state.tasks; track $index; let i = $index) {
+          <div
+            class="task"
+            [class.pics]="task.picture"
+            [class.cmp]="task.op === '?'"
+            [class.divider]="hasDivider(i)"
+            [class.rowline]="hasRowLine(i)"
+            [style.--pic]="task.picture ? counterSize(task) : null"
+          >
+            <ng-container *ngTemplateOutlet="side; context: { $implicit: task, n: task.a, which: 'a' }" />
+            @if (task.hide === 'op') {
+              <span class="answer hintbox"><span class="ghost">&lt;&nbsp;&nbsp;=&nbsp;&nbsp;&gt;</span></span>
+            } @else {
+              <span class="op">{{ ops[task.op].label }}</span>
+            }
+            <ng-container *ngTemplateOutlet="side; context: { $implicit: task, n: task.b, which: 'b' }" />
+            @if (task.op !== '?') {
+              <span class="eq">=</span>
+              @if ((task.hide || 'r') === 'r') {
+                <span class="answer"></span>
+              } @else {
+                <span>{{ task.r }}</span>
+              }
+            }
+          </div>
+        }
+      </div>
+      @if (needsPictures()) {
+        <p class="missing">{{ 'm.needPics' | t }}</p>
+      }
+    </div>
+  </div>
+</app-worksheet-layout>
+
+<!-- one side of a task: a blank box, a group of counters, or a number -->
+<ng-template #side let-task let-n="n" let-which="which">
+  @if (task.hide === which) {
+    <span class="answer"></span>
+  } @else if (task.picture) {
+    <div class="grpimgs">
+      @for (c of counters(n); track c) {
+        @if (task.pic?.type === 'emoji') {
+          <span class="emo">{{ task.pic.v }}</span>
+        } @else {
+          <img [src]="task.pic?.v ?? ''" alt="" />
+        }
+      }
+      @if (n === 0) {
+        <span>0</span>
+      }
+    </div>
+  } @else {
+    <span>{{ n }}</span>
+  }
+</ng-template>

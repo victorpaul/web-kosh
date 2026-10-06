@@ -1,0 +1,31 @@
+<div class="two-column-layout">
+  <div class="column left-column">
+    <div class="profile-image">
+      <img src="/img/kosh.jpg" alt="Victor Paul" />
+    </div>
+
+    <div class="social-links">
+      <a target="_blank" href="https://www.linkedin.com/in/victorkosh/" title="LinkedIn" aria-label="LinkedIn">
+        <i class="fab fa-linkedin" aria-hidden="true"></i>
+      </a>
+      <a target="_blank" href="https://gitlab.com/victorpaul" title="GitLab" aria-label="GitLab">
+        <i class="fab fa-gitlab" aria-hidden="true"></i>
+      </a>
+      <a target="_blank" href="https://github.com/victorpaul" title="GitHub" aria-label="GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      <!-- the CV is one resource among the others, not a top-level page -->
+      <a routerLink="/cv" [title]="'nav.cv' | t" [attr.aria-label]="'nav.cv' | t">
+        <svg class="cv-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm7 1.5V8h4.5L13 3.5ZM8 12v1.6h8V12H8Zm0 3.4V17h8v-1.6H8Zm0-6.8v1.6h3V8.6H8Z" />
+        </svg>
+      </a>
+    </div>
+    <br />
+    <app-typing-text [text]="'site.greeting' | t" />
+  </div>
+
+  <div class="column right-column">
+    <app-timeline />
+  </div>
+</div>

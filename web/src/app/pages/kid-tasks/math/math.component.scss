@@ -1,0 +1,249 @@
+.check {
+  flex-wrap: wrap;
+}
+
+/* operation + mode toggles */
+.modes {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.mode {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 13px;
+  text-align: left;
+  background: var(--panel);
+  color: var(--ink);
+
+  &:hover {
+    border-color: var(--blue);
+  }
+  &[aria-pressed='true'] {
+    border-color: var(--blue);
+    background: var(--blue-soft);
+  }
+}
+
+/* picture library */
+.lib {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-height: 190px;
+  overflow: auto;
+
+  .thumb {
+    position: relative;
+    width: 46px;
+    height: 46px;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--panel);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 3px;
+    }
+    &.builtin {
+      font-size: 24px;
+      border-style: dashed;
+    }
+    button {
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      border: 0;
+      background: var(--coral);
+      color: #fff;
+      border-radius: 0 6px 0 7px;
+      cursor: pointer;
+      font-size: 10px;
+      line-height: 1;
+      padding: 3px 4px;
+    }
+  }
+  .add {
+    width: 46px;
+    height: 46px;
+    border: 1.5px dashed var(--guide);
+    border-radius: 7px;
+    background: none;
+    cursor: pointer;
+    color: var(--pencil);
+    font-size: 20px;
+
+    &:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+  }
+}
+
+/* sheet */
+.sheet {
+  padding: 12mm;
+  display: flex;
+  flex-direction: column;
+  gap: 6mm;
+}
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 7mm;
+  flex: 1;
+  justify-content: flex-start;
+}
+.band {
+  display: grid;
+  gap: 7mm;
+  align-content: start;
+}
+.task {
+  --pic: 11mm;
+  position: relative;
+  display: grid;
+  grid-template-columns: 14mm 9mm 14mm 8mm 18mm;
+  align-items: center;
+  justify-items: center;
+  gap: 2mm;
+  font-family: var(--kid);
+  font-size: 24pt;
+  font-weight: 700;
+
+  &.cmp {
+    grid-template-columns: 14mm 18mm 14mm;
+  }
+  /* picture rows share one column grid so every +, = and box lines up down the page */
+  &.pics {
+    grid-template-columns: 1fr 9mm 1fr 8mm 18mm;
+    flex-wrap: nowrap;
+  }
+  &.pics.cmp {
+    grid-template-columns: 1fr 18mm 1fr;
+  }
+  /* faint dashed rules in the gaps, so the sheet reads as a grid of tasks */
+  &.divider::after {
+    content: '';
+    position: absolute;
+    top: -3.5mm;
+    bottom: -3.5mm;
+    right: -3.5mm;
+    border-right: 1px dashed #c9d1de;
+  }
+  &.rowline::before {
+    content: '';
+    position: absolute;
+    left: -3.5mm;
+    right: -3.5mm;
+    bottom: -3.5mm;
+    border-bottom: 1px dashed #c9d1de;
+  }
+}
+.grpimgs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2mm;
+  flex-wrap: wrap;
+  max-width: 100%;
+
+  img {
+    height: var(--pic);
+    width: var(--pic);
+    object-fit: contain;
+  }
+  .emo {
+    font-size: var(--pic);
+    line-height: 1;
+    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+  }
+}
+/* narrower furniture when several tasks share a row */
+.band.tight {
+  .task {
+    grid-template-columns: 12mm 7mm 12mm 6mm 14mm;
+    font-size: 20pt;
+    gap: 1.5mm;
+  }
+  .task.pics {
+    grid-template-columns: 1fr 7mm 1fr 6mm 14mm;
+  }
+  .task.cmp {
+    grid-template-columns: 12mm 14mm 12mm;
+  }
+  .task.pics.cmp {
+    grid-template-columns: 1fr 14mm 1fr;
+  }
+  .answer {
+    width: 13mm;
+    height: 11mm;
+  }
+}
+.op,
+.eq {
+  font-weight: 700;
+}
+.answer {
+  display: inline-block;
+  width: 16mm;
+  height: 13mm;
+  border: 2px solid #16243c;
+  border-radius: 3px;
+
+  &.hintbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.ghost {
+  font-family: var(--ui);
+  font-size: 8pt;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #aab4c4;
+}
+.howto {
+  font-family: var(--ui);
+  font-size: 11pt;
+  color: #42526e;
+  text-align: center;
+  margin: -2mm 0 0;
+
+  strong {
+    font-family: var(--kid);
+    font-size: 13pt;
+  }
+}
+.missing {
+  color: var(--pencil);
+  font-family: var(--ui);
+  font-size: 11pt;
+  font-weight: 400;
+}
+
+@media print {
+  /* one full page: A4 with zero margins */
+  .sheet {
+    width: 100%;
+    min-height: 0;
+    height: 297mm;
+    padding: 10mm;
+    overflow: hidden;
+  }
+  .task {
+    break-inside: avoid;
+  }
+}

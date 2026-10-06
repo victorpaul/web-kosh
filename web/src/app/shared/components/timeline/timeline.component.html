@@ -1,0 +1,41 @@
+<div class="timeline-container">
+  <div class="timeline-filters">
+    <label class="filter-option work">
+      <input type="checkbox" [checked]="showWork()" (change)="toggleWork()" />
+      <span>{{ 'timeline.work' | t }}</span>
+    </label>
+    <label class="filter-option personal">
+      <input type="checkbox" [checked]="showPersonal()" (change)="togglePersonal()" />
+      <span>{{ 'timeline.personal' | t }}</span>
+    </label>
+  </div>
+
+  <div class="timeline">
+    @if (loading()) {
+      <div class="timeline-loading">{{ 'timeline.loading' | t }}</div>
+    } @else if (error()) {
+      <div class="timeline-error">{{ 'timeline.error' | t: { msg: error()! } }}</div>
+    } @else {
+      @for (item of items(); track $index) {
+        @if (isVisible(item.type)) {
+          <div class="timeline-item" [class.personal]="item.type === 'personal'">
+            <div class="timeline-date">{{ item.date | localize }}</div>
+            <div class="timeline-content">
+              <div class="timeline-text-column">
+                <h3>{{ item.title | localize }}</h3>
+                @if (item.description?.length) {
+                  <p [innerHTML]="description(item)"></p>
+                }
+              </div>
+              @if (item.images?.length) {
+                <div class="timeline-images-column">
+                  <app-image-gallery [images]="item.images!" [alt]="item.title | localize" />
+                </div>
+              }
+            </div>
+          </div>
+        }
+      }
+    }
+  </div>
+</div>

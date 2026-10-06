@@ -1,0 +1,14 @@
+<header class="main-header">
+  <nav>
+    <ul>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a routerLink="/">{{ 'nav.me' | t }}</a>
+      </li>
+      <li routerLinkActive="active"><a routerLink="/kid-tasks">{{ 'nav.kids' | t }}</a></li>
+    </ul>
+  </nav>
+  <div class="controls">
+    <app-language-switch />
+    <app-theme-toggle />
+  </div>
+</header>

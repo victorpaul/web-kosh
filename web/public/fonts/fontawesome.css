@@ -1,0 +1,53 @@
+/* Font Awesome 6 - Free */
+@font-face {
+  font-family: 'Font Awesome 6 Free';
+  font-style: normal;
+  font-weight: 900;
+  src: url('fontawesome/fa-solid-900.woff2') format('woff2'),
+       url('fontawesome/fa-solid-900.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Font Awesome 6 Free';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fontawesome/fa-regular-400.woff2') format('woff2'),
+       url('fontawesome/fa-regular-400.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Font Awesome 6 Brands';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fontawesome/fa-brands-400.woff2') format('woff2'),
+       url('fontawesome/fa-brands-400.ttf') format('truetype');
+}
+
+.fa,
+.fas {
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+}
+
+.far {
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 400;
+}
+
+.fab {
+  font-family: 'Font Awesome 6 Brands';
+  font-weight: 400;
+}
+
+/* Brand Icons */
+.fa-linkedin:before {
+  content: "\f08c";
+}
+
+.fa-gitlab:before {
+  content: "\f296";
+}
+
+.fa-github:before {
+  content: "\f09b";
+}

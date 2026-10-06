@@ -1,0 +1,138 @@
+/* The CV is a sheet of paper: black on white in both themes, like the PDF it replaces. */
+:host {
+  display: block;
+  --cv-ink: #111;
+  --cv-text: #333;
+  --cv-muted: #666;
+  --cv-rule: #c4c4c4;
+}
+
+.cv-page {
+  padding: calc(var(--header-height) + 2rem) 1rem 3rem;
+}
+
+.status {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.cv-paper {
+  max-width: 210mm;
+  margin: 0 auto;
+  padding: 14mm 16mm;
+  background: #fff;
+  color: var(--cv-text);
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.18);
+  page: cv;
+}
+
+.slot + .slot {
+  margin-top: 1.6rem;
+}
+
+/* ---------- Classic: header, sidebar + intro, then full-width pages ---------- */
+.layout-classic {
+  display: grid;
+  grid-template-columns: 38% 1fr;
+  grid-template-areas:
+    'top top'
+    'side main'
+    'full full';
+  column-gap: 2rem;
+
+  .area-top {
+    grid-area: top;
+    margin-bottom: 2.25rem;
+  }
+  .area-side {
+    grid-area: side;
+    --cv-heading-size: 1.05rem;
+  }
+  .area-main {
+    grid-area: main;
+    border-left: 1px solid var(--cv-rule);
+    padding-left: 2rem;
+  }
+  .area-full {
+    grid-area: full;
+    margin-top: 3rem;
+    --cv-heading-size: 2.1rem;
+    --cv-heading-gap: 1.75rem;
+
+    .slot + .slot {
+      margin-top: 3rem;
+    }
+  }
+}
+
+/* screen only: an A4 print page is also ~760px wide, but must keep two columns */
+@media screen and (max-width: 760px) {
+  .cv-paper {
+    padding: 8mm 6mm;
+  }
+  .layout-classic {
+    /* minmax(0, …) lets the column shrink below its longest word instead of overflowing the screen */
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'top' 'side' 'main' 'full';
+
+    .area-main {
+      border-left: 0;
+      padding-left: 0;
+      margin-top: 2rem;
+    }
+    .area-full {
+      --cv-heading-size: 1.4rem;
+    }
+  }
+}
+
+/* ---------- print: A4 pages with margins, page breaks where the PDF had them ---------- */
+@page cv {
+  size: A4;
+  margin: 14mm 16mm;
+}
+
+@media print {
+  .cv-page {
+    padding: 0;
+  }
+  .cv-paper {
+    max-width: none;
+    padding: 0;
+    box-shadow: none;
+    font-size: 9.5pt;
+    line-height: 1.45;
+  }
+  .slot + .slot {
+    margin-top: 1.1rem;
+  }
+  .slot.print-break {
+    break-before: page;
+  }
+  .layout-classic {
+    grid-template-columns: 41% 1fr;
+
+    .area-top {
+      margin-bottom: 1.5rem;
+    }
+    .area-side .slot + .slot {
+      margin-top: 0.9rem;
+    }
+    .area-full {
+      margin-top: 0;
+      --cv-heading-size: 1.6rem;
+      --cv-heading-gap: 1.1rem;
+
+      .slot + .slot {
+        margin-top: 2rem;
+      }
+    }
+  }
+  a {
+    text-decoration: none !important;
+  }
+}

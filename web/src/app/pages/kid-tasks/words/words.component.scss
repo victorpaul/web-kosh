@@ -1,0 +1,21 @@
+.warn {
+  color: var(--coral);
+}
+
+.word {
+  font-family: var(--kid);
+  font-weight: 700;
+  font-size: 22pt;
+  text-align: right;
+
+  /* capital letters for children who only read printed capitals so far */
+  &.caps {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+}
+.pic {
+  font-size: 15mm;
+  line-height: 1;
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+}

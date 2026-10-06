@@ -1,0 +1,85 @@
+.two-column-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  padding-top: 50px;
+}
+
+.column {
+  padding: 2rem;
+}
+
+.left-column {
+  flex: 0 0 400px;
+  background-color: var(--left-column-bg);
+  border-right: 1px solid var(--left-column-border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.profile-image {
+  margin: 0 auto 0;
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.social-links {
+  padding-top: 2rem;
+  display: flex;
+  gap: 15px;
+
+  a {
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: #ddd;
+    color: #333;
+    text-align: center;
+    line-height: 40px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+
+    &:hover {
+      transform: scale(1.1);
+      background-color: #bbb;
+      color: #fff;
+    }
+
+    /* same size and colour as the Font Awesome brand icons next to it */
+    .cv-icon {
+      width: 20px;
+      height: 20px;
+      vertical-align: middle;
+      fill: currentColor;
+    }
+  }
+}
+
+.right-column {
+  flex: 1;
+  padding: 3rem 1rem 1rem 1rem;
+  overflow-y: auto;
+  height: calc(100vh - 50px);
+}
+
+@media (max-width: 768px) {
+  .two-column-layout {
+    flex-direction: column;
+  }
+
+  .left-column {
+    flex: 0 0 auto;
+    border-right: none;
+    border-bottom: 1px solid #eee;
+  }
+}

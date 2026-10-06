@@ -1,0 +1,58 @@
+.main-header {
+  background-color: var(--header-bg);
+  border-bottom: 1px solid var(--header-border);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s, border-color 0.3s;
+
+  nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  nav li {
+    padding: 0;
+  }
+
+  nav a {
+    display: block;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.1);
+      color: var(--link-hover);
+    }
+  }
+
+  nav li.active a {
+    color: var(--link-color);
+    border-bottom: 3px solid var(--link-color);
+  }
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .main-header nav a {
+    padding: 1rem 0.75rem;
+  }
+  .controls ::ng-deep app-theme-toggle .theme-toggle {
+    margin-right: 0.5rem;
+  }
+}

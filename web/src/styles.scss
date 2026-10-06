@@ -1,0 +1,104 @@
+@use 'styles/worksheets';
+
+:root {
+  --header-height: 64px;
+  --bg-color: white;
+  --text-color: #333;
+  --header-bg: #fff;
+  --header-border: #eee;
+  --link-color: #0077cc;
+  --link-hover: #005fa3;
+  --left-column-bg: #f9f9f9;
+  --left-column-border: #eee;
+  --timeline-border: #0077cc;
+  --timeline-personal-color: #28a745;
+  --timeline-content-bg: #f9f9f9;
+  --timeline-content-shadow: rgba(0, 0, 0, 0.1);
+  --work-filter-bg: rgba(0, 119, 204, 0.1);
+  --personal-filter-bg: rgba(40, 167, 69, 0.1);
+  --modal-overlay: rgba(0, 0, 0, 0.8);
+  --modal-bg: #fefefe;
+  --modal-shadow: rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='dark'] {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --header-bg: #1e1e1e;
+  --header-border: #333;
+  --link-color: #64b5f6;
+  --link-hover: #90caf9;
+  --left-column-bg: #1e1e1e;
+  --left-column-border: #333;
+  --timeline-border: #64b5f6;
+  --timeline-personal-color: #4caf50;
+  --timeline-content-bg: #262626;
+  --timeline-content-shadow: rgba(0, 0, 0, 0.3);
+  --work-filter-bg: rgba(100, 181, 246, 0.2);
+  --personal-filter-bg: rgba(76, 175, 80, 0.2);
+  --modal-overlay: rgba(0, 0, 0, 0.9);
+  --modal-bg: #262626;
+  --modal-shadow: rgba(0, 0, 0, 0.4);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: var(--link-color);
+  font-weight: bold;
+  transition: color 0.2s;
+  font-size: 1.1rem;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+.fab,
+.fa {
+  font-size: 20px;
+  line-height: 40px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media print {
+  app-header {
+    display: none !important;
+  }
+
+  body {
+    background-color: white;
+    color: black;
+  }
+
+}

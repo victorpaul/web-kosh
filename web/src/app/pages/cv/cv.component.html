@@ -1,0 +1,78 @@
+<div class="cv-page">
+  @if (cv(); as cv) {
+    <article [class]="'cv-paper layout-' + layout.id" lang="en">
+      @for (area of layout.areas; track area.name) {
+        <div [class]="'area area-' + area.name">
+          @for (slot of area.slots; track slot.section) {
+            <div class="slot" [class.print-break]="slot.printBreak">
+              @switch (slot.section) {
+                @case ("header") {
+                  <app-cv-header
+                    [name]="cv.name"
+                    [title]="cv.title"
+                    [note]="cv.note"
+                  />
+                }
+                @case ("contacts") {
+                  <app-cv-contacts [contacts]="cv.contacts" />
+                }
+                @case ("about") {
+                  <app-cv-text [paragraphs]="cv.about" />
+                }
+                @case ("ai") {
+                  <app-cv-text
+                    [lead]="cv.ai.title"
+                    [paragraphs]="cv.ai.paragraphs"
+                  />
+                }
+                @case ("experience") {
+                  <app-cv-experience [entries]="cv.experience" />
+                }
+                @case ("projects") {
+                  <app-cv-projects [projects]="cv.projects" />
+                }
+                @case ("summary") {
+                  <app-cv-text title="Summary" [paragraphs]="cv.summary" />
+                }
+                @case ("coreSkills") {
+                  <app-cv-skills
+                    title="Hard skills"
+                    variant="core"
+                    [skillGroups]="cv.skillGroups"
+                  />
+                }
+                @case ("allSkills") {
+                  <app-cv-skills
+                    title="Technical skills"
+                    variant="all"
+                    [skillGroups]="cv.skillGroups"
+                  />
+                }
+                @case ("domains") {
+                  <app-cv-list
+                    title="Domains I worked in"
+                    [items]="cv.domains"
+                    [columns]="3"
+                  />
+                }
+                @case ("softSkills") {
+                  <app-cv-list title="Soft skills" [items]="cv.softSkills" />
+                }
+                @case ("languages") {
+                  <app-cv-list title="Languages" [items]="languageItems(cv)" />
+                }
+                @case ("hobbies") {
+                  <app-cv-list title="Hobbies" [items]="cv.hobbies" />
+                }
+              }
+            </div>
+          }
+        </div>
+      }
+    </article>
+  } @else if (state().status === "error") {
+    <p class="status">{{ "cv.error" | t }}</p>
+  } @else {
+    <p class="status">{{ "cv.loading" | t }}</p>
+  }
+</div>
