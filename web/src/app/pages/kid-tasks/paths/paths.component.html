@@ -8,8 +8,12 @@
       <app-number-stepper [label]="'a.obstacles' | t" [value]="state.obstacles" [min]="0" [max]="maxObstacles" (valueChange)="setObstacles($event)" />
     </app-rail-group>
 
-    <app-rail-group titleKey="a.characters" hintKey="a.charactersHint">
-      <app-toggle-group [options]="pairOptions" [selected]="state.pairs" minMessageKey="a.minPairs" (selectedChange)="setPairs($event)" />
+    <app-rail-group titleKey="a.enemies" hintKey="a.enemiesHint" [hintParams]="{ max: maxEnemies }">
+      <app-number-stepper [label]="'a.enemies' | t" [value]="state.enemies" [min]="0" [max]="maxEnemies" (valueChange)="setEnemies($event)" />
+    </app-rail-group>
+
+    <app-rail-group titleKey="a.items" hintKey="a.itemsHint" [hintParams]="{ max: maxItems }">
+      <app-number-stepper [label]="'a.items' | t" [value]="state.items" [min]="0" [max]="maxItems" (valueChange)="setItems($event)" />
     </app-rail-group>
 
     <app-rail-group titleKey="m.sheet">
@@ -25,7 +29,7 @@
   </ng-container>
 
   @for (p of state.puzzles; track $index) {
-    <app-page-sheet [how]="'a.how' | t" [note]="p.obstacles?.length ? ('a.howObstacles' | t) : ''" [done]="state.done">
+    <app-page-sheet [how]="'a.how' | t" [note]="note(p)" [done]="state.done">
       <div class="puzzle">
         <ol class="steps">
           @for (step of p.steps; track $index) {
@@ -40,19 +44,54 @@
           }
         </ol>
 
-        <svg class="grid" [attr.viewBox]="viewBox(p)" [style.width.mm]="sizeMm()" [style.height.mm]="sizeMm()">
-          @for (i of lines(p); track i) {
-            <line class="gl" [attr.x1]="i" y1="0" [attr.x2]="i" [attr.y2]="p.size" />
-            <line class="gl" x1="0" [attr.y1]="i" [attr.x2]="p.size" [attr.y2]="i" />
+        @let scene = sceneOf(p);
+        <div class="board">
+          <svg class="grid" [attr.viewBox]="scene.viewBox" [style.width.mm]="sizeMm()" [style.height.mm]="sizeMm()">
+            <!-- tiles overlap a hair so no seams show; the group's opacity keeps the overlaps invisible -->
+            <g class="field">
+              @for (tile of scene.grass; track $index) {
+                <svg [attr.x]="tile.x" [attr.y]="tile.y" width="1.02" height="1.02" [attr.viewBox]="tile.viewBox">
+                  <image [attr.href]="grassSrc" width="192" height="192" />
+                </svg>
+              }
+            </g>
+            @for (tree of scene.trees; track $index) {
+              <image [attr.href]="tree.src" [attr.x]="tree.x" [attr.y]="tree.y" [attr.width]="tree.width" [attr.height]="tree.height" />
+            }
+            @for (x of dotIndexes(p); track x) {
+              @for (y of dotIndexes(p); track y) {
+                <circle class="gp" [attr.cx]="x" [attr.cy]="y" r="0.1" />
+              }
+            }
+            @for (item of p.items ?? []; track $index) {
+              <image [attr.href]="itemSrc[item.kind]" [attr.x]="item.x - itemSize / 2" [attr.y]="item.y - itemSize / 2" [attr.width]="itemSize" [attr.height]="itemSize" />
+            }
+            @for (o of p.obstacles ?? []; track $index) {
+              <image [attr.href]="stoneFor(o)" [attr.x]="o.x + 0.1" [attr.y]="o.y + 0.1" width="0.8" height="0.8" />
+            }
+            <!-- an enemy may fill its whole square: the path is at least a square away from every side -->
+            @for (e of p.enemies ?? []; track $index) {
+              <image [attr.href]="enemyFor(e)" [attr.x]="e.x" [attr.y]="e.y" width="1" height="1" />
+            }
+            <circle class="dot" [attr.cx]="p.start.x" [attr.cy]="p.start.y" r="0.2" />
+            <circle class="dot" [attr.cx]="p.end.x" [attr.cy]="p.end.y" r="0.2" />
+            <image [attr.href]="heroSrc" [attr.x]="scene.hero.x" [attr.y]="scene.hero.y" [attr.width]="scene.hero.width" [attr.height]="scene.hero.height" />
+            <image [attr.href]="goalSrc" [attr.x]="scene.goal.x" [attr.y]="scene.goal.y" [attr.width]="scene.goal.width" [attr.height]="scene.goal.height" />
+          </svg>
+          @if (foundRows(p).length) {
+            <!-- one box per item on the path: tick it when the path reaches the item -->
+            <div class="found">
+              @for (row of foundRows(p); track row.kind) {
+                <span class="found-row">
+                  <img [src]="itemSrc[row.kind]" alt="" />
+                  @for (box of row.boxes; track box) {
+                    <span class="box"></span>
+                  }
+                </span>
+              }
+            </div>
           }
-          @for (o of p.obstacles ?? []; track $index) {
-            <text class="obstacle" [attr.x]="o.x + 0.5" [attr.y]="o.y + 0.5">{{ o.pic }}</text>
-          }
-          <circle class="dot" [attr.cx]="p.start.x" [attr.cy]="p.start.y" r="0.2" />
-          <circle class="dot" [attr.cx]="p.end.x" [attr.cy]="p.end.y" r="0.2" />
-          <text class="pic" [attr.x]="p.start.x - 0.75" [attr.y]="p.start.y">{{ pairs[p.pair][0] }}</text>
-          <text class="pic" [attr.x]="goalAt(p).x" [attr.y]="goalAt(p).y">{{ pairs[p.pair][1] }}</text>
-        </svg>
+        </div>
       </div>
     </app-page-sheet>
   }

@@ -171,9 +171,25 @@ Ported from a standalone plain-JS app, behaviour kept 1:1.
   the owner found it confusing. The generator's guarantees (start on the left
   edge, no point visited twice, no repeated/reversed direction, end on the
   top/right/bottom border) are what make the answer unique — keep them.
-  Obstacles (0–12, default 4, themed per pair) go only in squares that share
+  Obstacles (0–12, default 4, shown as stones) go only in squares that share
   not even a corner with the path (`placeObstacles`), so the correct path never
   touches one — the sheet promises that. Changing the count keeps each path.
+  The grid is drawn as dots (the path goes over them) on a pale grass field
+  ringed by trees: layout in `paths.scenery.ts`, sprites in
+  `public/img/kid-tasks/paths/` (first frames cropped from the Tiny Swords free
+  pack). The grass stays pale so a pencil line shows on it. Every sheet is a
+  knight (Blue Warrior) walking to a sack of gold; `gold.png` is hand-drawn in
+  the pack's style, since the pack has no sack. The treasure is drawn big (a
+  glow, a heap of coins, sparkles) as the reward at the end.
+  Enemies (0–8, default 3; land enemies from the Tiny Swords Enemy Pack, files
+  `enemy-*.png`) follow the same rule as stones (`placeObstacles` with the
+  stones as `taken`, so two never share a square). Each square always gets the
+  same stone or enemy, picked from its position.
+  Items (coins and meat, 0–6, default 3; both kinds whenever there are two or
+  more) lie only on points of the right path, never on the start or end
+  (`placeItems`). Under the field is one empty box per item, so the kid ticks
+  them off and sees whether the path found them all. `paths.model.spec.ts`
+  checks these rules: `npx ng test --watch=false --browsers=ChromeHeadless`.
 - **Never rename a page's storage key** (`worksheet-press-*`): that loses the
   user's saved sheets. Merge loaded state with defaults so new options appear
   in old saves.

@@ -18,11 +18,13 @@ export interface Step {
   dir: Dir;
   len: number;
 }
-/* a picture sitting in the square whose top-left corner is (x, y) */
-export interface Obstacle {
-  x: number;
-  y: number;
-  pic: string;
+/* a stone or an enemy standing in the square whose top-left corner is (x, y) */
+export type Obstacle = Point;
+/* something to pick up, lying on a grid point of the path */
+export type ItemKind = 'coin' | 'meat';
+export const ITEM_KINDS: ItemKind[] = ['coin', 'meat'];
+export interface PathItem extends Point {
+  kind: ItemKind;
 }
 
 /* One puzzle = one printed page. The path lives on the grid's corner points: (0,0)…(size,size). */
@@ -31,8 +33,9 @@ export interface PathPuzzle {
   start: Point;
   steps: Step[];
   end: Point;
-  pair: string;
   obstacles?: Obstacle[];
+  enemies?: Obstacle[];
+  items?: PathItem[];
 }
 
 /* difficulty is just the number of steps; the grid and the longest step grow with it */
@@ -47,32 +50,12 @@ export function gridFor(steps: number): { size: number; maxLen: number } {
   return { size: 13, maxLen: 6 };
 }
 
-/* who walks (start) and where to (goal) */
-export const PAIRS: Record<string, [string, string]> = {
-  dino: ['🦕', '🥚'],
-  dog: ['🐶', '🦴'],
-  bunny: ['🐰', '🥕'],
-  bee: ['🐝', '🌻'],
-  mouse: ['🐭', '🧀'],
-  car: ['🚗', '🏠'],
-  rocket: ['🚀', '🪐'],
-  boat: ['⛵', '🏝️'],
-};
-export const PAIR_KEYS = Object.keys(PAIRS);
-
-/* what stands in the way, themed to match each pair */
-export const OBSTACLES: Record<string, string[]> = {
-  dino: ['🌋', '🪨', '🌴'],
-  dog: ['🐈', '🌳', '🛁'],
-  bunny: ['🦊', '🌳', '🪨'],
-  bee: ['🕸️', '🌧️', '🌵'],
-  mouse: ['🐈', '🪤', '🧹'],
-  car: ['🚧', '🌳', '🚦'],
-  rocket: ['☄️', '🌑', '🛸'],
-  boat: ['🦈', '🪨', '🐙'],
-};
 export const MAX_OBSTACLES = 12;
 export const DEFAULT_OBSTACLES = 4;
+export const MAX_ENEMIES = 8;
+export const DEFAULT_ENEMIES = 3;
+export const MAX_ITEMS = 6;
+export const DEFAULT_ITEMS = 3;
 
 const key = (p: Point) => `${p.x},${p.y}`;
 const onBorder = (p: Point, size: number) => p.x === 0 || p.y === 0 || p.x === size || p.y === size;
@@ -80,7 +63,7 @@ const onBorder = (p: Point, size: number) => p.x === 0 || p.y === 0 || p.x === s
 /* Builds a path that (1) starts on the left edge, (2) never touches a point twice, so the drawn path
    is unambiguous, (3) never repeats or reverses the previous direction, and (4) ends on the top,
    right or bottom border, where the goal picture can sit outside the grid. */
-export function makePuzzle(count: number, pair: string): PathPuzzle {
+export function makePuzzle(count: number): PathPuzzle {
   const { size, maxLen } = gridFor(count);
 
   for (let attempt = 0; attempt < 5000; attempt++) {
@@ -113,41 +96,57 @@ export function makePuzzle(count: number, pair: string): PathPuzzle {
       steps.push(step);
       prev = step.dir;
     }
-    if (steps.length === count) return { size, start, steps, end: at, pair };
+    if (steps.length === count) return { size, start, steps, end: at };
   }
   throw new Error(`no arrow path found with ${count} steps`);
 }
 
-/* where the goal picture goes: just outside the border the path ends on */
-export function goalOffset(p: PathPuzzle): Point {
-  if (p.end.y === 0) return { x: 0, y: -0.8 };
-  if (p.end.y === p.size) return { x: 0, y: 0.8 };
-  return { x: 0.8, y: 0 };
-}
-
-/* every grid corner the path runs through, start and end included */
-function pathCorners(p: PathPuzzle): Set<string> {
-  const corners = new Set([key(p.start)]);
+/* every grid point the path runs through, in order, start and end included */
+export function pathPoints(p: PathPuzzle): Point[] {
+  const points = [p.start];
   let at = p.start;
   for (const { dir, len } of p.steps) {
     for (let k = 0; k < len; k++) {
       at = { x: at.x + DIRS[dir].dx, y: at.y + DIRS[dir].dy };
-      corners.add(key(at));
+      points.push(at);
     }
   }
-  return corners;
+  return points;
+}
+
+function pathCorners(p: PathPuzzle): Set<string> {
+  return new Set(pathPoints(p).map(key));
+}
+
+/* Lays coins and meat on points of the right path (never the start or the end), so a kid who walks the
+   right path finds every one of them and can tick them off under the field. */
+export function placeItems(p: PathPuzzle, count: number): PathItem[] {
+  const points = shuffle(innerPoints(p)).slice(0, count);
+  const kinds = shuffle([...ITEM_KINDS, ...points.map(() => pick(ITEM_KINDS))].slice(0, points.length));
+  return points.map((point, i) => ({ ...point, kind: kinds[i] }));
+}
+
+/* how many items fit on this path: one per point, start and end left free */
+export function roomForItems(p: PathPuzzle): number {
+  return innerPoints(p).length;
+}
+
+function innerPoints(p: PathPuzzle): Point[] {
+  return pathPoints(p).slice(1, -1);
 }
 
 /* Puts obstacles only in squares that share not even a corner with the path, so the right path never
-   touches one and a miscount bumps into it. Most go right next to the path, where a wrong count lands. */
-export function placeObstacles(p: PathPuzzle, count: number): Obstacle[] {
+   touches one and a miscount bumps into it. Most go right next to the path, where a wrong count lands.
+   `taken` squares (stones, when placing enemies) stay free, so two never stand in one square. */
+export function placeObstacles(p: PathPuzzle, count: number, taken: Obstacle[] = []): Obstacle[] {
   const corners = pathCorners(p);
+  const occupied = new Set(taken.map(key));
   const near: Point[] = [];
   const far: Point[] = [];
   for (let x = 0; x < p.size; x++) {
     for (let y = 0; y < p.size; y++) {
       const own = [key({ x, y }), key({ x: x + 1, y }), key({ x, y: y + 1 }), key({ x: x + 1, y: y + 1 })];
-      if (own.some((c) => corners.has(c))) continue;
+      if (own.some((c) => corners.has(c)) || occupied.has(key({ x, y }))) continue;
       /* "near": a corner of this square is one step away from the path */
       const close = [x - 1, x, x + 1, x + 2].some((cx) => [y - 1, y, y + 1, y + 2].some((cy) => corners.has(key({ x: cx, y: cy }))));
       (close ? near : far).push({ x, y });
@@ -156,7 +155,5 @@ export function placeObstacles(p: PathPuzzle, count: number): Obstacle[] {
   /* about three in four next to the path; if one kind runs out, the other fills in */
   const nearShuffled = shuffle(near);
   const nearCount = Math.min(nearShuffled.length, Math.round(count * 0.75));
-  const cells = nearShuffled.slice(0, nearCount).concat(shuffle(far), nearShuffled.slice(nearCount)).slice(0, count);
-  const pics = OBSTACLES[p.pair] ?? OBSTACLES['dino'];
-  return cells.map((c) => ({ ...c, pic: pick(pics) }));
+  return nearShuffled.slice(0, nearCount).concat(shuffle(far), nearShuffled.slice(nearCount)).slice(0, count);
 }
