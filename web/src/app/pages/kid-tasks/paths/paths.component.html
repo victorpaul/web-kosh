@@ -58,11 +58,6 @@
             @for (tree of scene.trees; track $index) {
               <image [attr.href]="tree.src" [attr.x]="tree.x" [attr.y]="tree.y" [attr.width]="tree.width" [attr.height]="tree.height" />
             }
-            @for (x of dotIndexes(p); track x) {
-              @for (y of dotIndexes(p); track y) {
-                <circle class="gp" [attr.cx]="x" [attr.cy]="y" r="0.1" />
-              }
-            }
             @for (item of p.items ?? []; track $index) {
               <image [attr.href]="itemSrc[item.kind]" [attr.x]="item.x - itemSize / 2" [attr.y]="item.y - itemSize / 2" [attr.width]="itemSize" [attr.height]="itemSize" />
             }
@@ -72,6 +67,12 @@
             <!-- an enemy may fill its whole square: the path is at least a square away from every side -->
             @for (e of p.enemies ?? []; track $index) {
               <image [attr.href]="enemyFor(e)" [attr.x]="e.x" [attr.y]="e.y" width="1" height="1" />
+            }
+            <!-- dots on top of the pictures: a coin or meat lies on a dot the path goes through, not at its end -->
+            @for (x of dotIndexes(p); track x) {
+              @for (y of dotIndexes(p); track y) {
+                <circle class="gp" [attr.cx]="x" [attr.cy]="y" r="0.1" />
+              }
             }
             <circle class="dot" [attr.cx]="p.start.x" [attr.cy]="p.start.y" r="0.2" />
             <circle class="dot" [attr.cx]="p.end.x" [attr.cy]="p.end.y" r="0.2" />

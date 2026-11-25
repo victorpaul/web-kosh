@@ -90,6 +90,9 @@
   /* the corner points the path is drawn over */
   .gp {
     fill: #233020;
+    /* a thin white ring keeps a dot visible on dark pictures like the meat */
+    stroke: #fff;
+    stroke-width: 0.03;
   }
   .dot {
     fill: #de6a4e;
